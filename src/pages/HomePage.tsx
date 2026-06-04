@@ -1,98 +1,95 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { ArrowRight, ArrowUpRight, Sparkles, FlaskConical, Zap, Scale, MapPin } from "lucide-react";
-import TransformationJourney from "@/components/TransformationJourney";
-import TransformationAvatar from "@/components/TransformationAvatar";
-import EvolutionTimeline from "@/components/EvolutionTimeline";
-import { HERO_VIDEO_MP4, HERO_POSTER } from "@/lib/placeholders";
+import { ArrowRight, Star, Shield, Heart, Sparkles, Clock, Phone, MapPin, ChevronRight } from "lucide-react";
 
+import homeImg1 from "@/assets/home-1.jpg";
+import homeImg2 from "@/assets/home-2.jpg";
+import homeImg3 from "@/assets/home-3.jpg";
+import homeImg4 from "@/assets/home-4.jpg";
 import skinImg from "@/assets/services-1.jpg";
 import hormoneImg from "@/assets/hormone-balancing.jpg";
 import biohackingImg from "@/assets/biohacking.jpg";
 import weightImg from "@/assets/health-weight.jpg";
 import aboutImg from "@/assets/about-us-1.jpg";
-import aboutImg2 from "@/assets/about-us-3.jpg";
-import ourLocationsImg from "@/assets/our-locations-home.jpg";
-import botoxImg from "@/assets/botox-2.jpg";
+import teamImg from "@/assets/our-team-1.jpg";
 import victoriaImg from "@/assets/victoria.png";
 import langleyImg from "@/assets/langley.jpg";
 import kelownaImg from "@/assets/kelowna.jpg";
-import logo from "@/assets/footer-logo.png";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const treatments = [
+const services = [
   {
-    icon: FlaskConical,
-    title: "Hormone Optimisation",
-    description:
-      "Bioidentical hormone therapy to restore the chemistry of a younger, more resilient body.",
-    href: "/services#hormone-balancing",
+    title: "Hormone Optimization",
+    description: "Restore your energy, sleep better, and feel like yourself again with personalized hormone therapy.",
+    benefit: "More energy, better sleep, improved mood",
+    href: "/services/hormone-balancing",
     img: hormoneImg,
   },
   {
-    icon: Zap,
-    title: "Cellular Biohacking",
-    description:
-      "NAD+, IV nutrition, HBOT and red-light to fuel mitochondrial output and recovery.",
-    href: "/services#biohacking",
-    img: biohackingImg,
+    title: "Skin Rejuvenation",
+    description: "Gentle, effective treatments that reveal your natural radiance without looking overdone.",
+    benefit: "Smoother skin, natural glow, renewed confidence",
+    href: "/services#skin-rejuvenation",
+    img: skinImg,
   },
   {
-    icon: Scale,
-    title: "Metabolic Health",
-    description:
-      "Physician-led weight, glucose and metabolic care — the foundation of a long healthspan.",
-    href: "/services#health-weight",
+    title: "Medical Weight Management",
+    description: "Doctor-supervised programs that work with your body, not against it, for lasting results.",
+    benefit: "Sustainable weight loss, more energy, better health",
+    href: "/services/health-weight",
     img: weightImg,
   },
   {
-    icon: Sparkles,
-    title: "Aesthetic Signal",
-    description:
-      "Skin and tone treatments framed as the visible reflection of optimised cellular health.",
-    href: "/services#skin-rejuvenation",
-    img: skinImg,
+    title: "IV Nutrient Therapy",
+    description: "Replenish your body at the cellular level for improved energy, immunity, and recovery.",
+    benefit: "Increased energy, faster recovery, better immunity",
+    href: "/services/biohacking",
+    img: biohackingImg,
+  },
+];
+
+const testimonials = [
+  {
+    quote: "I finally feel like myself again. After struggling with fatigue for years, the hormone optimization program gave me my energy back. I can keep up with my grandkids now.",
+    name: "Margaret T.",
+    age: 58,
+    location: "Victoria",
+  },
+  {
+    quote: "The team here actually listens. They explained everything clearly and never made me feel rushed. My skin looks refreshed, not fake — exactly what I wanted.",
+    name: "Susan K.",
+    age: 52,
+    location: "Langley",
+  },
+  {
+    quote: "I was skeptical about weight management programs, but this one is different. The doctors work with you, not against you. I have lost 35 pounds and kept it off for over a year.",
+    name: "Robert M.",
+    age: 61,
+    location: "Kelowna",
   },
 ];
 
 const locations = [
-  { name: "Victoria", address: "740 Hillside Ave #120", city: "Victoria, BC", href: "/locations/victoria", img: victoriaImg },
-  { name: "Langley", address: "415-20178 96th Ave", city: "Langley, BC", href: "/locations/langley", img: langleyImg },
-  { name: "Kelowna", address: "1708 Dolphin Ave #101", city: "Kelowna, BC", href: "/locations/kelowna", img: kelownaImg },
+  { name: "Victoria", address: "740 Hillside Ave #120", city: "Victoria, BC", href: "/locations/victoria", img: victoriaImg, phone: "(250) 590-5321" },
+  { name: "Langley", address: "415-20178 96th Ave", city: "Langley, BC", href: "/locations/langley", img: langleyImg, phone: "(604) 427-0509" },
+  { name: "Kelowna", address: "1708 Dolphin Ave #101", city: "Kelowna, BC", href: "/locations/kelowna", img: kelownaImg, phone: "(250) 860-4116" },
 ];
 
-/**
- * Decide whether to load the hero video.
- * Skips on small viewports, on data-saver, and on reduced-motion preferences.
- * Saves ~4 MB on mobile cold loads.
- */
-function useShouldLoadHeroVideo() {
-  const [enabled, setEnabled] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const wide = window.matchMedia("(min-width: 768px)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-    const saveData = conn?.saveData === true;
-    const slow = conn?.effectiveType === "2g" || conn?.effectiveType === "slow-2g";
-    setEnabled(wide && !reduced && !saveData && !slow);
-  }, []);
-  return enabled;
-}
+const trustBadges = [
+  { icon: Shield, label: "Physician-Led Care", desc: "Every treatment overseen by licensed doctors" },
+  { icon: Heart, label: "10+ Years Experience", desc: "Trusted by thousands of patients across BC" },
+  { icon: Star, label: "4.9 Star Rating", desc: "Based on 280+ verified patient reviews" },
+];
 
 export default function HomePage() {
-  const loadHeroVideo = useShouldLoadHeroVideo();
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
-    name: "Ageless Living™ Wellness Centre",
-    description: "Modern treatments, expert guidance, and a commitment to helping you live better — at any age. Serving Langley, Victoria, and Kelowna, BC.",
+    name: "Ageless Living Wellness Centre",
+    description: "A trusted medical clinic specializing in natural anti-aging, wellness, and aesthetic treatments. Helping everyday people look and feel their best.",
     url: "https://agelessliving.com",
-    image: "https://agelessliving.com/wp-content/uploads/2022/06/ageless-living-logo.png",
     aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "287", bestRating: "5" },
     address: [
       { "@type": "PostalAddress", streetAddress: "415-20178 96th Ave", addressLocality: "Langley", addressRegion: "BC", postalCode: "V1M 0B2", addressCountry: "CA" },
@@ -104,146 +101,147 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Ageless Living™ | Longevity & Vitality Clinic — Victoria, Langley & Kelowna</title>
-        <meta name="description" content="A physician-led longevity & vitality clinic. Hormone optimisation, cellular biohacking, metabolic health and the aesthetic signal of internal wellness — across three BC clinics." />
+        <title>Ageless Living | Natural Anti-Aging and Wellness Clinic in BC</title>
+        <meta name="description" content="A trusted medical clinic helping everyday people look and feel their best through natural anti-aging, hormone optimization, skin rejuvenation, and wellness treatments. Three locations in Victoria, Langley, and Kelowna." />
         <link rel="canonical" href="https://agelessliving.com" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      {/*
-        ═══════════════════════════════════════════════════════════════
-          HERO — full-screen motion video with clean, centered typography.
-          One headline. One sub-line. One primary CTA. That's it.
-        ═══════════════════════════════════════════════════════════════
-          Swap the video file? → edit HERO_VIDEO_MP4 in
-          `src/lib/placeholders.ts`. Same for the still-image poster.
-      */}
-      <section className="relative h-screen min-h-[640px] w-full overflow-hidden bg-black">
-        {/* Poster layer — shown on mobile, reduced-motion, slow connections and
-            during video buffering. Eliminates the 4 MB mp4 fetch on phones. */}
-        <img
-          src={HERO_POSTER}
-          alt=""
-          aria-hidden
-          fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        {/* Video layer — desktop, full-motion, fast connections only */}
-        {loadHeroVideo && (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            poster={HERO_POSTER}
-            className="absolute inset-0 h-full w-full object-cover"
-            aria-hidden
-          >
-            <source src={HERO_VIDEO_MP4} type="video/mp4" />
-          </video>
-        )}
-
-        {/* Single, even legibility scrim — softer than before */}
-        <div className="absolute inset-0 bg-black/45" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/55" />
-
-        {/* Centered content stack */}
-        <div className="relative z-20 h-full flex items-center">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-16 text-center">
-            <motion.p
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease }}
-              className="text-[10px] md:text-xs uppercase tracking-[0.32em] text-white/70 mb-6 md:mb-8"
-            >
-              Ageless Living™ · Longevity &amp; Vitality Medicine
-            </motion.p>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease }}
-              className="font-display font-medium text-white leading-[1.02] tracking-tight mx-auto max-w-5xl"
-              style={{ fontSize: "clamp(2.75rem, 7.5vw, 6.5rem)" }}
-            >
-              Add years to your life.
-              <br />
-              <span className="italic font-light text-white/90">Add life to your years.</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.2, ease }}
-              className="mt-6 md:mt-8 mx-auto max-w-2xl text-base md:text-lg text-white/85 leading-relaxed"
-            >
-              A physician-led longevity &amp; vitality clinic — optimising hormones,
-              metabolism and cellular energy so your healthspan keeps pace with your
-              lifespan. Three locations across BC.
-            </motion.p>
-
+      {/* ══════════════ HERO ══════════════ */}
+      <section className="relative bg-background pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Left: Content */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.35, ease }}
-              className="mt-9 md:mt-11 flex flex-col sm:flex-row justify-center gap-3"
+              transition={{ duration: 0.7, ease }}
+              className="max-w-xl"
             >
-              <Link
-                to="/book"
-                className="group inline-flex items-center justify-center gap-3 bg-white text-foreground px-8 py-4 rounded-full font-semibold text-sm uppercase tracking-[0.18em] transition-all hover:bg-clinic-teal hover:text-white"
-              >
-                Book a Consultation
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to="/services"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-white/50 text-white font-semibold text-sm uppercase tracking-[0.18em] hover:bg-white/10 transition-all backdrop-blur"
-              >
-                Explore Services
-              </Link>
+              <p className="eyebrow mb-4 md:mb-5">
+                Trusted by thousands across British Columbia
+              </p>
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-normal text-foreground leading-[1.1] mb-5 md:mb-6">
+                Look and feel
+                <br />
+                <span className="italic text-primary">your best</span> at any age.
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
+                We help real people restore their energy, confidence, and natural vitality through personalized, doctor-led treatments. No gimmicks, no extreme measures — just care that works.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-3 mb-10">
+                <Link
+                  to="/book"
+                  className="group inline-flex items-center justify-center gap-3 bg-primary hover:bg-sage-dark text-primary-foreground px-7 py-4 rounded-full font-semibold text-sm transition-all"
+                >
+                  Book a Free Consultation
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  to="/services"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-border text-foreground font-medium text-sm hover:bg-secondary transition-all"
+                >
+                  View Our Services
+                </Link>
+              </div>
+
+              {/* Trust badges */}
+              <div className="flex flex-wrap gap-6 pt-6 border-t border-border">
+                {trustBadges.map((badge) => (
+                  <div key={badge.label} className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-full bg-sage-light flex items-center justify-center flex-shrink-0">
+                      <badge.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{badge.label}</p>
+                      <p className="text-xs text-muted-foreground">{badge.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right: Image collage */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease }}
+              className="relative"
+            >
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                <div className="space-y-3 md:space-y-4">
+                  <img
+                    src={homeImg1}
+                    alt="Patient consultation at Ageless Living"
+                    className="w-full aspect-[3/4] object-cover rounded-2xl"
+                  />
+                  <img
+                    src={homeImg3}
+                    alt="Relaxed patient during treatment"
+                    className="w-full aspect-square object-cover rounded-2xl"
+                  />
+                </div>
+                <div className="space-y-3 md:space-y-4 pt-8">
+                  <img
+                    src={homeImg2}
+                    alt="Happy patient after treatment"
+                    className="w-full aspect-square object-cover rounded-2xl"
+                  />
+                  <img
+                    src={homeImg4}
+                    alt="Professional clinic environment"
+                    className="w-full aspect-[3/4] object-cover rounded-2xl"
+                  />
+                </div>
+              </div>
+              {/* Floating badge */}
+              <div className="absolute -bottom-4 -left-4 md:-left-8 bg-card rounded-2xl shadow-xl p-4 md:p-5 border border-border">
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="w-8 h-8 rounded-full bg-sage-light border-2 border-card flex items-center justify-center text-xs font-medium text-primary">
+                        {["M", "S", "R"][i - 1]}
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
+                      ))}
+                    </div>
+                    <p className="text-xs text-muted-foreground">280+ happy patients</p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll cue */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-1.5 text-white/60"
-        >
-          <span className="text-[9px] uppercase tracking-[0.35em]">Scroll</span>
-          <motion.span
-            className="block h-8 w-px bg-white/40"
-            animate={{ scaleY: [0.3, 1, 0.3], originY: 0 }}
-            transition={{ duration: 1.8, repeat: Infinity }}
-          />
-        </motion.div>
       </section>
 
-      {/* ══════════════ STATS STRIP — neutral, editorial ══════════════ */}
-      <section className="bg-background border-y border-border/60 py-10 md:py-12 lg:py-14">
+      {/* ══════════════ STATS STRIP ══════════════ */}
+      <section className="bg-primary py-10 md:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
             {[
-              { k: "10+", v: "Years in practice" },
-              { k: "4.9★", v: "Patient rating" },
-              { k: "3", v: "BC clinic locations" },
-              { k: "Physician-led", v: "Every protocol" },
-            ].map((s, i) => (
+              { value: "10+", label: "Years helping patients" },
+              { value: "4.9", label: "Average patient rating" },
+              { value: "3", label: "Convenient BC locations" },
+              { value: "100%", label: "Doctor-supervised care" },
+            ].map((stat, i) => (
               <motion.div
-                key={s.v}
+                key={stat.label}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
               >
-                <p className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-                  {s.k}
+                <p className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-primary-foreground">
+                  {stat.value}
                 </p>
-                <p className="mt-1.5 md:mt-2 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {s.v}
+                <p className="mt-1 text-xs uppercase tracking-wider text-primary-foreground/70">
+                  {stat.label}
                 </p>
               </motion.div>
             ))}
@@ -251,248 +249,139 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════ VITALITY EVOLUTION — the avatar journey ══════════════ */}
-      <EvolutionTimeline />
-
-      {/* ══════════════ PHILOSOPHY — bridges aesthetics into longevity ══════════════ */}
-      <section className="relative bg-background py-20 md:py-28 lg:py-32 overflow-hidden border-t border-border/60">
+      {/* ══════════════ SERVICES ══════════════ */}
+      <section className="py-20 md:py-28 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <div className="text-center mb-12 md:mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease }}
-              className="lg:col-span-5"
-            >
-              <p className="eyebrow mb-3 md:mb-4">
-                <span className="hairline pb-2 text-xs md:text-sm">Our philosophy</span>
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-foreground leading-[1.08]">
-                The skin tells the story
-                <br />
-                <span className="italic text-vitality-forest">of the cell.</span>
-              </h2>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1, ease }}
-              className="lg:col-span-7"
-            >
-              <p className="text-lg md:text-xl text-foreground/85 leading-relaxed">
-                We're not a med spa. We're a longevity practice that takes the
-                aesthetic outcome seriously — because puffiness, dullness and tone
-                are <em className="not-italic text-vitality-forest">readouts</em>,
-                not blemishes. Treat the inflammation, the hormones and the
-                mitochondria first, and the mirror catches up on its own.
-              </p>
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  {
-                    k: "Internal",
-                    v: "Hormones, metabolism, mitochondria, sleep architecture.",
-                  },
-                  {
-                    k: "Structural",
-                    v: "Lean mass, posture, recovery, cardiovascular capacity.",
-                  },
-                  {
-                    k: "External",
-                    v: "Skin clarity, tone, elasticity — the visible signal.",
-                  },
-                ].map((b) => (
-                  <div
-                    key={b.k}
-                    className="rounded-2xl border border-border/70 bg-vitality-sage/50 p-5"
-                  >
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-vitality-forest">
-                      {b.k}
-                    </p>
-                    <p className="mt-2 text-sm text-foreground/80 leading-relaxed">
-                      {b.v}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════ TREATMENTS — cards with images ══════════════ */}
-      <section className="relative py-16 md:py-24 lg:py-32 bg-background overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-14 gap-4 md:gap-6">
-            <motion.div
-              className="max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease }}
             >
-              <p className="eyebrow mb-3 md:mb-4"><span className="hairline pb-2 text-xs md:text-sm">Four pillars of healthspan</span></p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-foreground tracking-tight mb-4 md:mb-5">
-                Total-body optimisation
+              <p className="eyebrow mb-3">How We Can Help You</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-4">
+                Treatments that make a <span className="italic text-primary">real difference</span>
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                We treat the system, not the symptom. Hormones, mitochondria, metabolism and aesthetics — sequenced as one protocol so internal health becomes visible from the outside.
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Every service is designed to help you feel more energetic, confident, and comfortable in your own skin — naturally.
               </p>
             </motion.div>
-            <Link
-              to="/services"
-              className="group flex items-center gap-2 text-clinic-teal font-semibold uppercase tracking-widest text-xs md:text-sm border-b-2 border-clinic-teal/20 pb-1 hover:border-clinic-teal transition-all shrink-0"
-            >
-              View All Services
-              <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {treatments.map((t, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {services.map((service, i) => (
               <motion.div
-                key={t.title}
+                key={service.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
               >
                 <Link
-                  to={t.href}
-                  className="group block rounded-xl md:rounded-2xl overflow-hidden bg-white border border-border/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full"
+                  to={service.href}
+                  className="group block bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:border-primary/20 transition-all duration-300 h-full"
                 >
-                  {/* Card image */}
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div className="aspect-[16/9] overflow-hidden">
                     <img
-                      src={t.img}
-                      alt={`${t.title} at Ageless Living`}
+                      src={service.img}
+                      alt={service.title}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  {/* Card body */}
-                  <div className="p-5 md:p-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-clinic-teal-light flex items-center justify-center">
-                        <t.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-clinic-teal" />
-                      </div>
-                      <ArrowUpRight className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="p-6 md:p-8">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Sparkles className="w-4 h-4 text-gold" />
+                      <span className="text-xs font-medium text-gold">{service.benefit}</span>
                     </div>
-                    <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 group-hover:text-clinic-teal transition-colors">
-                      {t.title}
+                    <h3 className="text-xl md:text-2xl font-display font-normal text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {service.title}
                     </h3>
-                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                      {t.description}
+                    <p className="text-muted-foreground mb-4">
+                      {service.description}
                     </p>
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                      Learn more
+                      <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </span>
                   </div>
                 </Link>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ══════════════ TRANSFORMATION AVATAR — creative interactive UI ══════════════ */}
-      <section className="relative py-16 md:py-24 lg:py-32 bg-background overflow-hidden">
-        <div className="pointer-events-none absolute -top-32 right-0 h-[32rem] w-[32rem] rounded-full bg-clinic-teal/[0.06] blur-3xl" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-10 md:gap-14 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease }}
+          <div className="text-center mt-10 md:mt-12">
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary border-b-2 border-primary/20 pb-1 hover:border-primary transition-all"
             >
-              <p className="eyebrow mb-4">
-                <span className="hairline pb-2 text-xs md:text-sm">The Ageless™ Effect</span>
-              </p>
-              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-foreground leading-[1.05] mb-5 md:mb-6">
-                Transformation,
-                <br />
-                <span className="italic text-clinic-teal">made visible.</span>
-              </h2>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8 max-w-md">
-                Anti-aging isn't a before &amp; after — it's a continuous
-                signal. Our interactive diagnostic maps the exact areas your
-                care plan will refine, brighten and restore.
-              </p>
-              <Link
-                to="/services"
-                className="group inline-flex items-center gap-2 text-clinic-teal font-semibold uppercase tracking-widest text-xs md:text-sm border-b-2 border-clinic-teal/20 pb-1 hover:border-clinic-teal transition-all"
-              >
-                Explore the Four Pillars
-                <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </motion.div>
-
-            <TransformationAvatar variant="home" />
+              View all services
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ══════════════ TRANSFORMATION JOURNEY — visual avatar journey ══════════════ */}
-      <TransformationJourney />
-
-      {/* ══════════════ ABOUT / PHILOSOPHY — image + text side-by-side ══════════════ */}
-      <section className="relative py-16 md:py-24 lg:py-32 bg-secondary/50 overflow-hidden">
+      {/* ══════════════ WHY CHOOSE US ══════════════ */}
+      <section className="py-20 md:py-28 bg-cream-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-center">
-            {/* Left: Two stacked images */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -16 }}
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease }}
-              className="grid grid-cols-2 gap-3 md:gap-4"
+              transition={{ duration: 0.6, ease }}
             >
-              <div className="rounded-xl md:rounded-2xl overflow-hidden aspect-[3/4]">
-                <img
-                  src={aboutImg}
-                  alt="Ageless Living clinician consultation"
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="rounded-xl md:rounded-2xl overflow-hidden aspect-[3/4] mt-6 md:mt-8">
-                <img
-                  src={aboutImg2}
-                  alt="Ageless Living clinical treatment"
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <img
+                src={aboutImg}
+                alt="Doctor consulting with patient"
+                className="w-full aspect-[4/3] object-cover rounded-2xl"
+              />
             </motion.div>
 
-            {/* Right: Text content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1, ease }}
+              transition={{ duration: 0.6, delay: 0.1, ease }}
             >
-              <span className="inline-block px-3 md:px-4 py-1.5 rounded-full bg-clinic-teal/10 text-clinic-teal text-[10px] md:text-xs font-semibold uppercase tracking-[0.18em] mb-4 md:mb-6 border border-clinic-teal/15">
-                Our Expertise
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-foreground tracking-tight mb-5 md:mb-6 leading-[1.1]">
-                Clinical Excellence & Collaborative Expertise
+              <p className="eyebrow mb-3">Why Patients Choose Us</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-6 leading-tight">
+                Real doctors. <br />
+                <span className="italic text-primary">Real results.</span>
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8">
-                Our clinical sanctuary is powered by a multidisciplinary team of physicians, specialists, and clinical managers across Langley, Victoria, and Kelowna. Together, we bring a decade of experience to your longevity journey, ensuring every treatment plan meets the highest standards of safety and clinical efficacy.
+              <p className="text-lg text-muted-foreground mb-8">
+                We are not a trendy med spa. We are a medical clinic with licensed physicians who take the time to understand your goals and create a personalized plan that actually works.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+
+              <div className="space-y-5">
+                {[
+                  { title: "Honest assessments", desc: "We will tell you what will work — and what will not. No upselling, no pressure." },
+                  { title: "Natural-looking results", desc: "Our goal is to help you look refreshed, not different. Subtle improvements that enhance your natural beauty." },
+                  { title: "Ongoing support", desc: "Your care does not end after one visit. We follow up and adjust your plan as needed." },
+                ].map((item) => (
+                  <div key={item.title} className="flex gap-4">
+                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8">
                 <Link
                   to="/about-us"
-                  className="group inline-flex items-center justify-center gap-3 bg-clinic-teal hover:bg-clinic-teal-container text-white px-6 md:px-7 py-3 md:py-3.5 rounded-full font-semibold text-xs md:text-sm uppercase tracking-widest transition-all"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary border-b-2 border-primary/20 pb-1 hover:border-primary transition-all"
                 >
-                  About Us
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  to="/faqs"
-                  className="inline-flex items-center justify-center px-6 md:px-7 py-3 md:py-3.5 rounded-full border-2 border-foreground/15 text-foreground text-xs md:text-sm font-semibold uppercase tracking-widest hover:bg-foreground hover:text-background transition-all"
-                >
-                  FAQ
+                  Learn more about our approach
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </motion.div>
@@ -500,122 +389,159 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════ FEATURED CLINIC IMAGE ══════════════ */}
-      <section className="py-16 md:py-20 lg:py-28 bg-background">
+      {/* ══════════════ TESTIMONIALS ══════════════ */}
+      <section className="py-20 md:py-28 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center">
+          <div className="text-center mb-12 md:mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease }}
-              className="lg:col-span-7 rounded-xl md:rounded-2xl overflow-hidden shadow-xl"
+              transition={{ duration: 0.6, ease }}
             >
-              <img
-                src={ourLocationsImg}
-                alt="Ageless Living wellness clinic interior showcasing modern medical facilities"
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1, ease }}
-              className="lg:col-span-5"
-            >
-              <p className="eyebrow mb-3 md:mb-4"><span className="hairline pb-2 text-xs md:text-sm">Inside the Clinic</span></p>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-foreground tracking-tight mb-3 md:mb-4">
-                A space designed for calm, clarity & precision.
+              <p className="eyebrow mb-3">Patient Stories</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-4">
+                Hear from people <span className="italic text-primary">like you</span>
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5 md:mb-6">
-                Every detail of our clinics is designed to support your wellness journey — from the moment you walk in to the follow-up after your treatment.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold uppercase tracking-widest text-clinic-teal border-b-2 border-clinic-teal/20 pb-1 hover:border-clinic-teal transition-all"
-              >
-                Visit Us <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
-              </Link>
             </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {testimonials.map((testimonial, i) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease }}
+                className="bg-card rounded-2xl p-6 md:p-8 border border-border"
+              >
+                <div className="flex gap-1 mb-4">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-4 h-4 fill-gold text-gold" />
+                  ))}
+                </div>
+                <p className="text-foreground mb-6 leading-relaxed">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-border">
+                  <div className="w-10 h-10 rounded-full bg-sage-light flex items-center justify-center text-sm font-semibold text-primary">
+                    {testimonial.name.split(" ").map(n => n[0]).join("")}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">{testimonial.name}, {testimonial.age}</p>
+                    <p className="text-xs text-muted-foreground">{testimonial.location}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════ GALLERY STRIP — fill with photos ══════════════ */}
-      <section className="bg-background pb-6 md:pb-8">
+      {/* ══════════════ MEET THE TEAM ══════════════ */}
+      <section className="py-20 md:py-28 bg-sage-light">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 lg:gap-4">
-            {[aboutImg2, botoxImg, ourLocationsImg, aboutImg].map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease }}
-                className="rounded-lg md:rounded-xl overflow-hidden aspect-square"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease }}
+            >
+              <p className="eyebrow mb-3">Our Care Team</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-6 leading-tight">
+                Caring professionals who <span className="italic text-primary">truly listen</span>
+              </h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Our physicians and practitioners are not just highly trained — they genuinely care about helping you achieve your goals. Every treatment plan is personalized, and we take the time to explain your options so you feel confident in your decisions.
+              </p>
+              <p className="text-muted-foreground mb-8">
+                Founded by a pharmacist and physician team, Ageless Living combines the best of traditional medicine with modern wellness approaches.
+              </p>
+              <Link
+                to="/our-team"
+                className="group inline-flex items-center gap-2 bg-primary hover:bg-sage-dark text-primary-foreground px-6 py-3 rounded-full font-semibold text-sm transition-all"
               >
-                <img
-                  src={img}
-                  alt="Ageless Living clinic treatment and wellness"
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            ))}
+                Meet our team
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1, ease }}
+            >
+              <img
+                src={teamImg}
+                alt="The Ageless Living medical team"
+                className="w-full aspect-[4/3] object-cover rounded-2xl"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ══════════════ LOCATIONS ══════════════ */}
-      <section className="relative py-16 md:py-24 lg:py-32 bg-secondary/50 overflow-hidden">
+      <section className="py-20 md:py-28 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease }}
-            className="text-center max-w-3xl mx-auto mb-10 md:mb-14"
-          >
-            <p className="eyebrow mb-3 md:mb-4"><span className="hairline pb-2 text-xs md:text-sm">Visit Us</span></p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-foreground tracking-tight mb-3 md:mb-4">
-              Our Locations
-            </h2>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Serving British Columbia for over a decade. Ageless Living™ has three locations across BC.
-            </p>
-          </motion.div>
+          <div className="text-center mb-12 md:mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease }}
+            >
+              <p className="eyebrow mb-3">Visit Us</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-4">
+                Three convenient <span className="italic text-primary">BC locations</span>
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Find a clinic near you and schedule your consultation today.
+              </p>
+            </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
-            {locations.map((loc, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {locations.map((location, i) => (
               <motion.div
-                key={loc.name}
+                key={location.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
               >
-                <Link to={loc.href} className="group block">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl md:rounded-2xl mb-3 md:mb-4">
+                <Link
+                  to={location.href}
+                  className="group block bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="aspect-[16/10] overflow-hidden">
                     <img
-                      src={loc.img}
-                      alt={`Ageless Living ${loc.name} clinic`}
+                      src={location.img}
+                      alt={`Ageless Living ${location.name} clinic`}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/5 to-transparent" />
-                    <div className="absolute top-3 right-3 md:top-4 md:right-4 flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full bg-white/90 text-foreground transition-transform group-hover:rotate-45">
-                      <ArrowUpRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                    </div>
-                    <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 text-white">
-                      <p className="text-[9px] md:text-[10px] uppercase tracking-[0.24em] text-white/70 flex items-center gap-1.5 mb-1">
-                        <MapPin className="h-2.5 w-2.5 md:h-3 md:w-3" /> British Columbia
-                      </p>
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-medium text-white tracking-tight">
-                        {loc.name}
-                      </h3>
-                      <p className="text-[10px] md:text-xs text-white/70 mt-0.5">{loc.address}</p>
+                  </div>
+                  <div className="p-5 md:p-6">
+                    <h3 className="text-xl font-display font-normal text-foreground mb-3 group-hover:text-primary transition-colors">
+                      {location.name}
+                    </h3>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <div className="flex items-start gap-2">
+                        <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                        <span>{location.address}<br />{location.city}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-4 h-4 flex-shrink-0" />
+                        <span>{location.phone}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 flex-shrink-0" />
+                        <span>Mon-Fri: 9am-5pm</span>
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -625,52 +551,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════ CLOSING CTA — editorial, minimal ══════════════ */}
-      <section className="relative bg-background overflow-hidden border-t border-border/60">
-        {/* Oversized wordmark watermark in the site's neutral tone */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center select-none"
-        >
-          <span className="logo-watermark text-foreground/[0.04] text-[28vw] md:text-[20vw]">
-            ageless
-          </span>
-        </div>
-        <div className="pointer-events-none absolute top-8 md:top-10 left-1/2 -translate-x-1/2 opacity-30">
-          <img src={logo} alt="" className="h-5 md:h-7" aria-hidden />
-        </div>
-
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-28 lg:py-32 text-center max-w-4xl">
+      {/* ══════════════ FINAL CTA ══════════════ */}
+      <section className="py-20 md:py-28 bg-primary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-16 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
+            className="max-w-3xl mx-auto"
           >
-            <p className="eyebrow mb-4">
-              <span className="hairline pb-2 text-xs md:text-sm">Start Today</span>
-            </p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-foreground tracking-tight leading-tight mb-5">
-              Ready to map your
-              <br />
-              <span className="italic text-vitality-forest">healthspan?</span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-primary-foreground mb-4 leading-tight">
+              Ready to feel like <span className="italic">yourself</span> again?
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground mb-9 max-w-lg mx-auto leading-relaxed px-4">
-              Start with a full longevity consultation — labs, biomarkers and a physician-led optimisation plan tailored to where you are right now.
+            <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+              Book a free consultation to discuss your goals with one of our doctors. No obligation, no pressure — just honest advice.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 px-4 sm:px-0">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/book"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-clinic-teal text-white font-semibold text-xs md:text-sm uppercase tracking-widest hover:bg-clinic-teal-container transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-card text-foreground font-semibold text-sm hover:bg-card/90 transition-all"
               >
-                Book Online
+                Book Your Free Consultation
+                <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-foreground/20 text-foreground font-semibold text-xs md:text-sm uppercase tracking-widest hover:border-foreground transition-colors"
+              <a
+                href="tel:+12363266830"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-semibold text-sm hover:bg-primary-foreground/10 transition-all"
               >
-                Contact Us
-              </Link>
+                <Phone className="w-4 h-4" />
+                Call (236) 326-6830
+              </a>
             </div>
           </motion.div>
         </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,75 +6,67 @@
 
 @layer base {
   :root {
-    /* Warm bone / cream — feels human, not sterile */
-    --background: 36 30% 97%;
-    --foreground: 165 18% 12%;
+    /* Warm, approachable palette - creams, beiges, sage greens, warm grays */
+    --background: 40 33% 97%;
+    --foreground: 30 10% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 165 18% 12%;
+    --card-foreground: 30 10% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 165 18% 12%;
+    --popover-foreground: 30 10% 15%;
 
-    --primary: 165 35% 18%;
-    --primary-foreground: 36 30% 97%;
+    /* Primary - warm sage green for trust and wellness */
+    --primary: 145 25% 32%;
+    --primary-foreground: 40 33% 97%;
 
-    --secondary: 36 22% 94%;
-    --secondary-foreground: 165 18% 12%;
+    --secondary: 40 25% 94%;
+    --secondary-foreground: 30 10% 15%;
 
-    --muted: 36 14% 92%;
-    --muted-foreground: 165 8% 42%;
+    --muted: 40 18% 92%;
+    --muted-foreground: 30 8% 45%;
 
-    --accent: 36 22% 94%;
-    --accent-foreground: 165 35% 18%;
+    --accent: 40 40% 92%;
+    --accent-foreground: 145 25% 28%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 36 18% 87%;
-    --input: 36 18% 87%;
-    --ring: 165 35% 18%;
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 145 25% 32%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 36 30% 98%;
-    --sidebar-foreground: 165 18% 12%;
-    --sidebar-primary: 165 35% 18%;
-    --sidebar-primary-foreground: 36 30% 97%;
-    --sidebar-accent: 36 22% 94%;
-    --sidebar-accent-foreground: 165 18% 12%;
-    --sidebar-border: 36 18% 87%;
-    --sidebar-ring: 165 35% 18%;
+    /* Warm neutral palette */
+    --cream: 40 33% 97%;
+    --cream-dark: 40 25% 94%;
+    --warm-beige: 35 30% 90%;
+    --taupe: 30 15% 70%;
+    --warm-gray: 30 8% 45%;
+    
+    /* Sage green - primary brand */
+    --sage: 145 25% 32%;
+    --sage-light: 145 20% 92%;
+    --sage-dark: 145 28% 25%;
+    
+    /* Gold accent - subtle luxury */
+    --gold: 38 60% 55%;
+    --gold-light: 40 50% 92%;
 
-    /* ── Longevity & Vitality palette ───────────────────────────────
-       Deep wellness forest as primary signal, calming clinical blue
-       as a secondary biomarker accent, warm sand as supporting tone. */
-    --vitality-forest: 165 38% 22%;       /* deep, science-grounded green */
-    --vitality-forest-deep: 165 42% 14%;
-    --vitality-moss: 152 28% 38%;         /* mid-green for chips / fills */
-    --vitality-sage: 150 22% 92%;         /* near-white wash */
-    --vitality-blue: 198 38% 36%;         /* calm clinical blue */
-    --vitality-blue-soft: 198 35% 95%;
-    --vitality-sand: 36 36% 88%;          /* warm earthy neutral */
-    --vitality-glow: 48 88% 62%;          /* subtle gold for peak state */
-
-    /* Backwards-compat: keep clinic-teal tokens, but route them to the
-       new vitality forest so legacy usages instantly pick up the new
-       brand without a sweeping refactor. */
-    --clinic-teal: 165 38% 22%;
-    --clinic-teal-light: 150 22% 92%;
-    --clinic-teal-container: 165 42% 14%;
-    --ageless-blue: 198 38% 36%;
-    --ageless-blue-deep: 165 42% 14%;
-    --ageless-blue-soft: 198 35% 95%;
-
-    /* Backward compat */
-    --wellness-teal: 0 0% 17%;
-    --wellness-teal-dark: 0 0% 12%;
-    --wellness-teal-light: 30 18% 95%;
-    --wellness-charcoal: 0 0% 10%;
-    --wellness-warm: 30 33% 97%;
-    --wellness-cream: 30 33% 97%;
+    /* Legacy compatibility */
+    --clinic-teal: 145 25% 32%;
+    --clinic-teal-light: 145 20% 92%;
+    --clinic-teal-container: 145 28% 25%;
+    
+    --sidebar-background: 40 33% 98%;
+    --sidebar-foreground: 30 10% 15%;
+    --sidebar-primary: 145 25% 32%;
+    --sidebar-primary-foreground: 40 33% 97%;
+    --sidebar-accent: 40 25% 94%;
+    --sidebar-accent-foreground: 30 10% 15%;
+    --sidebar-border: 40 20% 88%;
+    --sidebar-ring: 145 25% 32%;
   }
 }
 
@@ -83,30 +75,35 @@
     @apply border-border;
   }
 
+  html {
+    @apply bg-background;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-feature-settings: "ss01", "cv11";
-    letter-spacing: -0.005em;
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Jost', 'Raleway', system-ui, sans-serif;
-    @apply tracking-[-0.015em] font-medium;
+    font-family: 'Playfair Display', Georgia, serif;
+    @apply font-normal tracking-tight;
     text-wrap: balance;
   }
 
   h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply font-semibold;
   }
 
   p {
     text-wrap: pretty;
+    @apply leading-relaxed;
   }
 
-  /* Uppercase micro-labels inherit the heading face for visual unity */
   ::selection {
-    background: hsl(var(--ageless-blue) / 0.18);
+    background: hsl(var(--sage) / 0.15);
   }
 }
 
@@ -116,50 +113,39 @@
   }
 
   .section-y {
-    @apply py-24 md:py-32 lg:py-36;
+    @apply py-20 md:py-28 lg:py-32;
   }
 
-  .label-sm {
-    @apply text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground;
-  }
-
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
-  }
-
-  /* Display utility now resolves to Jost for a clean clinical look */
+  /* Display heading - elegant serif */
   .font-display {
-    font-family: 'Jost', 'Raleway', system-ui, sans-serif;
-    font-optical-sizing: auto;
+    font-family: 'Playfair Display', Georgia, serif;
     letter-spacing: -0.02em;
   }
 
-  .font-sans-alt {
+  /* Body text */
+  .font-body {
     font-family: 'Inter', system-ui, sans-serif;
   }
 
+  /* Eyebrow/label text */
   .eyebrow {
-    @apply text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground;
-    font-family: 'Jost', 'Raleway', system-ui, sans-serif;
+    @apply text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
-  .hairline {
+  /* Subtle underline accent */
+  .accent-underline {
     @apply relative inline-block;
   }
-  .hairline::after {
+  .accent-underline::after {
     content: '';
-    @apply absolute left-0 -bottom-1 h-px w-10 bg-clinic-teal;
+    @apply absolute left-0 -bottom-1 h-[2px] w-12 bg-sage;
   }
 
-  /* Oversized outlined wordmark watermark for CTA backgrounds */
-  .logo-watermark {
-    font-family: 'Jost', system-ui, sans-serif;
-    font-weight: 300;
-    letter-spacing: -0.04em;
-    line-height: 0.85;
-    -webkit-text-stroke: 1px currentColor;
-    color: transparent;
+  /* Warm gradient text */
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
   }
 
   .scrollbar-none {
@@ -176,7 +162,7 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: hsl(var(--muted));
