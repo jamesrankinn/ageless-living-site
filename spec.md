@@ -1,5 +1,21 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Brand Blue Repaint + Service-Page Cleanup (2026-06-04)
+
+Two surgical changes requested ahead of brand review.
+
+### A. Sage green → Ageless blue, site-wide (`src/index.css`)
+- Every brand HSL token previously sitting in the sage-green family (`145 25% 32%`) was repointed to the Ageless clinical blue (`212 68% 38%`). Tokens updated: `--primary`, `--ring`, `--accent-foreground`, `--sage*`, `--clinic-teal*`, `--sidebar-primary`, `--sidebar-ring`, and `::selection`.
+- Added the previously-undefined brand tokens that the Tailwind config already referenced: `--ageless-blue`, `--ageless-blue-deep`, `--ageless-blue-soft`, the full `--vitality-*` family, and the full `--wellness-*` family — all aligned to the Ageless blue palette so existing `bg-vitality-forest`, `text-wellness-teal`, etc. usages snap to brand without per-file edits.
+- One non-token green (`bg-green-100 / text-green-700` "completed" badge in `src/pages/DashboardPage.tsx`) switched to `bg-ageless-blue-soft / text-ageless-blue-deep`.
+
+### B. Removed the biomarker face-map avatar from every service page
+- `<TransformationAvatar />` (the portrait-with-pinned-metrics card — MOOD +38%, ENERGY +45%, SLEEP +34%, CLARITY +33%, etc.) is deleted from the codebase.
+- `<ServiceTransformationSection />` no longer renders the avatar column. Its layout collapses from a 2-column `[1.25fr_1fr]` grid into a single centered before/after slider with a centered eyebrow + caption — cleaner, more editorial, no more sci-fi feel.
+- The `variant` prop is dropped from `ServiceTransformationSection` and from all 11 callers: Botox, Belkyra, Biohacking, CosmeticDermalFiller, CustomizedUltraFacial, Dermaplaning, HealthWeight, HormoneBalancing, LaserIplBbl, Microneedling, PerfectDermaPeel.
+
+---
+
 ## Changelog — Launch-Readiness Critical Fixes (2026-05-16)
 
 Follow-up to the brand pivot. Six audit-critical items addressed so the site can ship.

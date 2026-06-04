@@ -263,7 +263,6 @@ export default function HealthWeightPage() {
 
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
-        variant="weight"
         serviceSlug="health-weight"
         title="Real Client Progress"
         subtitle="Drag to compare — physician-supervised change that sticks, without extreme diets."

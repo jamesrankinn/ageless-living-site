@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Warm, approachable palette - creams, beiges, sage greens, warm grays */
+    /* Warm, approachable palette - creams, beiges, Ageless blue, warm grays */
     --background: 40 33% 97%;
     --foreground: 30 10% 15%;
 
@@ -16,8 +16,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 30 10% 15%;
 
-    /* Primary - warm sage green for trust and wellness */
-    --primary: 145 25% 32%;
+    /* Primary - Ageless Living clinical blue */
+    --primary: 212 68% 38%;
     --primary-foreground: 40 33% 97%;
 
     --secondary: 40 25% 94%;
@@ -27,14 +27,14 @@
     --muted-foreground: 30 8% 45%;
 
     --accent: 40 40% 92%;
-    --accent-foreground: 145 25% 28%;
+    --accent-foreground: 212 70% 30%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 40 20% 88%;
     --input: 40 20% 88%;
-    --ring: 145 25% 32%;
+    --ring: 212 68% 38%;
 
     --radius: 0.75rem;
 
@@ -44,29 +44,53 @@
     --warm-beige: 35 30% 90%;
     --taupe: 30 15% 70%;
     --warm-gray: 30 8% 45%;
-    
-    /* Sage green - primary brand */
-    --sage: 145 25% 32%;
-    --sage-light: 145 20% 92%;
-    --sage-dark: 145 28% 25%;
-    
+
+    /* Brand blue — primary (legacy "sage" tokens repurposed so existing
+       sage-* utilities cascade to the Ageless blue) */
+    --sage: 212 68% 38%;
+    --sage-light: 212 50% 94%;
+    --sage-dark: 212 70% 28%;
+
     /* Gold accent - subtle luxury */
     --gold: 38 60% 55%;
     --gold-light: 40 50% 92%;
 
-    /* Legacy compatibility */
-    --clinic-teal: 145 25% 32%;
-    --clinic-teal-light: 145 20% 92%;
-    --clinic-teal-container: 145 28% 25%;
-    
+    /* Ageless blue palette */
+    --ageless-blue: 212 68% 38%;
+    --ageless-blue-deep: 212 70% 22%;
+    --ageless-blue-soft: 212 50% 94%;
+
+    /* Vitality palette (re-pointed to the Ageless blue family) */
+    --vitality-forest: 212 68% 32%;
+    --vitality-forest-deep: 212 70% 22%;
+    --vitality-moss: 212 55% 45%;
+    --vitality-sage: 212 50% 94%;
+    --vitality-blue: 212 68% 38%;
+    --vitality-blue-soft: 212 50% 94%;
+    --vitality-sand: 40 33% 97%;
+    --vitality-glow: 212 70% 80%;
+
+    /* Wellness palette (aligned to brand blue) */
+    --wellness-teal: 212 68% 38%;
+    --wellness-teal-dark: 212 70% 22%;
+    --wellness-teal-light: 212 50% 94%;
+    --wellness-charcoal: 30 10% 15%;
+    --wellness-warm: 40 25% 94%;
+    --wellness-cream: 40 33% 97%;
+
+    /* Legacy compatibility — clinic-teal now points to Ageless blue */
+    --clinic-teal: 212 68% 38%;
+    --clinic-teal-light: 212 50% 94%;
+    --clinic-teal-container: 212 70% 28%;
+
     --sidebar-background: 40 33% 98%;
     --sidebar-foreground: 30 10% 15%;
-    --sidebar-primary: 145 25% 32%;
+    --sidebar-primary: 212 68% 38%;
     --sidebar-primary-foreground: 40 33% 97%;
     --sidebar-accent: 40 25% 94%;
     --sidebar-accent-foreground: 30 10% 15%;
     --sidebar-border: 40 20% 88%;
-    --sidebar-ring: 145 25% 32%;
+    --sidebar-ring: 212 68% 38%;
   }
 }
 
@@ -103,7 +127,7 @@
   }
 
   ::selection {
-    background: hsl(var(--sage) / 0.15);
+    background: hsl(var(--ageless-blue) / 0.15);
   }
 }
 

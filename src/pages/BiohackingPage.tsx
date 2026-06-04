@@ -341,7 +341,6 @@ export default function BiohackingPage() {
 
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
-        variant="biohacking"
         serviceSlug="biohacking"
         title="Performance, Measured"
         subtitle="Drag to compare — the clarity, recovery and energy our clients report after a full biohacking protocol."

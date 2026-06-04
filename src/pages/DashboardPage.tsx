@@ -24,7 +24,7 @@ type Tab = "upcoming" | "history" | "profile";
 function StatusBadge({ status }: { status: Booking["status"] }) {
   const styles = {
     upcoming: "bg-primary/10 text-primary",
-    completed: "bg-green-100 text-green-700",
+    completed: "bg-ageless-blue-soft text-ageless-blue-deep",
     cancelled: "bg-red-100 text-red-600",
   };
   const labels = { upcoming: "Upcoming", completed: "Completed", cancelled: "Cancelled" };

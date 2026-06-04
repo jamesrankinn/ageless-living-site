@@ -340,7 +340,6 @@ export default function HormoneBalancingPage() {
       {/* CTA Section */}
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
-        variant="hormone"
         serviceSlug="hormone-balancing"
         title="Feel the Difference Balance Makes"
         subtitle="Drag to compare — when hormones return to their optimal set-points, everything else follows."

@@ -322,7 +322,6 @@ export default function LaserIplBblPage() {
 
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
-        variant="laser"
         serviceSlug="laser-ipl-bbl"
         title="Pigment, Redness, Erased"
         subtitle="Drag to compare — medical-grade light therapy clears what creams can't."
