@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
-import TransformationAvatar, {
-  type AvatarVariant,
-} from "@/components/TransformationAvatar";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import {
   SERVICE_BEFORE_AFTER,
@@ -16,17 +13,12 @@ import {
  *  ------------------------------------------------------------------
  *  Displays the three-phase client journey for an individual service
  *  page (Before → Mid-Protocol → Final Result) plus a real
- *  before/after comparison slider and the TransformationAvatar map.
- *
- *  Per-service media is sourced from `SERVICE_PHASE_MEDIA` and
- *  `SERVICE_BEFORE_AFTER` in `src/lib/placeholders.ts` — every service
- *  page renders this component, no per-page prop wiring needed.
+ *  before/after comparison slider.
  */
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 type Props = {
-  variant: AvatarVariant;
   /** Must match a key in SERVICE_PHASE_MEDIA / SERVICE_BEFORE_AFTER */
   serviceSlug: string;
   title?: string;
@@ -47,7 +39,6 @@ const DEFAULT_PHASES: Props["phases"] = [
 ];
 
 export default function ServiceTransformationSection({
-  variant,
   serviceSlug,
   title = "Your Transformation, Step by Step",
   eyebrow = "Client Journey",
@@ -152,37 +143,27 @@ export default function ServiceTransformationSection({
           </motion.div>
         </AnimatePresence>
 
-        {/* Final comparison slider + annotated avatar */}
-        <div className="mt-16 md:mt-20 grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-6 md:gap-10 items-stretch">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease }}
-          >
-            <h3 className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-3 font-semibold">
-              Drag to compare · Real client
-            </h3>
-            <BeforeAfterSlider
-              before={photos.before}
-              after={photos.after}
-              alt={`${serviceSlug.replace(/-/g, " ")} treatment result`}
-              aspect="4/3"
-            />
-            <p className="mt-3 text-xs text-muted-foreground italic">
-              Results vary per client — shown with permission.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease }}
-          >
-            <TransformationAvatar variant={variant} compact />
-          </motion.div>
-        </div>
+        {/* Final comparison slider */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+          className="mt-16 md:mt-20 max-w-4xl mx-auto"
+        >
+          <h3 className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-3 font-semibold text-center">
+            Drag to compare · Real client
+          </h3>
+          <BeforeAfterSlider
+            before={photos.before}
+            after={photos.after}
+            alt={`${serviceSlug.replace(/-/g, " ")} treatment result`}
+            aspect="4/3"
+          />
+          <p className="mt-3 text-xs text-muted-foreground italic text-center">
+            Results vary per client — shown with permission.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

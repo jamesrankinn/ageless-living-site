@@ -209,7 +209,6 @@ export default function MicroneedlingPage() {
 
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
-        variant="microneedling"
         serviceSlug="microneedling"
         title="Collagen You Can See"
         subtitle="Drag to compare — smoother texture, refined pores and visibly firmer skin."

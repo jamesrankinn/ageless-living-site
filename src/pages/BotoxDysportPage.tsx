@@ -307,7 +307,6 @@ export default function BotoxDysportPage() {
 
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
-        variant="botox"
         serviceSlug="botox"
         title="See Botox Results, Frame by Frame"
         subtitle="Drag the handle to reveal real client outcomes — softer dynamic lines, rested eyes, still unmistakably you."
