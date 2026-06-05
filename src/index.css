@@ -6,91 +6,99 @@
 
 @layer base {
   :root {
-    /* Warm, approachable palette - creams, beiges, Ageless blue, warm grays */
-    --background: 40 33% 97%;
-    --foreground: 30 10% 15%;
+    /* ───────────────────────────────────────────────────────────────
+       COASTAL BRAND PALETTE
+       Midnight Harbor #3F5F86 · Coastal Sky #6F9FC8 · Salt Linen #E6E2DA
+       Dune Beige #D8CBB2 · Stone Clay #CFC9C3
+       Light & airy: linen backgrounds, deep harbor blue for emphasis,
+       coastal sky as the soft accent.
+       ─────────────────────────────────────────────────────────────── */
+    --background: 40 30% 96%;
+    --foreground: 213 32% 17%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 30 10% 15%;
+    --card: 40 33% 99%;
+    --card-foreground: 213 32% 17%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 40 33% 99%;
+    --popover-foreground: 213 32% 17%;
 
-    /* Primary - Ageless Living clinical blue */
-    --primary: 212 68% 38%;
-    --primary-foreground: 40 33% 97%;
+    /* Primary — Midnight Harbor */
+    --primary: 213 36% 39%;
+    --primary-foreground: 40 33% 98%;
 
-    --secondary: 40 25% 94%;
-    --secondary-foreground: 30 10% 15%;
+    /* Secondary — Salt Linen */
+    --secondary: 40 22% 91%;
+    --secondary-foreground: 213 32% 20%;
 
-    --muted: 40 18% 92%;
-    --muted-foreground: 30 8% 45%;
+    --muted: 38 18% 92%;
+    --muted-foreground: 213 12% 42%;
 
-    --accent: 40 40% 92%;
-    --accent-foreground: 212 70% 30%;
+    /* Accent — Coastal Sky tint */
+    --accent: 208 42% 92%;
+    --accent-foreground: 213 40% 30%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 52%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 20% 88%;
-    --input: 40 20% 88%;
-    --ring: 212 68% 38%;
+    --border: 38 16% 85%;
+    --input: 38 16% 85%;
+    --ring: 213 36% 39%;
 
     --radius: 0.75rem;
 
-    /* Warm neutral palette */
-    --cream: 40 33% 97%;
-    --cream-dark: 40 25% 94%;
-    --warm-beige: 35 30% 90%;
-    --taupe: 30 15% 70%;
-    --warm-gray: 30 8% 45%;
+    /* Coastal neutral palette */
+    --cream: 40 30% 96%;
+    --cream-dark: 40 22% 91%;
+    --warm-beige: 40 33% 77%;   /* Dune Beige */
+    --taupe: 30 11% 79%;        /* Stone Clay */
+    --warm-gray: 213 12% 42%;
 
     /* Brand blue — primary (legacy "sage" tokens repurposed so existing
-       sage-* utilities cascade to the Ageless blue) */
-    --sage: 212 68% 38%;
-    --sage-light: 212 50% 94%;
-    --sage-dark: 212 70% 28%;
+       sage-* utilities cascade to the Midnight Harbor blue) */
+    --sage: 213 36% 39%;
+    --sage-light: 208 42% 92%;
+    --sage-dark: 213 40% 28%;
 
-    /* Gold accent - subtle luxury */
-    --gold: 38 60% 55%;
-    --gold-light: 40 50% 92%;
+    /* Accent — Coastal Sky / Dune Beige (legacy "gold" tokens) */
+    --gold: 208 45% 61%;
+    --gold-light: 208 42% 92%;
 
-    /* Ageless blue palette */
-    --ageless-blue: 212 68% 38%;
-    --ageless-blue-deep: 212 70% 22%;
-    --ageless-blue-soft: 212 50% 94%;
+    /* Brand blue palette */
+    --ageless-blue: 213 36% 39%;
+    --ageless-blue-deep: 213 42% 22%;
+    --ageless-blue-soft: 208 42% 92%;
 
-    /* Vitality palette (re-pointed to the Ageless blue family) */
-    --vitality-forest: 212 68% 32%;
-    --vitality-forest-deep: 212 70% 22%;
-    --vitality-moss: 212 55% 45%;
-    --vitality-sage: 212 50% 94%;
-    --vitality-blue: 212 68% 38%;
-    --vitality-blue-soft: 212 50% 94%;
-    --vitality-sand: 40 33% 97%;
-    --vitality-glow: 212 70% 80%;
+    /* Vitality palette (re-pointed to the coastal blue family) */
+    --vitality-forest: 213 36% 36%;
+    --vitality-forest-deep: 213 42% 22%;
+    --vitality-moss: 208 40% 50%;
+    --vitality-sage: 208 42% 92%;
+    --vitality-blue: 213 36% 39%;
+    --vitality-blue-soft: 208 42% 92%;
+    --vitality-sand: 40 30% 96%;
+    --vitality-glow: 208 50% 80%;
 
-    /* Wellness palette (aligned to brand blue) */
-    --wellness-teal: 212 68% 38%;
-    --wellness-teal-dark: 212 70% 22%;
-    --wellness-teal-light: 212 50% 94%;
-    --wellness-charcoal: 30 10% 15%;
-    --wellness-warm: 40 25% 94%;
-    --wellness-cream: 40 33% 97%;
+    /* Wellness palette (aligned to coastal blue) */
+    --wellness-teal: 213 36% 39%;
+    --wellness-teal-dark: 213 42% 22%;
+    --wellness-teal-light: 208 42% 92%;
+    --wellness-charcoal: 213 32% 17%;
+    --wellness-warm: 40 22% 91%;
+    --wellness-cream: 40 30% 96%;
 
-    /* Legacy compatibility — clinic-teal now points to Ageless blue */
-    --clinic-teal: 212 68% 38%;
-    --clinic-teal-light: 212 50% 94%;
-    --clinic-teal-container: 212 70% 28%;
+    /* Legacy compatibility — clinic-teal now points to Midnight Harbor */
+    --clinic-teal: 213 36% 39%;
+    --clinic-teal-light: 208 42% 92%;
+    --clinic-teal-container: 213 40% 28%;
 
-    --sidebar-background: 40 33% 98%;
-    --sidebar-foreground: 30 10% 15%;
-    --sidebar-primary: 212 68% 38%;
-    --sidebar-primary-foreground: 40 33% 97%;
-    --sidebar-accent: 40 25% 94%;
-    --sidebar-accent-foreground: 30 10% 15%;
-    --sidebar-border: 40 20% 88%;
-    --sidebar-ring: 212 68% 38%;
+    --sidebar-background: 40 30% 97%;
+    --sidebar-foreground: 213 32% 17%;
+    --sidebar-primary: 213 36% 39%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 40 22% 91%;
+    --sidebar-accent-foreground: 213 32% 17%;
+    --sidebar-border: 38 16% 85%;
+    --sidebar-ring: 213 36% 39%;
   }
 }
 
