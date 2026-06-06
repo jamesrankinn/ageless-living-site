@@ -335,8 +335,8 @@ export default function PerfectDermaPeelPage() {
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
         serviceSlug="perfect-derma-peel"
-        title="Skin, Reset"
-        subtitle="Drag to compare — clearer tone, softer texture and a luminous finish."
+        title="Skin, reset"
+        subtitle="Clearer tone, softer texture and a luminous finish over the weeks that follow."
       />
 
       <ServiceCTA

@@ -309,8 +309,8 @@ export default function CustomizedUltraFacialPage() {
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
         serviceSlug="customized-ultrafacial"
-        title="The UltraFacial Glow"
-        subtitle="Drag to compare — plumper, clearer, visibly brighter skin in a single session."
+        title="The UltraFacial glow"
+        subtitle="Plumper, clearer, visibly brighter skin — tailored to what your skin needs that day."
       />
 
       <ServiceCTA />

@@ -1,169 +1,107 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Check } from "lucide-react";
-import BeforeAfterSlider from "@/components/BeforeAfterSlider";
-import {
-  SERVICE_BEFORE_AFTER,
-  SERVICE_PHASE_MEDIA,
-  type ServicePhaseMedia,
-} from "@/lib/placeholders";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+import botoxImg from "@/assets/real/botox-ageless-living.webp";
+import fillerImg from "@/assets/real/dermal-filler-ageless-living.webp";
+import ultrafacialImg from "@/assets/real/ultrafacial-ageless-living.webp";
+import laserImg from "@/assets/real/laser-ipl-bbl-ageless-living.webp";
+import peelImg from "@/assets/real/perfect-derma-peel-ageless-living.webp";
+import microneedlingImg from "@/assets/real/microneedling-ageless-living.webp";
+import belkyraImg from "@/assets/real/belkyra-ageless-living.webp";
+import dermaplaningImg from "@/assets/real/dermaplaning-ageless-living.webp";
+import biohackingImg from "@/assets/real/biohacking-ageless-living.webp";
+import hormoneImg from "@/assets/real/hormone-balancing-ageless-living.webp";
+import weightImg from "@/assets/real/medical-weight-loss-ageless-living.webp";
+import skinImg from "@/assets/real/skin-rejuvenation-ageless-living.webp";
 
 /**
  *  <ServiceTransformationSection />
  *  ------------------------------------------------------------------
- *  Displays the three-phase client journey for an individual service
- *  page (Before → Mid-Protocol → Final Result) plus a real
- *  before/after comparison slider.
+ *  A calm, honest "what to expect" band for an individual service page:
+ *  a real clinic photo paired with short, outcome-led copy and a CTA.
+ *
+ *  (Replaces the earlier synthetic before/after avatar slider — we don't
+ *  present stock or AI portraits as real client results.)
  */
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+const SERVICE_IMAGE: Record<string, string> = {
+  botox: botoxImg,
+  "cosmetic-dermal-filler": fillerImg,
+  "customized-ultrafacial": ultrafacialImg,
+  "laser-ipl-bbl": laserImg,
+  "perfect-derma-peel": peelImg,
+  microneedling: microneedlingImg,
+  belkyra: belkyraImg,
+  dermaplaning: dermaplaningImg,
+  biohacking: biohackingImg,
+  "hormone-balancing": hormoneImg,
+  "health-weight": weightImg,
+  "skin-rejuvenation": skinImg,
+};
+
 type Props = {
-  /** Must match a key in SERVICE_PHASE_MEDIA / SERVICE_BEFORE_AFTER */
+  /** Used to pick the matching real photo from SERVICE_IMAGE */
   serviceSlug: string;
   title?: string;
   eyebrow?: string;
   subtitle?: string;
-  /** Optional per-phase copy overrides — sensible defaults exist */
-  phases?: [
-    { label: string; caption: string },
-    { label: string; caption: string },
-    { label: string; caption: string }
-  ];
 };
-
-const DEFAULT_PHASES: Props["phases"] = [
-  { label: "Before Treatment", caption: "Your starting point — captured at your initial consultation." },
-  { label: "Mid-Protocol", caption: "1-2 weeks in: early softening, improved tone, brightening." },
-  { label: "Final Result", caption: "After the full course — real results from a real client." },
-];
 
 export default function ServiceTransformationSection({
   serviceSlug,
-  title = "Your Transformation, Step by Step",
-  eyebrow = "Client Journey",
-  subtitle = "Every client follows the same three-phase flow. Tap a phase to see the change you can expect.",
-  phases = DEFAULT_PHASES,
+  title = "What to expect",
+  eyebrow = "Your care",
+  subtitle = "Every plan starts with a conversation and is tailored to you — natural-looking results, at your pace.",
 }: Props) {
-  const photos =
-    SERVICE_BEFORE_AFTER[serviceSlug] ?? SERVICE_BEFORE_AFTER.botox;
-  const phaseMedia: ServicePhaseMedia =
-    SERVICE_PHASE_MEDIA[serviceSlug] ?? SERVICE_PHASE_MEDIA.botox;
-
-  const ordered = [phaseMedia.phase1, phaseMedia.phase2, phaseMedia.phase3];
-  const [active, setActive] = useState(0);
-  const current = ordered[active];
+  const img = SERVICE_IMAGE[serviceSlug] ?? skinImg;
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 bg-background overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease }}
-          className="text-center max-w-2xl mx-auto mb-10 md:mb-14"
-        >
-          <p className="eyebrow mb-3 md:mb-4">
-            <span className="hairline pb-2 text-xs md:text-sm">{eyebrow}</span>
-          </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-foreground tracking-tight mb-4 leading-tight">
-            {title}
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            {subtitle}
-          </p>
-        </motion.div>
-
-        {/* Phase tabs */}
-        <div className="flex justify-center mb-8 md:mb-10">
-          <div className="inline-flex items-center rounded-full border border-border bg-background p-1">
-            {phases.map((p, i) => (
-              <button
-                key={p.label}
-                onClick={() => setActive(i)}
-                className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-                  active === i
-                    ? "bg-foreground text-background"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-                aria-pressed={active === i}
-              >
-                <span
-                  className={`inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${
-                    active === i ? "bg-background/10" : "bg-secondary"
-                  }`}
-                >
-                  {i < active ? <Check className="w-3 h-3" /> : i + 1}
-                </span>
-                <span className="hidden sm:inline">{p.label}</span>
-                <span className="sm:hidden">{p.label.split(" ")[0]}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Phase media */}
-        <AnimatePresence mode="wait">
+    <section className="bg-secondary/40 section-y">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease }}
-            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+            className="order-2 lg:order-1"
           >
-            <div className="relative overflow-hidden rounded-2xl md:rounded-[2rem] shadow-[0_30px_80px_-20px_rgba(15,60,74,0.2)] ring-1 ring-foreground/10 aspect-[4/3] bg-secondary">
-              {current.video ? (
-                <video
-                  key={current.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 h-full w-full object-cover"
-                >
-                  <source src={current.video} type="video/mp4" />
-                </video>
-              ) : (
-                <img
-                  src={current.src}
-                  alt={current.alt ?? `${serviceSlug} — phase ${active + 1}`}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              )}
-              <span className="absolute top-4 left-4 rounded-full bg-black/60 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
-                Phase {active + 1} · {phases[active].label}
-              </span>
-            </div>
-            <p className="mt-3 text-center text-xs md:text-sm text-muted-foreground italic">
-              {phases[active].caption}
+            <p className="eyebrow mb-4">{eyebrow}</p>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-5">
+              {title}
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-md">
+              {subtitle}
             </p>
+            <Link
+              to="/book"
+              className="group inline-flex items-center justify-center gap-2.5 bg-clinic-teal text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-clinic-teal-container transition-colors"
+            >
+              Book a consultation
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
           </motion.div>
-        </AnimatePresence>
 
-        {/* Final comparison slider */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease }}
-          className="mt-16 md:mt-20 max-w-4xl mx-auto"
-        >
-          <h3 className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-3 font-semibold text-center">
-            Drag to compare · Real client
-          </h3>
-          <BeforeAfterSlider
-            before={photos.before}
-            after={photos.after}
-            alt={`${serviceSlug.replace(/-/g, " ")} treatment result`}
-            aspect="4/3"
-          />
-          <p className="mt-3 text-xs text-muted-foreground italic text-center">
-            Results vary per client — shown with permission.
-          </p>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1, ease }}
+            className="order-1 lg:order-2"
+          >
+            <div className="rounded-2xl md:rounded-[1.75rem] overflow-hidden aspect-[4/3] shadow-lg">
+              <img
+                src={img}
+                alt={`${serviceSlug.replace(/-/g, " ")} care at Ageless Living`}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

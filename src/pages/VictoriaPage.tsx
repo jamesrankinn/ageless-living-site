@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Info, Zap, Scale, FlaskConical, Sparkles, ExternalLink } from "lucide-react";
 import { getStaffByLocation, getStaffAltText } from "@/data/staffData";
-import victoriaImg from "@/assets/victoria.png";
+import victoriaImg from "@/assets/real/victoria-clinic-ageless-living.webp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -39,7 +39,7 @@ export default function VictoriaPage() {
         <title>Victoria Clinic | Ageless Living - BC Wellness Centre</title>
         <meta
           name="description"
-          content="Visit Ageless Living Victoria clinic at 1-101 Burnside Rd W. Expert aesthetic and functional medicine services including skin rejuvenation, hormone balancing, and biohacking."
+          content="Visit Ageless Living Victoria clinic at 740 Hillside Ave #120. Expert aesthetic and functional medicine services including skin rejuvenation, hormone balancing, and biohacking."
         />
       </Helmet>
 
@@ -65,7 +65,7 @@ export default function VictoriaPage() {
                   <MapPin className="w-4 h-4 text-clinic-teal mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-bold text-foreground text-sm">Address</p>
-                    <p className="text-muted-foreground text-sm">1-101 Burnside Rd W, Victoria, BC V9A 1B7</p>
+                    <p className="text-muted-foreground text-sm">740 Hillside Ave #120, Victoria, BC V8T 1Z4</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -99,7 +99,7 @@ export default function VictoriaPage() {
                   Book Consultation
                 </Link>
                 <a
-                  href="https://maps.google.com/?q=1-101+Burnside+Rd+W,+Victoria,+BC+V9A+1B7"
+                  href="https://maps.google.com/?q=740+Hillside+Ave+%23120,+Victoria,+BC+V8T+1Z4"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-6 py-3 text-sm font-bold tracking-tight shadow-lg hover:shadow-xl transition-all"
@@ -118,7 +118,7 @@ export default function VictoriaPage() {
               <div className="aspect-[4/5] rounded-[1.75rem] overflow-hidden shadow-2xl max-w-md mx-auto lg:max-w-none">
                 <img
                   src={victoriaImg}
-                  alt="Modern minimalist aesthetic clinic reception in Victoria"
+                  alt="Ageless Living wellness clinic in Victoria, BC"
                   className="w-full h-full object-cover object-center"
                   width={680}
                   height={850}

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Info, Zap, Scale, FlaskConical, Sparkles, ExternalLink } from "lucide-react";
 import { getStaffByLocation, getStaffAltText } from "@/data/staffData";
-import langleyImg from "@/assets/langley.jpg";
+import langleyImg from "@/assets/real/langley-clinic-ageless-living.webp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 

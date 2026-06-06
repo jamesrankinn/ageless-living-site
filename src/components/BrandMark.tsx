@@ -6,52 +6,56 @@ type BrandMarkProps = {
 };
 
 /**
- * Inline SVG wordmark — replaces the 812 KB header-logo.png that previously
- * shipped on every route. Tiny, crisp at any size, and inherits currentColor.
+ * Official Ageless Living lockup — the real teal triangle mark (from the
+ * brand SVG) paired with a clean, tracked wordmark. Inline SVG keeps it
+ * crisp at any size and tiny on the wire. The mark always renders in the
+ * brand teal; the wordmark inherits `currentColor` so it reads correctly on
+ * both light (header) and dark (footer) surfaces.
  */
 export default function BrandMark({
   className,
   inverted = false,
   title = "Ageless Living",
 }: BrandMarkProps) {
-  const fg = inverted ? "currentColor" : "currentColor";
+  const wordmark = inverted ? "hsl(var(--card))" : "currentColor";
   return (
     <svg
       role="img"
       aria-label={`${title} — Longevity & Vitality Clinic`}
-      viewBox="0 0 220 32"
+      viewBox="0 0 232 40"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>{title}</title>
-      {/* Leaf-arc monogram — references vitality / growth without leaning floral */}
-      <g fill="none" stroke={fg} strokeWidth="1.5" strokeLinecap="round">
-        <path d="M6 22 C 6 10, 14 4, 24 4 C 24 16, 16 22, 6 22 Z" />
-        <path d="M6 22 C 12 18, 18 14, 24 6" opacity="0.55" />
+      {/* Real brand mark — three nested chevrons forming the Ageless "A". */}
+      <g transform="translate(1 2) scale(0.0925)" fill="hsl(var(--clinic-teal))">
+        <polygon points="421.33 389.33 388.89 389.33 211.44 59.44 32 389.33 0 389.33 210.67 0 421.33 389.33" />
+        <polygon points="345.78 389.33 313.33 389.33 301.33 365.33 119.56 365.33 108 389.33 74.67 389.33 100 342.22 320.44 342.22 345.78 389.33" />
+        <polygon points="304 307.56 115.56 307.56 212.89 128 227.11 155.11 159.44 282.22 291.11 282.22 304 307.56" />
       </g>
       {/* Wordmark */}
       <text
-        x="36"
+        x="52"
         y="22"
-        fill={fg}
-        fontFamily="Jost, system-ui, sans-serif"
-        fontSize="18"
-        fontWeight="500"
-        letterSpacing="0.4"
+        fill={wordmark}
+        fontFamily="Inter, system-ui, sans-serif"
+        fontSize="17"
+        fontWeight="600"
+        letterSpacing="1"
       >
-        Ageless Living
+        AGELESS
       </text>
       <text
-        x="36"
-        y="30"
-        fill={fg}
-        fontFamily="Jost, system-ui, sans-serif"
-        fontSize="6"
-        fontWeight="600"
-        letterSpacing="2.2"
-        opacity="0.65"
+        x="52"
+        y="34"
+        fill={wordmark}
+        fontFamily="Inter, system-ui, sans-serif"
+        fontSize="8.5"
+        fontWeight="500"
+        letterSpacing="4.6"
+        opacity="0.7"
       >
-        LONGEVITY · VITALITY
+        LIVING
       </text>
     </svg>
   );

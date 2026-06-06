@@ -89,7 +89,7 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Jost", "Raleway", "system-ui", "sans-serif"],
+        display: ["Playfair Display", "Georgia", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -243,8 +243,8 @@ export default function BelkyraPage() {
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
         serviceSlug="belkyra"
-        title="A Sharper, More Defined Profile"
-        subtitle="Drag to compare — permanent reduction of submental fat, without surgery."
+        title="A sharper, more defined profile"
+        subtitle="A non-surgical way to reduce fullness under the chin, with lasting results."
       />
 
       <ServiceCTA

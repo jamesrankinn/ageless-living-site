@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Info, Zap, Scale, FlaskConical, Sparkles, ExternalLink } from "lucide-react";
 import { getStaffByLocation, getStaffAltText } from "@/data/staffData";
-import kelownaImg from "@/assets/kelowna.jpg";
+import kelownaImg from "@/assets/real/kelowna-clinic-ageless-living.webp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -39,7 +39,7 @@ export default function KelownaPage() {
         <title>Kelowna Clinic | Ageless Living - BC Wellness Centre</title>
         <meta
           name="description"
-          content="Visit Ageless Living Kelowna Clinic at 102-3320 Richter Street. Expert aesthetic and functional medicine services including skin rejuvenation, hormone balancing, and biohacking."
+          content="Visit Ageless Living Kelowna Clinic at 1708 Dolphin Ave #101. Expert aesthetic and functional medicine services including skin rejuvenation, hormone balancing, and biohacking."
         />
       </Helmet>
 
@@ -65,7 +65,7 @@ export default function KelownaPage() {
                   <MapPin className="w-4 h-4 text-clinic-teal mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-bold text-foreground text-sm">Address</p>
-                    <p className="text-muted-foreground text-sm">102-3320 Richter Street, Kelowna, BC V1W 4V5</p>
+                    <p className="text-muted-foreground text-sm">1708 Dolphin Ave #101, Kelowna, BC V1Y 9S4</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -98,7 +98,7 @@ export default function KelownaPage() {
                   Book Consultation
                 </Link>
                 <a
-                  href="https://maps.google.com/?q=102-3320+Richter+Street,+Kelowna,+BC+V1W+4V5"
+                  href="https://maps.google.com/?q=1708+Dolphin+Ave+%23101,+Kelowna,+BC+V1Y+9S4"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-6 py-3 text-sm font-bold tracking-tight shadow-lg hover:shadow-xl transition-all"

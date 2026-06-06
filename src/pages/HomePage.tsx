@@ -1,582 +1,394 @@
-import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { ArrowRight, ChevronDown, Phone } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
+import { HERO_VIDEO_MP4, HERO_POSTER } from "@/lib/placeholders";
 
-import cellHero from "@/assets/gen/cell-hero.png";
-import phaseBaseline from "@/assets/gen/phase-baseline.png";
-import phasePillars from "@/assets/gen/phase-pillars.png";
-import phaseRecovery from "@/assets/gen/phase-recovery.png";
-import phaseAesthetics from "@/assets/gen/phase-aesthetics.png";
-import journeyCognitive from "@/assets/gen/journey-cognitive.png";
-import journeyVitality from "@/assets/gen/journey-vitality.png";
-import journeyRadiance from "@/assets/gen/journey-radiance.png";
-import clinicMoss from "@/assets/gen/clinic-moss.png";
-import clinicHbot from "@/assets/gen/clinic-hbot.png";
-import clinicPemf from "@/assets/gen/clinic-pemf.png";
-import clinicConsult from "@/assets/gen/clinic-consult.png";
-import clinicIv from "@/assets/gen/clinic-iv.png";
-import victoriaImg from "@/assets/gen/victoria.png";
-import langleyImg from "@/assets/gen/langley.png";
-import kelownaImg from "@/assets/gen/kelowna.png";
-import { SHOP_URL } from "@/lib/links";
+import skinImg from "@/assets/real/skin-rejuvenation-ageless-living.webp";
+import hormoneImg from "@/assets/real/hormone-balancing-ageless-living.webp";
+import biohackingImg from "@/assets/real/biohacking-ageless-living.webp";
+import weightImg from "@/assets/real/medical-weight-loss-ageless-living.webp";
+import consultationImg from "@/assets/real/consultation-ageless-living.webp";
+import treatmentRoomImg from "@/assets/real/treatment-room-ageless-living.webp";
+import victoriaImg from "@/assets/real/victoria-clinic-ageless-living.webp";
+import langleyImg from "@/assets/real/langley-clinic-ageless-living.webp";
+import kelownaImg from "@/assets/real/kelowna-clinic-ageless-living.webp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const phases = [
+/** Outcome-led entry points — framed around how people want to feel, not the product. */
+const outcomes = [
   {
-    num: "01",
-    label: "THE BASELINE",
-    title: "Clear. Restore. Optimize.",
-    body: "The foundation. We clear inflammation and optimize metabolic health through advanced gut protocols and medical healthy weight programs. Everything that follows builds on this clean foundation.",
-    cardTitle: "The Baseline",
-    cardSub: "Clearing inflammation & optimizing metabolism",
-    badge: "PHASE 1 OF 4",
-    img: phaseBaseline,
+    title: "More energy, every day",
+    copy: "IV therapy, NAD+ and recovery to help you feel switched on again.",
+    href: "/services#biohacking",
+    img: biohackingImg,
   },
   {
-    num: "02",
-    label: "THE STRUCTURAL PILLARS",
-    title: "Strength. Clarity. Vitality.",
-    body: "Energy restored. We balance your hormones to bring back your physical strength, mental sharpness, and natural vitality. This is where patients say they feel like themselves again.",
-    cardTitle: "The Structural Pillars",
-    cardSub: "Balancing hormones for strength & clarity",
-    badge: "PHASE 2 OF 4",
-    img: phasePillars,
+    title: "Feel balanced again",
+    copy: "Hormone care for steady energy, better sleep, mood and libido.",
+    href: "/services#hormone-balancing",
+    img: hormoneImg,
   },
   {
-    num: "03",
-    label: "CELLULAR RECOVERY",
-    title: "Repair. Regenerate. Protect.",
-    body: "Deep repair. Using biohacking technology like Hyperbaric Oxygen and PEMF, we manage cellular stress and promote DNA repair. Your body heals faster than it has in years.",
-    cardTitle: "Cellular Recovery",
-    cardSub: "Deep repair via HBOT, PEMF & biohacking",
-    badge: "PHASE 3 OF 4",
-    img: phaseRecovery,
+    title: "Reach a healthy weight",
+    copy: "Physician-guided, sustainable weight and metabolic support.",
+    href: "/services#health-weight",
+    img: weightImg,
   },
   {
-    num: "04",
-    label: "MEDICAL AESTHETICS",
-    title: "Reveal. Refine. Radiate.",
-    body: "The final expression. Because you are deeply healthy underneath, our advanced skin rejuvenation, Botox, and dermal fillers look flawless, radiant, and completely natural.",
-    cardTitle: "Medical Aesthetics",
-    cardSub: "Flawless, radiant, natural results",
-    badge: "PHASE 4 OF 4",
-    img: phaseAesthetics,
+    title: "Confidence in your skin",
+    copy: "Natural-looking skin and aesthetic care that still feels like you.",
+    href: "/services#skin-rejuvenation",
+    img: skinImg,
   },
 ];
 
-const journeys = [
-  {
-    tag: "JOURNEY 01",
-    title: "Cognitive & Cellular Reboot",
-    body: "Overcome deep fatigue and brain fog. Featuring Functional Nutrition, Hormone Optimization, HBOT, PEMF, and IV Vitamin Therapy.",
-    img: journeyCognitive,
-    href: "/services/biohacking",
-  },
-  {
-    tag: "JOURNEY 02",
-    title: "Peak Vitality & Performance",
-    body: "Optimize your body to perform and recover. Featuring Performance Diets, IR Sauna, Biohacking, and Targeted Supplementation.",
-    img: journeyVitality,
-    href: "/services/health-weight",
-  },
-  {
-    tag: "JOURNEY 03",
-    title: "Total Radiance Reset",
-    body: "The ultimate synergy of health and aesthetics. Featuring Medical Weight Loss, Stress Defense, and our full suite of injectables and lasers.",
-    img: journeyRadiance,
-    href: "/services",
-  },
-];
-
-const clinicGallery = [
-  { img: clinicMoss, caption: "Biophilic Moss Wall & Light Oak Floors", wide: true },
-  { img: clinicHbot, caption: "State-of-the-Art HBOT Chamber", wide: false },
-  { img: clinicPemf, caption: "Zero-Gravity PEMF Recovery", wide: false },
-  { img: clinicConsult, caption: "Private Consultation Suite", wide: false },
-  { img: clinicIv, caption: "IV Therapy Lounge", wide: false },
+const stats = [
+  { k: "10+", v: "Years in practice" },
+  { k: "4.9★", v: "Patient rating" },
+  { k: "3", v: "BC locations" },
+  { k: "Physician-led", v: "Every plan" },
 ];
 
 const locations = [
-  {
-    name: "Victoria",
-    img: victoriaImg,
-    address: ["1-101 Burnside Rd W", "Victoria, BC V9A 1B7"],
-    phone: "(250) 590-5787",
-    tel: "+12505905787",
-    hours: "Mon-Fri 9am-5pm",
-    href: "/locations/victoria",
-  },
-  {
-    name: "Langley",
-    img: langleyImg,
-    address: ["415-20178 96th Ave", "Langley, BC V1M 0B2"],
-    phone: "(236) 326-6830",
-    tel: "+12363266830",
-    hours: "Mon-Fri 9am-5pm",
-    href: "/locations/langley",
-  },
-  {
-    name: "Kelowna",
-    img: kelownaImg,
-    address: ["102-3320 Richter Street", "Kelowna, BC V1W 4V5"],
-    phone: "(778) 760-9827",
-    tel: "+17787609827",
-    hours: "Mon-Fri 9am-5pm",
-    href: "/locations/kelowna",
-  },
+  { name: "Victoria", address: "740 Hillside Ave #120", href: "/locations/victoria", img: victoriaImg },
+  { name: "Langley", address: "415-20178 96th Ave", href: "/locations/langley", img: langleyImg },
+  { name: "Kelowna", address: "1708 Dolphin Ave #101", href: "/locations/kelowna", img: kelownaImg },
 ];
 
-/* Triangle texture used behind the light editorial sections */
-const triangleBg =
-  "url(\"data:image/svg+xml,%3Csvg width='80' height='70' viewBox='0 0 80 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 14 L62 54 L18 54 Z' fill='none' stroke='%2314b8c4' stroke-opacity='0.07' stroke-width='1'/%3E%3C/svg%3E\")";
-
-function ScrollPhases() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const idx = Math.min(phases.length - 1, Math.floor(v * phases.length));
-    setActive(idx < 0 ? 0 : idx);
-  });
-
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ["8%", "100%"]);
-  const current = phases[active];
-
-  return (
-    <section
-      ref={sectionRef}
-      className="relative bg-background"
-      style={{ height: `${phases.length * 100}vh`, backgroundImage: triangleBg }}
-    >
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Text column */}
-            <div className="order-2 lg:order-1">
-              <motion.div
-                key={`txt-${active}`}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease }}
-                className="max-w-xl bg-card border border-border rounded-2xl p-8 md:p-10 shadow-sm"
-              >
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="flex items-center justify-center w-9 h-9 rounded-full border border-clinic-teal/40 text-clinic-teal text-sm font-semibold">
-                    {current.num}
-                  </span>
-                  <span className="text-xs font-semibold tracking-[0.18em] text-clinic-teal">
-                    {current.label}
-                  </span>
-                </div>
-                <h3 className="font-display text-3xl md:text-4xl text-foreground mb-4">
-                  {current.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed text-pretty">
-                  {current.body}
-                </p>
-              </motion.div>
-            </div>
-
-            {/* Image card column */}
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              <motion.div
-                key={`img-${active}`}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease }}
-                className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl"
-              >
-                <img
-                  src={current.img || "/placeholder.svg"}
-                  alt={current.cardTitle}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-7">
-                  <p className="text-[11px] font-semibold tracking-[0.18em] text-white/70 mb-1.5">
-                    {current.badge}
-                  </p>
-                  <h4 className="font-display text-2xl md:text-3xl text-white mb-1">
-                    {current.cardTitle}
-                  </h4>
-                  <p className="text-sm text-clinic-teal-light mb-5">{current.cardSub}</p>
-                  <div className="h-1 w-full rounded-full bg-white/20 overflow-hidden">
-                    <motion.div
-                      className="h-full rounded-full bg-clinic-teal"
-                      style={{ width: progressWidth }}
-                    />
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+/**
+ * Decide whether to load the hero video.
+ * Skips on small viewports, on data-saver, and on reduced-motion preferences.
+ */
+function useShouldLoadHeroVideo() {
+  const [enabled, setEnabled] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const wide = window.matchMedia("(min-width: 768px)").matches;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const saveData = conn?.saveData === true;
+    const slow = conn?.effectiveType === "2g" || conn?.effectiveType === "slow-2g";
+    setEnabled(wide && !reduced && !saveData && !slow);
+  }, []);
+  return enabled;
 }
 
 export default function HomePage() {
+  const loadHeroVideo = useShouldLoadHeroVideo();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
-    name: "Ageless Living Wellness Centre",
-    description:
-      "A premier longevity clinic optimizing internal health so you look and live your best, for the longest you can.",
+    name: "Ageless Living™ Wellness Centre",
+    description: "Physician-led longevity and wellness care across British Columbia — built around how you want to look and feel.",
+    url: "https://agelessliving.com",
+    image: "https://agelessliving.com/icon.png",
     aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "287", bestRating: "5" },
     address: [
-      { "@type": "PostalAddress", streetAddress: "1-101 Burnside Rd W", addressLocality: "Victoria", addressRegion: "BC", postalCode: "V9A 1B7", addressCountry: "CA" },
+      { "@type": "PostalAddress", streetAddress: "740 Hillside Ave #120", addressLocality: "Victoria", addressRegion: "BC", postalCode: "V8T 1Z4", addressCountry: "CA" },
       { "@type": "PostalAddress", streetAddress: "415-20178 96th Ave", addressLocality: "Langley", addressRegion: "BC", postalCode: "V1M 0B2", addressCountry: "CA" },
-      { "@type": "PostalAddress", streetAddress: "102-3320 Richter Street", addressLocality: "Kelowna", addressRegion: "BC", postalCode: "V1W 4V5", addressCountry: "CA" },
+      { "@type": "PostalAddress", streetAddress: "1708 Dolphin Ave #101", addressLocality: "Kelowna", addressRegion: "BC", postalCode: "V1Y 9S4", addressCountry: "CA" },
     ],
   };
 
   return (
     <>
       <Helmet>
-        <title>Ageless Living™ | Medical Aesthetics, Hormone Therapy & Biohacking in BC</title>
-        <meta
-          name="description"
-          content="A premier Longevity Clinic. We optimize your internal health so you look and live your best, for the longest you can. Three locations across British Columbia."
-        />
+        <title>Ageless Living™ | Longevity & Wellness — Victoria, Langley & Kelowna BC</title>
+        <meta name="description" content="Look and feel your best, at any age. Physician-led longevity and wellness care across Victoria, Langley and Kelowna, BC — built around how you want to live." />
         <link rel="canonical" href="https://agelessliving.com" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      {/* ══════════════ HERO ══════════════ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* ════════════════ HERO — real brand video, one clear message ════════════════ */}
+      <section className="relative h-[92vh] min-h-[600px] w-full overflow-hidden bg-foreground">
         <img
-          src={cellHero || "/placeholder.svg"}
+          src={HERO_POSTER}
           alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#1d2b2b]/75" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50" />
+        {loadHeroVideo && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster={HERO_POSTER}
+            className="absolute inset-0 h-full w-full object-cover"
+            aria-hidden
+          >
+            <source src={HERO_VIDEO_MP4} type="video/mp4" />
+          </video>
+        )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease }}
-          className="relative z-10 container mx-auto px-4 sm:px-6 text-center"
-        >
-          <p className="text-xs sm:text-sm font-semibold tracking-[0.22em] text-clinic-teal mb-4">
-            LONGEVITY-FOCUSED AESTHETICS
-          </p>
-          <p className="text-xs sm:text-sm font-medium tracking-[0.22em] text-white/70 mb-7">
-            YOUR BEST SELF, AT ANY AGE
-          </p>
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[1.02] tracking-tight text-balance">
-            True Beauty Starts at the
-            <br className="hidden sm:block" />{" "}
-            <span className="text-clinic-teal">Cellular Level.</span>
-          </h1>
-          <p className="mt-8 text-base md:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto text-pretty">
-            We are a premier Longevity Clinic. We optimize your internal health so you look and live
-            your best, for the longest you can.
-          </p>
-          <div className="mt-10 flex justify-center">
-            <a
-              href="#synergy"
-              className="group inline-flex items-center gap-3 bg-clinic-teal hover:bg-clinic-teal-container text-white px-8 py-4 rounded-full font-semibold text-sm transition-all"
-            >
-              Discover Longevity-Focused Beauty
-              <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
-            </a>
+        {/* Soft, even legibility wash */}
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/25 to-foreground/60" />
+
+        <div className="relative z-20 h-full flex items-end pb-16 md:items-center md:pb-0">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-16">
+            <div className="max-w-2xl">
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease }}
+                className="eyebrow text-white/80 mb-5"
+              >
+                Longevity &amp; Wellness · British Columbia
+              </motion.p>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease }}
+                className="font-display text-white leading-[1.05]"
+                style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+              >
+                Look and feel your
+                <br />
+                best, <span className="italic">at any age.</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.2, ease }}
+                className="mt-6 max-w-md text-base md:text-lg text-white/85 leading-relaxed"
+              >
+                Physician-led care, built around how you want to live. Three clinics across BC.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.32, ease }}
+                className="mt-8 flex flex-col sm:flex-row gap-3"
+              >
+                <Link
+                  to="/book"
+                  className="group inline-flex items-center justify-center gap-2.5 bg-white text-foreground px-7 py-4 rounded-full font-semibold text-sm transition-colors hover:bg-clinic-teal hover:text-white"
+                >
+                  Book a consultation
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  to="/services"
+                  className="inline-flex items-center justify-center px-7 py-4 rounded-full border border-white/40 text-white font-semibold text-sm hover:bg-white/10 transition-colors"
+                >
+                  Explore care
+                </Link>
+              </motion.div>
+            </div>
           </div>
-        </motion.div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-          <ChevronDown className="w-6 h-6 text-white/50 animate-bounce" />
         </div>
       </section>
 
-      {/* ══════════════ THE INSIDE-OUT SYNERGY ══════════════ */}
-      <div id="synergy" className="relative bg-background" style={{ backgroundImage: triangleBg }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-32 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease }}
-          >
-            <div className="mx-auto mb-6 h-0.5 w-14 bg-clinic-teal" />
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight text-balance">
-              The Inside-Out Synergy
-            </h2>
-            <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Our four-phase process doesn&apos;t just treat symptoms. It rebuilds you from the
-              cellular level up.
-            </p>
-          </motion.div>
+      {/* ════════════════ TRUST STRIP ════════════════ */}
+      <section className="bg-background border-b border-border">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-16 py-10 md:py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {stats.map((s) => (
+              <div key={s.v}>
+                <p className="font-display text-3xl md:text-4xl text-foreground">{s.k}</p>
+                <p className="mt-1.5 text-xs uppercase tracking-[0.16em] text-muted-foreground">{s.v}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      <ScrollPhases />
-
-      {/* ══════════════ CHOOSE YOUR TRANSFORMATION ══════════════ */}
-      <section className="relative bg-secondary/60" style={{ backgroundImage: triangleBg }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 section-y">
+      {/* ════════════════ OUTCOMES — start with how you want to feel ════════════════ */}
+      <section className="bg-background section-y">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-16">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease }}
-            className="text-center"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease }}
+            className="max-w-2xl mb-10 md:mb-14"
           >
-            <div className="mx-auto mb-6 h-0.5 w-14 bg-clinic-teal" />
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight text-balance">
-              Choose Your Transformation
+            <p className="eyebrow mb-4">Where to begin</p>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1]">
+              Start with how you
+              <br className="hidden sm:block" /> want to <span className="italic text-clinic-teal">feel.</span>
             </h2>
-            <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Every journey is different. Find the path that matches where you are — and where you
-              want to be.
+            <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
+              Not sure where to start? Most people come to us for one of these.
             </p>
           </motion.div>
 
-          <div className="mt-14 grid md:grid-cols-3 gap-6 lg:gap-8">
-            {journeys.map((j, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {outcomes.map((o, i) => (
               <motion.div
-                key={j.title}
-                initial={{ opacity: 0, y: 30 }}
+                key={o.title}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease }}
-                className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease }}
               >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={j.img || "/placeholder.svg"}
-                    alt={j.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                  <span className="absolute bottom-4 left-5 text-[11px] font-semibold tracking-[0.18em] text-white/80">
-                    {j.tag}
-                  </span>
-                </div>
-                <div className="flex flex-col flex-1 p-7">
-                  <h3 className="font-display text-2xl text-foreground mb-3">{j.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-pretty flex-1">{j.body}</p>
-                  <Link
-                    to={j.href}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clinic-teal hover:gap-3 transition-all"
-                  >
-                    Learn More
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
+                <Link
+                  to={o.href}
+                  className="group block rounded-2xl overflow-hidden bg-card border border-border hover:border-clinic-teal/40 hover:shadow-lg transition-all duration-300 h-full"
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={o.img}
+                      alt={`${o.title} at Ageless Living`}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-5 md:p-6">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-lg font-semibold text-foreground leading-snug group-hover:text-clinic-teal transition-colors">
+                        {o.title}
+                      </h3>
+                      <ArrowUpRight className="w-4 h-4 mt-1 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{o.copy}</p>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════ DESIGNED FOR DEEP HEALING ══════════════ */}
-      <section className="relative bg-background" style={{ backgroundImage: triangleBg }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 section-y">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease }}
-            className="text-center"
-          >
-            <div className="mx-auto mb-6 h-0.5 w-14 bg-clinic-teal" />
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight text-balance">
-              Designed for Deep Healing
-            </h2>
-            <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Every detail of our clinic is intentional — biophilic design meets clinical precision.
-            </p>
-          </motion.div>
+      {/* ════════════════ APPROACH — image + short, human copy ════════════════ */}
+      <section className="bg-secondary/50 section-y">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease }}
+              className="grid grid-cols-2 gap-3 md:gap-4"
+            >
+              <div className="rounded-2xl overflow-hidden aspect-[3/4]">
+                <img src={consultationImg} alt="A consultation with an Ageless Living clinician" loading="lazy" className="w-full h-full object-cover" />
+              </div>
+              <div className="rounded-2xl overflow-hidden aspect-[3/4] mt-8">
+                <img src={treatmentRoomImg} alt="Inside an Ageless Living treatment room" loading="lazy" className="w-full h-full object-cover" />
+              </div>
+            </motion.div>
 
-          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {clinicGallery.map((item, i) => (
-              <motion.div
-                key={item.caption}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease }}
-                className={`group relative overflow-hidden rounded-2xl shadow-sm ${
-                  item.wide ? "lg:col-span-2" : ""
-                }`}
-              >
-                <div className={`${item.wide ? "aspect-[16/9]" : "aspect-[4/3]"} w-full`}>
-                  <img
-                    src={item.img || "/placeholder.svg"}
-                    alt={item.caption}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <p className="absolute bottom-5 left-6 right-6 text-white font-medium">
-                  {item.caption}
-                </p>
-              </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease }}
+            >
+              <p className="eyebrow mb-4">Our approach</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-6">
+                We start with you — <span className="italic text-clinic-teal">not a product.</span>
+              </h2>
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-md">
+                The real question isn't which treatment. It's how you want to look and feel.
+                We listen first, then build a simple plan with you — and adjust it as life does.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/about-us"
+                  className="group inline-flex items-center justify-center gap-2.5 bg-clinic-teal text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-clinic-teal-container transition-colors"
+                >
+                  About us
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  to="/faqs"
+                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-foreground/20 text-foreground text-sm font-semibold hover:border-foreground transition-colors"
+                >
+                  Common questions
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════ EXTEND YOUR RESULTS (SHOP) ══════════════ */}
-      <section
-        className="relative bg-clinic-teal text-white overflow-hidden"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='80' height='70' viewBox='0 0 80 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 14 L62 54 L18 54 Z' fill='none' stroke='white' stroke-opacity='0.12' stroke-width='1'/%3E%3C/svg%3E\")",
-        }}
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center">
+      {/* ════════════════ LOCATIONS ════════════════ */}
+      <section className="bg-background section-y">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-16">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease }}
+            className="max-w-2xl mb-10 md:mb-14"
           >
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight text-balance">
-              Extend Your Results at Home
+            <p className="eyebrow mb-4">Visit us</p>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1]">
+              Three clinics <span className="italic text-clinic-teal">across BC.</span>
             </h2>
-            <p className="mt-5 text-lg text-white/85 max-w-2xl mx-auto text-pretty">
-              Shop our curated longevity supplements and medical-grade skincare — the same products
-              we prescribe in-clinic, delivered to your door.
-            </p>
-            <a
-              href={SHOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-9 inline-flex items-center gap-3 bg-white text-clinic-teal px-8 py-4 rounded-full font-semibold text-sm transition-all hover:bg-white/90"
-            >
-              Shop Ageless Living
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════ LOCATIONS ══════════════ */}
-      <section className="relative bg-secondary/60" style={{ backgroundImage: triangleBg }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 section-y">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease }}
-            className="text-center"
-          >
-            <div className="mx-auto mb-6 h-0.5 w-14 bg-clinic-teal" />
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground tracking-tight text-balance">
-              Visit Us in British Columbia
-            </h2>
-            <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Three locations, one standard of excellence.
-            </p>
           </motion.div>
 
-          <div className="mt-14 grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {locations.map((loc, i) => (
               <motion.div
                 key={loc.name}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease }}
-                className="flex flex-col bg-card border border-border rounded-2xl overflow-hidden shadow-sm"
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease }}
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <img
-                    src={loc.img || "/placeholder.svg"}
-                    alt={`${loc.name} clinic location`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <h3 className="absolute bottom-4 left-6 font-display text-2xl text-white">
-                    {loc.name}
-                  </h3>
-                </div>
-                <div className="flex flex-col flex-1 p-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    {loc.address[0]}
-                    <br />
-                    {loc.address[1]}
-                  </p>
-                  <p className="mt-4 text-sm text-foreground">
-                    <span className="font-semibold">Phone: </span>
-                    <a href={`tel:${loc.tel}`} className="text-clinic-teal hover:underline">
-                      {loc.phone}
-                    </a>
-                  </p>
-                  <p className="mt-1.5 text-sm text-foreground">
-                    <span className="font-semibold">Hours: </span>
-                    {loc.hours}
-                  </p>
-                  <Link
-                    to={loc.href}
-                    className="mt-6 inline-flex items-center justify-center gap-2 bg-clinic-teal hover:bg-clinic-teal-container text-white px-5 py-3 rounded-lg font-semibold text-sm transition-all"
-                  >
-                    Book at {loc.name}
-                  </Link>
-                </div>
+                <Link to={loc.href} className="group block">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
+                    <img
+                      src={loc.img}
+                      alt={`Ageless Living ${loc.name} clinic`}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/10 to-transparent" />
+                    <div className="absolute bottom-5 left-5 right-5 text-white">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/75 flex items-center gap-1.5 mb-1">
+                        <MapPin className="h-3 w-3" /> British Columbia
+                      </p>
+                      <h3 className="font-display text-2xl md:text-3xl text-white">{loc.name}</h3>
+                      <p className="text-xs text-white/75 mt-1">{loc.address}</p>
+                    </div>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════ NEWSLETTER ══════════════ */}
-      <section className="relative bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 text-center">
+      {/* ════════════════ CLOSING CTA — warm, minimal ════════════════ */}
+      <section className="bg-secondary/50 border-t border-border">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-16 py-20 md:py-28 text-center max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease }}
-            className="max-w-xl mx-auto"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease }}
           >
-            <h2 className="font-display text-3xl md:text-4xl text-foreground tracking-tight">
-              Start Your Journey
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-5">
+              Ready to feel more <span className="italic text-clinic-teal">like yourself?</span>
             </h2>
-            <p className="mt-4 text-muted-foreground text-pretty">
-              Join our newsletter for longevity insights, exclusive offers, and clinic updates.
+            <p className="text-base md:text-lg text-muted-foreground mb-9 max-w-lg mx-auto leading-relaxed">
+              Book a consultation and we'll start with what matters most to you.
             </p>
-            <form
-              className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <label htmlFor="newsletter-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="newsletter-email"
-                type="email"
-                required
-                placeholder="your@email.com"
-                className="flex-1 px-5 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-clinic-teal"
-              />
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center bg-clinic-teal hover:bg-clinic-teal-container text-white px-7 py-3 rounded-lg font-semibold text-sm transition-all"
+            <div className="flex flex-col sm:flex-row justify-center gap-3">
+              <Link
+                to="/book"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-clinic-teal text-white font-semibold text-sm hover:bg-clinic-teal-container transition-colors"
               >
-                Subscribe
-              </button>
-            </form>
-            <div className="mt-8">
-              <a
-                href="tel:+12363266830"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                Book a consultation
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-foreground/20 text-foreground font-semibold text-sm hover:border-foreground transition-colors"
               >
-                <Phone className="w-4 h-4 text-clinic-teal" />
-                Prefer to talk? Call (236) 326-6830
-              </a>
+                Contact us
+              </Link>
             </div>
           </motion.div>
         </div>

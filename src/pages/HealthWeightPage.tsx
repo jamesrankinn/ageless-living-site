@@ -264,8 +264,8 @@ export default function HealthWeightPage() {
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
         serviceSlug="health-weight"
-        title="Real Client Progress"
-        subtitle="Drag to compare — physician-supervised change that sticks, without extreme diets."
+        title="Lasting, healthy change"
+        subtitle="Physician-supervised support that's sustainable — no crash diets, no extremes."
       />
 
       <ServiceCTA

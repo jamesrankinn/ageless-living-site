@@ -1,5 +1,84 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Real-Asset Integration + Anti-AI Home Rebuild (2026-06-06)
+
+Brand-authenticity pass: swap AI-generated assets for the real clinic
+photography/brand assets, anchor on the official logo + teal, and simplify
+the home page around outcomes (how people want to feel) over products.
+
+### A. Brand identity wired to the real assets
+- `src/components/BrandMark.tsx` now renders the **official Ageless Living
+  mark** — the real teal triangle/chevron logo (from the brand SVG) plus a
+  clean tracked "AGELESS / LIVING" wordmark — replacing the invented
+  leaf-arc monogram. Mark uses `--clinic-teal`; wordmark inherits
+  `currentColor` so it inverts correctly in the dark footer.
+- `index.html`: favicon → real teal triangle (`/brand/favicon.svg`);
+  `theme-color` → brand teal `#1f8a96`.
+- `tailwind.config.ts`: `fontFamily.display` → **Playfair Display** to match
+  the intentional `src/index.css` switch (warmer, more human/editorial than
+  the previous Jost). Color tokens already point to the brand teal
+  (`184 64% 33%`) in `index.css`.
+
+### B. Real asset pipeline
+- Source mirror of the live site landed at `public/agelessliving.com/`
+  (375 real assets / 50 pages, indexed by `context_map.json`).
+- Curated, keyword-named, <200 KB `.webp` copies placed in
+  `src/assets/real/` (imported + hashed by Vite); the real brand hero video
+  + poster in `public/media/` (`hero.mp4`, `hero-poster.webp`); brand SVGs in
+  `public/brand/`.
+- `src/lib/placeholders.ts`: `HERO_VIDEO_MP4` / `HERO_POSTER` repointed from
+  the AI Kling clip + AI portraits to the **real brand video + clinic still**.
+
+### C. Home page rebuilt (`src/pages/HomePage.tsx`)
+- Removed the AI-generated imagery (`src/assets/gen/*.png`) and the
+  scroll-jacking 4-phase "Inside-Out Synergy" / "Designed for Deep Healing"
+  sections — the synthetic, over-produced look flagged in the Anti-AI brief.
+- New lean, mobile-first structure: **Hero (real brand video) → Trust strip →
+  Outcomes → Approach → Locations → Closing CTA**.
+- Copy reframed from product/jargon ("True Beauty at the Cellular Level",
+  "HBOT/PEMF", "healthspan vs lifespan") to **outcome-led, minimal** voice
+  ("Look and feel your best, at any age"; "Start with how you want to feel";
+  "We start with you — not a product").
+
+### Verification
+- `npx vite build` — clean (~4 s); all real-asset imports resolve.
+- `npx tsc` — changed files clean (2 pre-existing zod-resolver errors remain
+  in `NewsletterSignup.tsx` / `PerformancePackagesPage.tsx`, untouched).
+
+### D. Service pages — honest real-photo band + dead-code cleanup
+- `ServiceTransformationSection.tsx` rewritten: the synthetic 3-phase tab UI
+  and the "Drag to compare · Real client" before/after slider (both fed by AI
+  portraits) are gone. It now renders a calm **real clinic photo + outcome-led
+  copy + Book CTA** band, keyed by `serviceSlug` to a real photo in
+  `src/assets/real/`. Same props, so all 11 callers keep working.
+- All 11 service call sites reworded from slider-referencing copy ("Drag the
+  handle…") to honest, sentence-case, outcome-led lines.
+- Deleted now-orphaned components: `TransformationAvatar.tsx`,
+  `EvolutionTimeline.tsx`, `TransformationJourney.tsx`, `BeforeAfterSlider.tsx`.
+- Deleted unused AI assets: `src/assets/gen/` (24 PNGs, ~30 MB) and the
+  AI portraits + Kling hero clip in `public/photos/`.
+- `placeholders.ts` slimmed to just `HERO_VIDEO_MP4` / `HERO_POSTER` (all the
+  AI before/after maps removed).
+
+### E. Location pages — real photos + canonical addresses
+- Victoria / Langley / Kelowna hero + inset images repointed to real clinic
+  photos in `src/assets/real/`.
+- Addresses corrected to the canonical (Footer) set after user confirmation:
+  Victoria **740 Hillside Ave #120, V8T 1Z4** (was a wrong "Burnside" address),
+  Kelowna **1708 Dolphin Ave #101, V1Y 9S4** (was a wrong "Richter St"
+  address); Langley `415-20178 96 Ave` was already correct. Helmet meta +
+  Google Maps links updated to match.
+
+### Outstanding (next pass)
+- Per-clinic phone numbers on the location pages (Victoria `250 590-5787`,
+  Kelowna `778 760-9827`) were added alongside the now-corrected wrong
+  addresses — verify against the real clinic lines (Langley uses the canonical
+  `236 326-6830`).
+- Service pages still use the older `src/assets/*.jpg` stock imagery in their
+  upper sections; swap for real clinic photography as it becomes available.
+
+---
+
 ## Changelog — Brand Blue Repaint + Service-Page Cleanup (2026-06-04)
 
 Two surgical changes requested ahead of brand review.

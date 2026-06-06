@@ -370,8 +370,8 @@ export default function DermaplaningPage() {
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
         serviceSlug="dermaplaning"
-        title="Instant Luminosity"
-        subtitle="Drag to compare — the silk-smooth, light-reflecting finish dermaplaning is famous for."
+        title="Instant luminosity"
+        subtitle="The silk-smooth, light-reflecting finish dermaplaning is loved for."
       />
 
       <ServiceCTA

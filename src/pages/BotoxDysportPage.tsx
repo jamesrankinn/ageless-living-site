@@ -308,8 +308,8 @@ export default function BotoxDysportPage() {
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
         serviceSlug="botox"
-        title="See Botox Results, Frame by Frame"
-        subtitle="Drag the handle to reveal real client outcomes — softer dynamic lines, rested eyes, still unmistakably you."
+        title="Soften lines, still look like you"
+        subtitle="Natural-looking results that ease dynamic lines and leave you rested — never frozen."
       />
 
       {/* CTA */}

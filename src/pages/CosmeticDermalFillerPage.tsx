@@ -312,8 +312,8 @@ export default function CosmeticDermalFillerPage() {
       {/* ═══ REAL RESULTS — interactive transformation slider ═══ */}
       <ServiceTransformationSection
         serviceSlug="cosmetic-dermal-filler"
-        title="Volume, Contour, Confidence"
-        subtitle="Drag to compare — strategic filler restores the youthful architecture most of us lose with time."
+        title="Volume, contour, confidence"
+        subtitle="Strategic filler restores the youthful structure most of us lose with time — subtle and balanced."
       />
 
       <ServiceCTA />
