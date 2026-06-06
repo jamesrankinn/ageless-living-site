@@ -1,26 +1,25 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Shield, Heart, Sparkles, Clock, Phone, MapPin, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Star, Shield, Heart, Clock, Phone, MapPin } from "lucide-react";
 
-import homeImg1 from "@/assets/home-1.jpg";
-import homeImg2 from "@/assets/home-2.jpg";
-import homeImg3 from "@/assets/home-3.jpg";
-import homeImg4 from "@/assets/home-4.jpg";
-import skinImg from "@/assets/services-1.jpg";
-import hormoneImg from "@/assets/hormone-balancing.jpg";
-import biohackingImg from "@/assets/biohacking.jpg";
-import weightImg from "@/assets/health-weight.jpg";
-import aboutImg from "@/assets/about-us-1.jpg";
-import teamImg from "@/assets/our-team-1.jpg";
-import victoriaImg from "@/assets/victoria.png";
-import langleyImg from "@/assets/langley.jpg";
-import kelownaImg from "@/assets/kelowna.jpg";
+import heroMain from "@/assets/gen/hero-main.png";
+import heroSecondary from "@/assets/gen/hero-2.png";
+import hormoneImg from "@/assets/gen/hormone.png";
+import skinImg from "@/assets/gen/skin.png";
+import weightImg from "@/assets/gen/weight.png";
+import ivImg from "@/assets/gen/iv.png";
+import doctorImg from "@/assets/gen/doctor.png";
+import teamImg from "@/assets/gen/team.png";
+import victoriaImg from "@/assets/gen/victoria.png";
+import langleyImg from "@/assets/gen/langley.png";
+import kelownaImg from "@/assets/gen/kelowna.png";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const services = [
   {
+    num: "01",
     title: "Hormone Optimization",
     description: "Restore your energy, sleep better, and feel like yourself again with personalized hormone therapy.",
     benefit: "More energy, better sleep, improved mood",
@@ -28,6 +27,7 @@ const services = [
     img: hormoneImg,
   },
   {
+    num: "02",
     title: "Skin Rejuvenation",
     description: "Gentle, effective treatments that reveal your natural radiance without looking overdone.",
     benefit: "Smoother skin, natural glow, renewed confidence",
@@ -35,6 +35,7 @@ const services = [
     img: skinImg,
   },
   {
+    num: "03",
     title: "Medical Weight Management",
     description: "Doctor-supervised programs that work with your body, not against it, for lasting results.",
     benefit: "Sustainable weight loss, more energy, better health",
@@ -42,11 +43,12 @@ const services = [
     img: weightImg,
   },
   {
+    num: "04",
     title: "IV Nutrient Therapy",
     description: "Replenish your body at the cellular level for improved energy, immunity, and recovery.",
     benefit: "Increased energy, faster recovery, better immunity",
     href: "/services/biohacking",
-    img: biohackingImg,
+    img: ivImg,
   },
 ];
 
@@ -108,122 +110,107 @@ export default function HomePage() {
       </Helmet>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section className="relative bg-background pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Left: Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease }}
-              className="max-w-xl"
-            >
-              <p className="eyebrow mb-4 md:mb-5">
-                Trusted by thousands across British Columbia
-              </p>
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] font-normal text-foreground leading-[1.1] mb-5 md:mb-6">
-                Look and feel
-                <br />
-                <span className="italic text-primary">your best</span> at any age.
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-                We help real people restore their energy, confidence, and natural vitality through personalized, doctor-led treatments. No gimmicks, no extreme measures — just care that works.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-3 mb-10">
-                <Link
-                  to="/book"
-                  className="group inline-flex items-center justify-center gap-3 bg-primary hover:bg-sage-dark text-primary-foreground px-7 py-4 rounded-full font-semibold text-sm transition-all"
-                >
-                  Book a Free Consultation
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-border text-foreground font-medium text-sm hover:bg-secondary transition-all"
-                >
-                  View Our Services
-                </Link>
-              </div>
+      <section className="relative bg-background overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-16 pt-28 md:pt-36 pb-0">
+          {/* Centered editorial headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease }}
+            className="text-center max-w-5xl mx-auto"
+          >
+            <p className="eyebrow mb-6">Trusted by thousands across British Columbia</p>
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-normal text-foreground leading-[0.98] tracking-tight text-balance">
+              Look and feel <span className="italic text-primary">your best</span>
+              <br className="hidden sm:block" /> at any age.
+            </h1>
+            <p className="mt-7 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
+              We help real people restore their energy, confidence, and natural vitality through personalized, doctor-led treatments. No gimmicks, no extreme measures — just care that works.
+            </p>
+            <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                to="/book"
+                className="group inline-flex items-center justify-center gap-3 bg-primary hover:bg-sage-dark text-primary-foreground px-8 py-4 rounded-full font-semibold text-sm transition-all"
+              >
+                Book a Free Consultation
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-border text-foreground font-medium text-sm hover:bg-secondary transition-all"
+              >
+                View Our Services
+              </Link>
+            </div>
+          </motion.div>
 
-              {/* Trust badges */}
-              <div className="flex flex-wrap gap-6 pt-6 border-t border-border">
-                {trustBadges.map((badge) => (
-                  <div key={badge.label} className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full bg-sage-light flex items-center justify-center flex-shrink-0">
-                      <badge.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">{badge.label}</p>
-                      <p className="text-xs text-muted-foreground">{badge.desc}</p>
-                    </div>
-                  </div>
-                ))}
+          {/* Full-bleed hero imagery */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease }}
+            className="relative mt-14 md:mt-20"
+          >
+            <div className="grid grid-cols-12 gap-3 md:gap-5 items-end">
+              <div className="col-span-3 hidden md:block">
+                <img
+                  src={heroSecondary}
+                  alt="An energetic, healthy patient enjoying life"
+                  className="w-full aspect-[3/4] object-cover rounded-2xl"
+                />
               </div>
-            </motion.div>
-
-            {/* Right: Image collage */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease }}
-              className="relative"
-            >
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
-                <div className="space-y-3 md:space-y-4">
-                  <img
-                    src={homeImg1}
-                    alt="Patient consultation at Ageless Living"
-                    className="w-full aspect-[3/4] object-cover rounded-2xl"
-                  />
-                  <img
-                    src={homeImg3}
-                    alt="Relaxed patient during treatment"
-                    className="w-full aspect-square object-cover rounded-2xl"
-                  />
-                </div>
-                <div className="space-y-3 md:space-y-4 pt-8">
-                  <img
-                    src={homeImg2}
-                    alt="Happy patient after treatment"
-                    className="w-full aspect-square object-cover rounded-2xl"
-                  />
-                  <img
-                    src={homeImg4}
-                    alt="Professional clinic environment"
-                    className="w-full aspect-[3/4] object-cover rounded-2xl"
-                  />
-                </div>
+              <div className="col-span-12 md:col-span-6">
+                <img
+                  src={heroMain}
+                  alt="A radiant, confident patient at Ageless Living"
+                  className="w-full aspect-[4/5] md:aspect-[3/3.4] object-cover rounded-2xl md:rounded-3xl"
+                />
               </div>
-              {/* Floating badge */}
-              <div className="absolute -bottom-4 -left-4 md:-left-8 bg-card rounded-2xl shadow-xl p-4 md:p-5 border border-border">
-                <div className="flex items-center gap-3">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-sage-light border-2 border-card flex items-center justify-center text-xs font-medium text-primary">
-                        {["M", "S", "R"][i - 1]}
-                      </div>
+              <div className="col-span-3 hidden md:flex flex-col gap-5">
+                <div className="bg-sage-light rounded-2xl p-5">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
                     ))}
                   </div>
-                  <div>
-                    <div className="flex items-center gap-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
-                      ))}
-                    </div>
-                    <p className="text-xs text-muted-foreground">280+ happy patients</p>
-                  </div>
+                  <p className="font-display text-3xl text-primary leading-none">4.9</p>
+                  <p className="text-xs text-muted-foreground mt-1">from 280+ verified reviews</p>
+                </div>
+                <img
+                  src={doctorImg}
+                  alt="A doctor consulting with a patient"
+                  className="w-full aspect-square object-cover rounded-2xl"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Trust badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35, ease }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 py-10 md:py-14 mt-8 border-t border-border"
+          >
+            {trustBadges.map((badge) => (
+              <div key={badge.label} className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-full bg-sage-light flex items-center justify-center flex-shrink-0">
+                  <badge.icon className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">{badge.label}</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">{badge.desc}</p>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* ══════════════ STATS STRIP ══════════════ */}
-      <section className="bg-primary py-10 md:py-12">
+      <section className="bg-primary py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6">
             {[
               { value: "10+", label: "Years helping patients" },
               { value: "4.9", label: "Average patient rating" },
@@ -236,11 +223,12 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                className="text-center md:text-left md:border-l md:border-primary-foreground/15 md:pl-6 first:md:border-l-0 first:md:pl-0"
               >
-                <p className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-primary-foreground">
+                <p className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-primary-foreground leading-none">
                   {stat.value}
                 </p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-primary-foreground/70">
+                <p className="mt-3 text-xs uppercase tracking-[0.15em] text-primary-foreground/70">
                   {stat.label}
                 </p>
               </motion.div>
@@ -250,94 +238,93 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ SERVICES ══════════════ */}
-      <section className="py-20 md:py-28 bg-background">
+      <section className="py-20 md:py-32 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-12 md:mb-16">
+          <div className="max-w-3xl mb-14 md:mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease }}
             >
-              <p className="eyebrow mb-3">How We Can Help You</p>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-4">
+              <p className="eyebrow mb-4">How We Can Help You</p>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-foreground leading-[1.05] text-balance">
                 Treatments that make a <span className="italic text-primary">real difference</span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="mt-6 text-lg text-muted-foreground max-w-2xl text-pretty">
                 Every service is designed to help you feel more energetic, confident, and comfortable in your own skin — naturally.
               </p>
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 md:gap-y-16">
             {services.map((service, i) => (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                transition={{ duration: 0.5, delay: (i % 2) * 0.1, ease }}
               >
-                <Link
-                  to={service.href}
-                  className="group block bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:border-primary/20 transition-all duration-300 h-full"
-                >
-                  <div className="aspect-[16/9] overflow-hidden">
+                <Link to={service.href} className="group block">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:rounded-3xl">
                     <img
                       src={service.img}
                       alt={service.title}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
+                    <span className="absolute top-4 left-4 font-display text-sm text-primary-foreground/90 bg-foreground/20 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center">
+                      {service.num}
+                    </span>
+                    <span className="absolute top-4 right-4 w-10 h-10 rounded-full bg-card flex items-center justify-center opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      <ArrowUpRight className="w-4 h-4 text-primary" />
+                    </span>
                   </div>
-                  <div className="p-6 md:p-8">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Sparkles className="w-4 h-4 text-gold" />
-                      <span className="text-xs font-medium text-gold">{service.benefit}</span>
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-display font-normal text-foreground mb-2 group-hover:text-primary transition-colors">
+                  <div className="pt-5">
+                    <p className="text-xs font-medium uppercase tracking-wider text-gold mb-2">{service.benefit}</p>
+                    <h3 className="text-2xl md:text-3xl font-display font-normal text-foreground group-hover:text-primary transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-muted-foreground mb-4">
-                      {service.description}
-                    </p>
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                      Learn more
-                      <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </span>
+                    <p className="mt-2 text-muted-foreground max-w-md">{service.description}</p>
                   </div>
                 </Link>
               </motion.div>
             ))}
           </div>
 
-          <div className="text-center mt-10 md:mt-12">
+          <div className="mt-14 md:mt-20 flex justify-center">
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary border-b-2 border-primary/20 pb-1 hover:border-primary transition-all"
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-primary border-b-2 border-primary/20 pb-1 hover:border-primary transition-all"
             >
               View all services
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* ══════════════ WHY CHOOSE US ══════════════ */}
-      <section className="py-20 md:py-28 bg-cream-dark">
+      <section className="py-20 md:py-32 bg-cream-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease }}
+              transition={{ duration: 0.7, ease }}
+              className="relative order-2 lg:order-1"
             >
               <img
-                src={aboutImg}
+                src={doctorImg}
                 alt="Doctor consulting with patient"
-                className="w-full aspect-[4/3] object-cover rounded-2xl"
+                className="w-full aspect-[4/5] object-cover rounded-2xl md:rounded-3xl"
               />
+              <div className="absolute -bottom-6 -right-4 md:-right-8 bg-card rounded-2xl shadow-xl p-5 md:p-6 border border-border max-w-[220px]">
+                <p className="font-display text-4xl text-primary leading-none">10+</p>
+                <p className="text-sm text-muted-foreground mt-2">years caring for patients across British Columbia</p>
+              </div>
             </motion.div>
 
             <motion.div
@@ -345,23 +332,23 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1, ease }}
+              className="order-1 lg:order-2"
             >
-              <p className="eyebrow mb-3">Why Patients Choose Us</p>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-6 leading-tight">
-                Real doctors. <br />
-                <span className="italic text-primary">Real results.</span>
+              <p className="eyebrow mb-4">Why Patients Choose Us</p>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-foreground leading-[1.05] text-balance">
+                Real doctors. <span className="italic text-primary">Real results.</span>
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="mt-6 text-lg text-muted-foreground text-pretty">
                 We are not a trendy med spa. We are a medical clinic with licensed physicians who take the time to understand your goals and create a personalized plan that actually works.
               </p>
 
-              <div className="space-y-5">
+              <div className="mt-10 space-y-6">
                 {[
                   { title: "Honest assessments", desc: "We will tell you what will work — and what will not. No upselling, no pressure." },
                   { title: "Natural-looking results", desc: "Our goal is to help you look refreshed, not different. Subtle improvements that enhance your natural beauty." },
                   { title: "Ongoing support", desc: "Your care does not end after one visit. We follow up and adjust your plan as needed." },
                 ].map((item) => (
-                  <div key={item.title} className="flex gap-4">
+                  <div key={item.title} className="flex gap-4 border-t border-border pt-6">
                     <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                       <svg className="w-3 h-3 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -375,13 +362,13 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <div className="mt-8">
+              <div className="mt-10">
                 <Link
                   to="/about-us"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary border-b-2 border-primary/20 pb-1 hover:border-primary transition-all"
+                  className="group inline-flex items-center gap-2 text-sm font-semibold text-primary border-b-2 border-primary/20 pb-1 hover:border-primary transition-all"
                 >
                   Learn more about our approach
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </motion.div>
@@ -390,17 +377,17 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ TESTIMONIALS ══════════════ */}
-      <section className="py-20 md:py-28 bg-background">
+      <section className="py-20 md:py-32 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-12 md:mb-16">
+          <div className="max-w-3xl mb-14 md:mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease }}
             >
-              <p className="eyebrow mb-3">Patient Stories</p>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-4">
+              <p className="eyebrow mb-4">Patient Stories</p>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-foreground leading-[1.05] text-balance">
                 Hear from people <span className="italic text-primary">like you</span>
               </h2>
             </motion.div>
@@ -414,18 +401,18 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
-                className="bg-card rounded-2xl p-6 md:p-8 border border-border"
+                className="flex flex-col bg-card border border-border rounded-2xl md:rounded-3xl p-7 md:p-8 shadow-sm"
               >
-                <div className="flex gap-1 mb-4">
+                <div className="flex gap-1 mb-5">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star key={star} className="w-4 h-4 fill-gold text-gold" />
                   ))}
                 </div>
-                <p className="text-foreground mb-6 leading-relaxed">
+                <p className="font-display text-lg md:text-xl text-foreground leading-relaxed flex-1 text-pretty">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-border">
-                  <div className="w-10 h-10 rounded-full bg-sage-light flex items-center justify-center text-sm font-semibold text-primary">
+                <div className="flex items-center gap-3 pt-6 mt-6 border-t border-border">
+                  <div className="w-11 h-11 rounded-full bg-sage-light flex items-center justify-center text-sm font-semibold text-primary">
                     {testimonial.name.split(" ").map(n => n[0]).join("")}
                   </div>
                   <div>
@@ -440,28 +427,28 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ MEET THE TEAM ══════════════ */}
-      <section className="py-20 md:py-28 bg-sage-light">
+      <section className="py-20 md:py-32 bg-sage-light">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease }}
             >
-              <p className="eyebrow mb-3">Our Care Team</p>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-6 leading-tight">
+              <p className="eyebrow mb-4">Our Care Team</p>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-foreground leading-[1.05] text-balance">
                 Caring professionals who <span className="italic text-primary">truly listen</span>
               </h2>
-              <p className="text-lg text-muted-foreground mb-6">
+              <p className="mt-6 text-lg text-muted-foreground text-pretty">
                 Our physicians and practitioners are not just highly trained — they genuinely care about helping you achieve your goals. Every treatment plan is personalized, and we take the time to explain your options so you feel confident in your decisions.
               </p>
-              <p className="text-muted-foreground mb-8">
+              <p className="mt-4 text-muted-foreground">
                 Founded by a pharmacist and physician team, Ageless Living combines the best of traditional medicine with modern wellness approaches.
               </p>
               <Link
                 to="/our-team"
-                className="group inline-flex items-center gap-2 bg-primary hover:bg-sage-dark text-primary-foreground px-6 py-3 rounded-full font-semibold text-sm transition-all"
+                className="group mt-9 inline-flex items-center gap-2 bg-primary hover:bg-sage-dark text-primary-foreground px-7 py-3.5 rounded-full font-semibold text-sm transition-all"
               >
                 Meet our team
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -469,15 +456,15 @@ export default function HomePage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1, ease }}
+              transition={{ duration: 0.7, delay: 0.1, ease }}
             >
               <img
                 src={teamImg}
                 alt="The Ageless Living medical team"
-                className="w-full aspect-[4/3] object-cover rounded-2xl"
+                className="w-full aspect-[4/3] object-cover rounded-2xl md:rounded-3xl"
               />
             </motion.div>
           </div>
@@ -485,20 +472,20 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ LOCATIONS ══════════════ */}
-      <section className="py-20 md:py-28 bg-background">
+      <section className="py-20 md:py-32 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="text-center mb-12 md:mb-16">
+          <div className="max-w-3xl mb-14 md:mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease }}
             >
-              <p className="eyebrow mb-3">Visit Us</p>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-4">
+              <p className="eyebrow mb-4">Visit Us</p>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-foreground leading-[1.05] text-balance">
                 Three convenient <span className="italic text-primary">BC locations</span>
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="mt-6 text-lg text-muted-foreground">
                 Find a clinic near you and schedule your consultation today.
               </p>
             </motion.div>
@@ -513,33 +500,30 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
               >
-                <Link
-                  to={location.href}
-                  className="group block bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="aspect-[16/10] overflow-hidden">
+                <Link to={location.href} className="group block">
+                  <div className="aspect-[16/11] overflow-hidden rounded-2xl md:rounded-3xl">
                     <img
                       src={location.img}
                       alt={`Ageless Living ${location.name} clinic`}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <div className="p-5 md:p-6">
-                    <h3 className="text-xl font-display font-normal text-foreground mb-3 group-hover:text-primary transition-colors">
+                  <div className="pt-5">
+                    <h3 className="text-2xl font-display font-normal text-foreground group-hover:text-primary transition-colors">
                       {location.name}
                     </h3>
-                    <div className="space-y-2 text-sm text-muted-foreground">
+                    <div className="mt-3 space-y-2 text-sm text-muted-foreground">
                       <div className="flex items-start gap-2">
-                        <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                        <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
                         <span>{location.address}<br />{location.city}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Phone className="w-4 h-4 flex-shrink-0" />
+                        <Phone className="w-4 h-4 flex-shrink-0 text-primary" />
                         <span>{location.phone}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 flex-shrink-0" />
+                        <Clock className="w-4 h-4 flex-shrink-0 text-primary" />
                         <span>Mon-Fri: 9am-5pm</span>
                       </div>
                     </div>
@@ -552,28 +536,28 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ FINAL CTA ══════════════ */}
-      <section className="py-20 md:py-28 bg-primary">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-16 text-center">
+      <section className="pb-20 md:pb-32 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
-            className="max-w-3xl mx-auto"
+            className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 md:px-16 md:py-24 text-center"
           >
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-primary-foreground mb-4 leading-tight">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-normal text-primary-foreground leading-[1.05] max-w-3xl mx-auto text-balance">
               Ready to feel like <span className="italic">yourself</span> again?
             </h2>
-            <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+            <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl mx-auto text-pretty">
               Book a free consultation to discuss your goals with one of our doctors. No obligation, no pressure — just honest advice.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/book"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-card text-foreground font-semibold text-sm hover:bg-card/90 transition-all"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-card text-foreground font-semibold text-sm hover:bg-card/90 transition-all"
               >
                 Book Your Free Consultation
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <a
                 href="tel:+12363266830"
