@@ -52,11 +52,6 @@ export default function Header() {
   // (not scrolled) it needs light text to stay legible.
   const onDarkHero = location.pathname === "/" && !scrolled;
 
-  // Top-level nav trigger color: light on the dark hero, muted otherwise.
-  const navLinkClass = onDarkHero
-    ? "text-white/80 hover:text-white"
-    : "text-muted-foreground hover:text-foreground";
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -78,10 +73,8 @@ export default function Header() {
             to="/"
             className={`text-sm font-medium transition-colors duration-200 ${
               location.pathname === "/"
-                ? onDarkHero
-                  ? "text-white"
-                  : "text-foreground"
-                : navLinkClass
+                ? "text-foreground"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Home
@@ -94,7 +87,7 @@ export default function Header() {
             onMouseLeave={() => setServicesOpen(false)}
           >
             <button
-              className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 ${navLinkClass}`}
+              className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               Services
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
@@ -141,7 +134,7 @@ export default function Header() {
             onMouseLeave={() => setAboutOpen(false)}
           >
             <button
-              className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 ${navLinkClass}`}
+              className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               About
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${aboutOpen ? "rotate-180" : ""}`} />
@@ -180,7 +173,7 @@ export default function Header() {
             onMouseLeave={() => setLocationsOpen(false)}
           >
             <button
-              className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 ${navLinkClass}`}
+              className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               Locations
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${locationsOpen ? "rotate-180" : ""}`} />
@@ -214,7 +207,7 @@ export default function Header() {
 
           <Link
             to="/contact"
-            className={`text-sm font-medium transition-colors duration-200 ${navLinkClass}`}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             Contact
           </Link>
