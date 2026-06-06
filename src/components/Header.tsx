@@ -48,16 +48,23 @@ export default function Header() {
 
   useEffect(() => setMobileOpen(false), [location.pathname]);
 
+  // On the homepage the hero is dark, so when the header is transparent
+  // (not scrolled) it needs light text to stay legible.
+  const onDarkHero = location.pathname === "/" && !scrolled;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-card/95 backdrop-blur-md shadow-sm"
           : "bg-transparent"
-      }`}
+      } ${onDarkHero ? "text-white" : "text-foreground"}`}
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-6 lg:px-8">
-        <Link to="/" className="relative z-10 flex items-center text-foreground">
+        <Link
+          to="/"
+          className={`relative z-10 flex items-center ${onDarkHero ? "text-white" : "text-foreground"}`}
+        >
           <BrandMark className="h-8 md:h-9 w-auto transition-all duration-300" />
         </Link>
 
