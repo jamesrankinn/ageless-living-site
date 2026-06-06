@@ -40,7 +40,7 @@ export const staffMembers: StaffMember[] = [
     slug: "michael-forbes",
     role: "Owner, Pharmacist, Certified in Hormone Restoration",
     credentials: "BSc Pharm",
-    image: "https://agelessliving.com/wp-content/uploads/2022/06/mike-768x768.png",
+    image: "/team/michael-forbes.webp",
     locations: ["langley", "kelowna"],
     bio: "Michael founded Ageless Living with a vision to bring evidence-based wellness solutions to British Columbia. With decades of pharmaceutical expertise and a deep commitment to patient care, he leads our hormone restoration and longevity programs. His unique background in compounding pharmacy allows him to create customized treatment protocols that address each client's specific needs. Michael believes that optimal health is achievable at every age and is passionate about helping clients feel their best through scientifically-backed therapies.",
     education: [
@@ -65,7 +65,7 @@ export const staffMembers: StaffMember[] = [
     slug: "dr-jean-paul-lim",
     role: "Owner, Internal Medicine, Complex Care, and Longevity Specialist",
     credentials: "MD, FRCPC",
-    image: "https://agelessliving.com/wp-content/uploads/2022/06/Screenshot-2024-06-14-at-10.23.47%E2%80%AFAM-768x767.png",
+    image: "/team/dr-jean-paul-lim.webp",
     locations: ["langley", "kelowna"],
     bio: "Dr. Lim brings a rare combination of internal medicine expertise and longevity science to Ageless Living. Board-certified and fellowship-trained, he designs personalized biohacking and metabolic protocols that help clients unlock peak performance and vitality. With years of experience in complex care, Dr. Lim takes a comprehensive approach to each patient — addressing root causes rather than symptoms. His focus on evidence-based longevity medicine makes him a trusted partner for clients seeking to optimize their healthspan.",
     education: [
@@ -90,7 +90,7 @@ export const staffMembers: StaffMember[] = [
     slug: "sarita-hutton",
     role: "Owner, Aesthetic Nurse Specialist, Director of Aesthetic Medicine",
     credentials: "RN, Aesthetic Nurse Specialist",
-    image: "https://agelessliving.com/wp-content/uploads/2022/06/4-768x768.png",
+    image: "/team/sarita-hutton.webp",
     locations: ["victoria"],
     bio: "Sarita is a passionate aesthetic nurse specialist who leads our Victoria clinic with artistry, precision, and a deep commitment to natural-looking results. Her advanced training in facial aesthetics and skin science has made her one of BC's most sought-after aesthetic practitioners. As Director of Aesthetic Medicine, Sarita sets the standard of care across all Ageless Living aesthetic services. She believes that every client deserves a personalized treatment plan that enhances their natural beauty while supporting long-term skin health.",
     education: [
@@ -118,7 +118,7 @@ export const staffMembers: StaffMember[] = [
     slug: "dr-tracey-lotze",
     role: "Hormone and Sexual Health Specialist",
     credentials: "MD",
-    image: "https://agelessliving.com/wp-content/uploads/2024/06/Dr.Tracey-White-Dress-uncropped-13-1-768x793.jpg",
+    image: "/team/dr-tracey-lotze.webp",
     locations: ["kelowna", "victoria"],
     bio: "Dr. Lotze specializes in hormone optimization and sexual health, bringing compassionate care and deep medical knowledge to every consultation. She helps clients regain confidence and vitality through personalized hormone protocols tailored to their unique physiology. With a focus on both men's and women's health, Dr. Lotze takes a thorough, evidence-based approach to hormone therapy — ensuring every patient receives comprehensive assessment, ongoing monitoring, and protocols optimized for long-term wellness.",
     education: [
@@ -141,7 +141,7 @@ export const staffMembers: StaffMember[] = [
     slug: "dr-jason-boxtart",
     role: "Men's Health Specialist",
     credentials: "ND",
-    image: "https://agelessliving.com/wp-content/uploads/2024/04/jason-768x768.jpg",
+    image: "/team/dr-jason-boxtart.webp",
     locations: ["kelowna", "victoria"],
     bio: "Dr. Boxtart is a naturopathic doctor focused on men's health and vitality. His integrative approach combines evidence-based natural medicine with cutting-edge peptide therapy to help men feel their strongest at every stage of life. He takes a holistic view of men's wellness — addressing hormonal balance, metabolic function, stress resilience, and physical performance through customized treatment plans that get real results.",
     education: [
@@ -166,7 +166,7 @@ export const staffMembers: StaffMember[] = [
     slug: "constanza-moraga-herrera",
     role: "Certified Nutritional Practitioner, Lifestyle Medicine & Microbiota Specialist",
     credentials: "CNP",
-    image: "https://agelessliving.com/wp-content/uploads/2025/09/Diseno-sin-titulo-4.png",
+    image: "/team/constanza-moraga-herrera.webp",
     locations: ["kelowna"],
     bio: "Constanza takes a holistic approach to nutrition, specializing in lifestyle medicine and the gut microbiome. She designs personalized plans that complement our clinical treatments, helping clients fuel their transformation from the inside out. Her expertise in microbiota science allows her to address the root causes of digestive issues, inflammation, and metabolic imbalance — creating sustainable dietary protocols that support whole-body wellness.",
     education: [
@@ -189,7 +189,7 @@ export const staffMembers: StaffMember[] = [
     slug: "rachel-bowman-fassio",
     role: "Clinical and Holistic Nutritionist",
     credentials: "BSc, CN, RHN",
-    image: "https://agelessliving.com/wp-content/uploads/2025/09/Diseno-sin-titulo-3.png",
+    image: "/team/rachel-bowman-fassio.webp",
     locations: ["kelowna"],
     bio: "Rachel's evidence-based nutritional counseling pairs perfectly with our Kelowna clinic's treatment offerings. With a Bachelor of Science and certifications in both clinical and holistic nutrition, she guides clients toward sustainable lifestyle changes that amplify their clinical results. Rachel takes a science-first approach to dietary planning, combining conventional nutritional science with holistic principles to create personalized protocols for each client.",
     education: [
@@ -214,7 +214,7 @@ export const staffMembers: StaffMember[] = [
     slug: "yvonne-ng",
     role: "Certified Medical Aesthetician",
     credentials: "Certified Medical Aesthetician",
-    image: "https://agelessliving.com/wp-content/uploads/2025/09/yvonne-bio-photo-e1758061895992-768x768.jpg",
+    image: "/team/yvonne-ng.webp",
     locations: ["langley"],
     bio: "Yvonne's meticulous approach to skin health has earned her a loyal following at our Langley clinic. Certified in advanced aesthetics, she creates customized skin rejuvenation plans that deliver visible, lasting results. With a keen eye for detail and a passion for helping clients achieve their best skin, Yvonne stays current with the latest techniques in medical aesthetics to ensure every treatment is both safe and effective.",
     education: [
@@ -237,7 +237,7 @@ export const staffMembers: StaffMember[] = [
     slug: "avnit-bhullar",
     role: "Medical Aesthetician",
     credentials: "Medical Aesthetician",
-    image: "https://agelessliving.com/wp-content/uploads/2024/06/Diseno-sin-titulo-5.png",
+    image: "/team/avnit-bhullar.webp",
     locations: ["langley"],
     bio: "Avnit combines artistic vision with clinical precision to deliver beautiful aesthetic results at our Langley clinic. Her warm approach helps clients feel at ease during every treatment, making their experience as enjoyable as the results. Avnit specializes in facial contouring and skin analysis, working closely with each client to develop treatment plans that enhance their natural features.",
     education: [
@@ -262,7 +262,7 @@ export const staffMembers: StaffMember[] = [
     slug: "jenny-hwang",
     role: "Aesthetic Nurse Mentee",
     credentials: "RN",
-    image: "https://agelessliving.com/wp-content/uploads/2025/04/1-768x768.png",
+    image: "/team/jenny-hwang.webp",
     locations: ["victoria"],
     bio: "Jenny brings registered nursing expertise to our Victoria aesthetic practice. Under the mentorship of Sarita Hutton, she is building her skills in advanced aesthetic nursing while delivering exceptional care to every client. Jenny's clinical precision and gentle technique make her a trusted choice for skin rejuvenation and IV therapy treatments. Her nursing background ensures the highest standard of safety and patient care.",
     education: [
@@ -285,7 +285,7 @@ export const staffMembers: StaffMember[] = [
     slug: "madison-allen",
     role: "Medical Aesthetician",
     credentials: "Medical Aesthetician",
-    image: "https://agelessliving.com/wp-content/uploads/2024/04/Ageless-Website-Team-Photos-2-768x768.png",
+    image: "/team/madison-allen.webp",
     locations: ["victoria"],
     bio: "Madison is a skilled medical aesthetician at our Victoria clinic, delivering personalized skin treatments with care and precision. Her passion for aesthetics and commitment to client satisfaction make her an integral part of the Victoria team. Madison works closely with each client to understand their skin goals and create customized treatment plans that deliver visible, lasting results.",
     education: [
@@ -309,7 +309,7 @@ export const staffMembers: StaffMember[] = [
     slug: "shelley-mcbride",
     role: "MOA, Clinic Manager",
     credentials: "MOA",
-    image: "https://agelessliving.com/wp-content/uploads/2025/09/Diseno-sin-titulo-6.png",
+    image: "/team/shelley-mcbride.webp",
     locations: ["langley"],
     bio: "Shelley is the welcoming face of our Langley clinic. As clinic manager and medical office assistant, she ensures every client's experience is seamless from booking to follow-up. Shelley coordinates care across our entire clinical team, managing scheduling, patient communications, and day-to-day operations with warmth and efficiency. Her dedication to client experience makes the Langley clinic feel like a true wellness home.",
     education: [
@@ -331,7 +331,7 @@ export const staffMembers: StaffMember[] = [
     slug: "melissa-zitterer",
     role: "Clinic Manager, MOA",
     credentials: "MOA",
-    image: "https://agelessliving.com/wp-content/uploads/2025/09/image0-10-e1757724838812.jpeg",
+    image: "/team/melissa-zitterer.webp",
     locations: ["kelowna"],
     bio: "Melissa keeps our Kelowna clinic running smoothly, managing scheduling, client communications, and day-to-day operations with efficiency and warmth. As your first point of contact, she ensures every visit to Ageless Living Kelowna is comfortable and well-organized. Melissa's attention to detail and caring approach make her an essential part of the Kelowna team.",
     education: [
@@ -353,7 +353,7 @@ export const staffMembers: StaffMember[] = [
     slug: "lucy-watson",
     role: "Clinic Manager",
     credentials: "",
-    image: "https://agelessliving.com/wp-content/uploads/2024/04/3-768x768.png",
+    image: "/team/lucy-watson.webp",
     locations: ["victoria"],
     bio: "Lucy oversees the Victoria clinic with a keen eye for client experience and operational excellence. Her warm, organized approach ensures every visit is comfortable and efficient. Lucy works closely with the entire Victoria team to maintain the high standard of care that Ageless Living is known for, making sure every client feels valued from the moment they walk through the door.",
     education: [
@@ -375,7 +375,7 @@ export const staffMembers: StaffMember[] = [
     slug: "natalie-king",
     role: "Medical Office Assistant",
     credentials: "MOA",
-    image: "/images/team/natalie-king-headshot.webp",
+    image: "/team/natalie-king.webp",
     locations: ["victoria"],
     bio: "Natalie supports our Victoria clinic as a dedicated medical office assistant, helping ensure every client interaction is smooth and professional. She assists with scheduling, patient intake, and administrative coordination — making the clinic experience seamless from start to finish. Natalie's friendly and efficient approach makes her a valued member of the Victoria team.",
     education: [

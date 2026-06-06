@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { HERO_VIDEO_MP4, HERO_POSTER } from "@/lib/placeholders";
+import AglessPattern from "@/components/AglessPattern";
+import BrandMark from "@/components/BrandMark";
 
 import skinImg from "@/assets/real/skin-rejuvenation-ageless-living.webp";
 import hormoneImg from "@/assets/real/hormone-balancing-ageless-living.webp";
@@ -189,8 +191,9 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════ TRUST STRIP ════════════════ */}
-      <section className="bg-background border-b border-border">
-        <div className="container mx-auto px-5 sm:px-6 lg:px-16 py-10 md:py-12">
+      <section className="relative bg-background border-b border-border overflow-hidden">
+        <AglessPattern opacity={0.05} size={130} />
+        <div className="relative container mx-auto px-5 sm:px-6 lg:px-16 py-10 md:py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s) => (
               <div key={s.v}>
@@ -313,8 +316,9 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════ LOCATIONS ════════════════ */}
-      <section className="bg-background section-y">
-        <div className="container mx-auto px-5 sm:px-6 lg:px-16">
+      <section className="relative bg-background section-y overflow-hidden">
+        <AglessPattern opacity={0.04} size={140} />
+        <div className="relative container mx-auto px-5 sm:px-6 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -362,14 +366,16 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════ CLOSING CTA — warm, minimal ════════════════ */}
-      <section className="bg-secondary/50 border-t border-border">
-        <div className="container mx-auto px-5 sm:px-6 lg:px-16 py-20 md:py-28 text-center max-w-3xl">
+      <section className="relative bg-secondary/50 border-t border-border overflow-hidden">
+        <AglessPattern opacity={0.06} size={150} />
+        <div className="relative container mx-auto px-5 sm:px-6 lg:px-16 py-20 md:py-28 text-center max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
           >
+            <BrandMark className="h-10 w-auto mx-auto mb-7 text-foreground" />
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1] mb-5">
               Ready to feel more <span className="italic text-clinic-teal">like yourself?</span>
             </h2>
