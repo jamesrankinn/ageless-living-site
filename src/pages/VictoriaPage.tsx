@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Info, Zap, Scale, FlaskConical, Sparkles, ExternalLink } from "lucide-react";
 import { getStaffByLocation, getStaffAltText } from "@/data/staffData";
+import AglessPattern from "@/components/AglessPattern";
 import victoriaImg from "@/assets/real/victoria-clinic-ageless-living.webp";
+import interiorImg from "@/assets/real/clinic-interior-ageless-living.webp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -125,10 +127,10 @@ export default function VictoriaPage() {
                 />
               </div>
               <div className="absolute -bottom-5 -left-5 bg-card p-3 rounded-xl shadow-xl hidden md:block border border-border/50">
-                <div className="w-40 h-28 rounded-lg overflow-hidden grayscale">
+                <div className="w-40 h-28 rounded-lg overflow-hidden">
                   <img
-                    src={victoriaImg}
-                    alt="Ageless Living Victoria clinic"
+                    src={interiorImg}
+                    alt="Inside the Ageless Living Victoria clinic"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -245,8 +247,9 @@ export default function VictoriaPage() {
       </section>
 
       {/* ═══ TEAM ═══ */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto section-padding">
+      <section className="relative py-20 bg-background overflow-hidden">
+        <AglessPattern opacity={0.04} size={130} />
+        <div className="relative container mx-auto section-padding">
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 16 }}
@@ -301,6 +304,7 @@ export default function VictoriaPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
           >
+            <AglessPattern opacity={0.07} size={120} color="hsl(var(--card))" />
             <div className="relative z-10 space-y-6">
               <h2 className="text-2xl md:text-4xl font-bold text-background tracking-tight">
                 Ready to begin your journey?

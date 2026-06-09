@@ -7,7 +7,9 @@ import {
   getStaffAltText,
   type StaffMember,
 } from "@/data/staffData";
-import ourTeamImg from "@/assets/our-team-1.jpg";
+import AglessPattern from "@/components/AglessPattern";
+
+const ourTeamImg = "/team/team-founders.webp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -72,8 +74,9 @@ export default function TeamPage() {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-10 md:pb-12 bg-secondary/30">
-        <div className="container mx-auto section-padding">
+      <section className="relative pt-24 pb-10 md:pb-12 bg-secondary/30 overflow-hidden">
+        <AglessPattern opacity={0.05} size={130} />
+        <div className="relative container mx-auto section-padding">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <motion.div
               className="space-y-4"
