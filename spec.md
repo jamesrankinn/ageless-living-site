@@ -1,5 +1,35 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Simplification: Remove Shop/Discount + Contact Intake Form (2026-06-17)
+
+Site-wide simplification pass. Strips the recurring shop and discount/offer
+modules so the experience is cleaner and more focused, and converts the
+Contact page into a proper intake form with each location's contact details
+on the left.
+
+### A. Removed shop + discount sections (global)
+- **`Layout.tsx`** no longer renders `<VisitShopCta />` or `<NewsletterSignup />`.
+  These two modules previously appeared above the footer on every route; both
+  are now gone so every page ends cleanly at the footer.
+- **Deleted** `src/components/VisitShopCta.tsx` (global "Visit the Shop" CTA),
+  `src/components/NewsletterSignup.tsx` (the "15% off your first facial"
+  members-only discount block), and the now-orphaned `src/lib/subscribers.ts`.
+- **`App.tsx`**: removed the `/shop` route and the `ExternalRedirect` +
+  `SHOP_URL` imports; deleted the orphaned `src/components/ExternalRedirect.tsx`.
+- **`src/lib/links.ts`**: removed the `SHOP_URL` constant.
+- **`ChatBot.tsx`**: removed the "shop / bundle / product" intent cluster.
+- **`public/sitemap.xml`**: removed the `/shop` URL entry.
+
+### B. Contact page → intake form (`src/pages/ContactPage.tsx`)
+- Replaced the locations-only layout with a two-column contact + intake layout.
+- **Left:** each location's contact info (Langley, Victoria, Kelowna) as
+  cards — address, click-to-call phone, mailto email — plus clinic hours.
+- **Right:** an intake form (React Hook Form + Zod) capturing first/last name,
+  email, phone, preferred location, area of interest, and a message, with
+  inline validation and an animated success state.
+- New `src/lib/contactLeads.ts` persists submissions (best-effort POST to
+  `/api/contact`, localStorage fallback) mirroring the existing lead pattern.
+
 ## Changelog — Real-Asset Integration + Anti-AI Home Rebuild (2026-06-06)
 
 Brand-authenticity pass: swap AI-generated assets for the real clinic

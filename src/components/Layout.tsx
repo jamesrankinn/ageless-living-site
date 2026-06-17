@@ -2,8 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import VisitShopCta from "./VisitShopCta";
-import NewsletterSignup from "./NewsletterSignup";
 
 /**
  * ChatBot is below-the-fold on every page and not needed for first paint.
@@ -54,8 +52,6 @@ export default function Layout() {
       <main id="main-content">
         <Outlet />
       </main>
-      <NewsletterSignup />
-      <VisitShopCta />
       <Footer />
       {showChat && (
         <Suspense fallback={null}>

@@ -87,11 +87,6 @@ const knowledgeBase: { keywords: string[]; answer: string }[] = [
       "Reach us via our [Contact page](/contact) — we reply within one business day. For urgent appointment questions, book online directly at [/book](/book).",
   },
   {
-    keywords: ["shop", "bundle", "supplement", "product"],
-    answer:
-      "Our curated at-home bundles (Energy Boost, Skin Renewal, Hormone Support) are available on our [secure online store](/shop).",
-  },
-  {
     keywords: ["safe", "risk", "side effect"],
     answer:
       "Every Ageless Living treatment is physician-supervised with full medical intake, bloodwork where needed, and ongoing monitoring. We'll walk you through every risk/benefit in your consultation.",
