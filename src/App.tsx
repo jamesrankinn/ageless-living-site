@@ -26,9 +26,6 @@ const BelkyraPage = lazy(() => import("@/pages/BelkyraPage"));
 const DermaplaningPage = lazy(() => import("@/pages/DermaplaningPage"));
 const BiohackingPage = lazy(() => import("@/pages/BiohackingPage"));
 const HealthWeightPage = lazy(() => import("@/pages/HealthWeightPage"));
-const VictoriaPage = lazy(() => import("@/pages/VictoriaPage"));
-const LangleyPage = lazy(() => import("@/pages/LangleyPage"));
-const KelownaPage = lazy(() => import("@/pages/KelownaPage"));
 const AboutUsPage = lazy(() => import("@/pages/AboutUsPage"));
 const TeamPage = lazy(() => import("@/pages/TeamPage"));
 const StaffProfilePage = lazy(() => import("@/pages/StaffProfilePage"));
@@ -47,7 +44,6 @@ const BookNowPage = lazy(() => import("@/pages/BookNowPage"));
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const SignupPage = lazy(() => import("@/pages/SignupPage"));
 const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
-const ContactPage = lazy(() => import("@/pages/ContactPage"));
 const PerformancePackagesPage = lazy(() => import("@/pages/PerformancePackagesPage"));
 const AdminPage = lazy(() => import("@/pages/AdminPage"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
@@ -77,9 +73,6 @@ const App = () => (
               <Route path="/services/dermaplaning" element={<DermaplaningPage />} />
               <Route path="/services/biohacking" element={<BiohackingPage />} />
               <Route path="/services/health-weight" element={<HealthWeightPage />} />
-              <Route path="/locations/victoria" element={<VictoriaPage />} />
-              <Route path="/locations/langley" element={<LangleyPage />} />
-              <Route path="/locations/kelowna" element={<KelownaPage />} />
               <Route path="/about-us" element={<AboutUsPage />} />
               <Route path="/our-team" element={<TeamPage />} />
               <Route path="/our-team/:slug" element={<StaffProfilePage />} />
@@ -98,11 +91,14 @@ const App = () => (
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/contact" element={<ContactPage />} />
               {/* Redirects for old routes */}
               <Route path="/treatments" element={<Navigate to="/services" replace />} />
               <Route path="/journey" element={<Navigate to="/about-us" replace />} />
+              <Route path="/contact" element={<Navigate to="/book" replace />} />
               <Route path="/locations" element={<Navigate to="/about-us" replace />} />
+              <Route path="/locations/victoria" element={<Navigate to="/book" replace />} />
+              <Route path="/locations/langley" element={<Navigate to="/book" replace />} />
+              <Route path="/locations/kelowna" element={<Navigate to="/book" replace />} />
             </Route>
             {/* Standalone (no public Layout chrome) */}
             <Route path="/performance-packages" element={<PerformancePackagesPage />} />

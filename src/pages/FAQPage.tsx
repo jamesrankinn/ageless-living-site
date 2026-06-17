@@ -233,12 +233,6 @@ export default function FAQPage() {
               >
                 Book a Consultation
               </a>
-              <a
-                href="/contact"
-                className="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-medium transition-all hover:bg-white hover:text-clinic-teal"
-              >
-                Contact Us
-              </a>
             </div>
           </div>
           <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-[80px]"></div>

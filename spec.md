@@ -1,5 +1,36 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Merge Contact into Book Now + Remove Location Pages (2026-06-17)
+
+Further simplification. The intake form now lives on a single **Book Now**
+page, the separate Contact page and the three location pages are gone, and the
+nav can no longer get stuck open after a click.
+
+### A. Book Now becomes the intake form
+- **`src/pages/BookNowPage.tsx`** now renders the full intake experience
+  (location contact info on the left, validated React Hook Form + Zod intake
+  form on the right) — the content that previously lived on the Contact page.
+  Eyebrow reads **"Book Now"**, heading **"Start your journey"**.
+- **Deleted** `src/pages/ContactPage.tsx`. `/contact` now 301-style redirects
+  to `/book` (`App.tsx`).
+
+### B. Location pages removed
+- **Deleted** `VictoriaPage.tsx`, `LangleyPage.tsx`, `KelownaPage.tsx` and
+  their lazy imports + routes. `/locations`, `/locations/victoria|langley|kelowna`
+  now redirect (to `/about-us` / `/book`) so old links never 404.
+- Re-pointed every internal link that targeted a location page to `/book`
+  (HomePage, AboutUsPage location cards, BiohackingPage). Staff-profile
+  location badges are now non-clickable `<span>`s.
+- Removed the location/contact URLs from `public/sitemap.xml`.
+
+### C. Navigation
+- Removed the **Locations** dropdown and the **Contact** link from the header
+  (desktop + mobile) and footer. Primary CTA renamed **"Book Consultation" →
+  "Book Now"**.
+- **Stuck-menu fix:** the header now closes the mobile overlay and all
+  dropdowns on *every* navigation — including hash-only changes and re-clicking
+  the current route — by keying the close effect on `location.key`.
+
 ## Changelog — Simplification: Remove Shop/Discount + Contact Intake Form (2026-06-17)
 
 Site-wide simplification pass. Strips the recurring shop and discount/offer
