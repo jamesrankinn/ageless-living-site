@@ -7,8 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/lib/auth";
 import Layout from "@/components/Layout";
 import HomePage from "@/pages/HomePage";
-import ExternalRedirect from "@/components/ExternalRedirect";
-import { SHOP_URL } from "@/lib/links";
 
 /**
  * Route-level code splitting. The HomePage is eager-imported because it's the
@@ -100,7 +98,6 @@ const App = () => (
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/shop" element={<ExternalRedirect to={SHOP_URL} />} />
               <Route path="/contact" element={<ContactPage />} />
               {/* Redirects for old routes */}
               <Route path="/treatments" element={<Navigate to="/services" replace />} />
