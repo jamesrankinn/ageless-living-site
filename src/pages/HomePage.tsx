@@ -521,7 +521,7 @@ export default function HomePage() {
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
                 Physician-led care, advanced diagnostics, and biohacking technology — in clinics designed to feel
                 calm, not clinical. Find us in{" "}
-                <Link to="/locations/victoria" className="text-clinic-teal font-semibold hover:underline">
+                <Link to="/book" className="text-clinic-teal font-semibold hover:underline">
                   Victoria, Langley &amp; Kelowna
                 </Link>
                 .

@@ -84,7 +84,7 @@ const knowledgeBase: { keywords: string[]; answer: string }[] = [
   {
     keywords: ["contact", "phone", "email", "call"],
     answer:
-      "Reach us via our [Contact page](/contact) — we reply within one business day. For urgent appointment questions, book online directly at [/book](/book).",
+      "Reach us through our [Book Now page](/book) — fill out the quick intake form and we'll reply within one business day. You'll also find each clinic's phone and email there.",
   },
   {
     keywords: ["safe", "risk", "side effect"],
@@ -103,7 +103,7 @@ function getResponse(input: string): string {
   for (const entry of knowledgeBase) {
     if (entry.keywords.some((k) => lower.includes(k))) return entry.answer;
   }
-  return "Great question! I don't have a canned answer for that — our team will. You can [book a free 15-min call](/book) or ask via our [Contact page](/contact). Meanwhile, I'm happy to cover treatments, booking, pricing, locations or hours.";
+  return "Great question! I don't have a canned answer for that — our team will. You can [book a free 15-min call](/book) and we'll be in touch. Meanwhile, I'm happy to cover treatments, booking, pricing, locations or hours.";
 }
 
 function renderMarkup(content: string) {

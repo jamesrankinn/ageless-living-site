@@ -154,14 +154,13 @@ function ProfileContent({ member }: { member: StaffMember }) {
               {/* Location badges */}
               <div className="flex flex-wrap gap-2">
                 {member.locations.map((loc) => (
-                  <Link
+                  <span
                     key={loc}
-                    to={`/locations/${loc}`}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-secondary/50 text-sm text-foreground/80 hover:bg-secondary transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-secondary/50 text-sm text-foreground/80"
                   >
                     <MapPin className="h-3.5 w-3.5 text-primary" />
                     {locationNames[loc]}
-                  </Link>
+                  </span>
                 ))}
               </div>
 

@@ -47,10 +47,10 @@ export default function BiohackingPage() {
                   Explore Modalities
                 </a>
                 <Link
-                  to="/locations/kelowna"
+                  to="/book"
                   className="px-6 py-3 border border-border bg-card text-foreground rounded-full text-sm font-semibold hover:bg-secondary transition-colors"
                 >
-                  View Locations
+                  Book a Consultation
                 </Link>
               </div>
             </motion.div>
@@ -350,8 +350,8 @@ export default function BiohackingPage() {
         title="Ready to optimize your biology?"
         description="Book a consultation with our biohacking specialists and discover your personalized protocol."
         primaryButtonText="Book Online"
-        secondaryButtonText="View Kelowna Hub"
-        secondaryButtonLink="/locations/kelowna"
+        secondaryButtonText="View All Services"
+        secondaryButtonLink="/services"
       />
     </>
   );

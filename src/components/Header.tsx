@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, MapPin, User, LogOut, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, User, LogOut, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/lib/auth";
 import BrandMark from "@/components/BrandMark";
@@ -20,12 +20,6 @@ const aboutItems = [
   { label: "Careers", href: "/careers" },
 ];
 
-const locations = [
-  { label: "Victoria", href: "/locations/victoria" },
-  { label: "Langley", href: "/locations/langley" },
-  { label: "Kelowna", href: "/locations/kelowna" },
-];
-
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -33,8 +27,6 @@ export default function Header() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
-  const [locationsOpen, setLocationsOpen] = useState(false);
-  const [mobileLocationsOpen, setMobileLocationsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -46,7 +38,17 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setMobileOpen(false), [location.pathname]);
+  // Close every menu/dropdown on any navigation — including hash-only changes
+  // and clicking the route you're already on — so the mobile overlay and the
+  // desktop dropdowns can never get "stuck" open after a click.
+  useEffect(() => {
+    setMobileOpen(false);
+    setMobileServicesOpen(false);
+    setMobileAboutOpen(false);
+    setServicesOpen(false);
+    setAboutOpen(false);
+    setUserMenuOpen(false);
+  }, [location.pathname, location.hash, location.key]);
 
   // On the homepage the hero is dark, so when the header is transparent
   // (not scrolled) it needs light text to stay legible.
@@ -166,57 +168,11 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Locations Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setLocationsOpen(true)}
-            onMouseLeave={() => setLocationsOpen(false)}
-          >
-            <button
-              className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-            >
-              Locations
-              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${locationsOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            <AnimatePresence>
-              {locationsOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
-                >
-                  <div className="bg-card border border-border rounded-xl shadow-lg py-2 min-w-[180px]">
-                    {locations.map((loc) => (
-                      <Link
-                        key={loc.label}
-                        to={loc.href}
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors"
-                      >
-                        <MapPin className="w-4 h-4 text-primary" />
-                        {loc.label}
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <Link
-            to="/contact"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-          >
-            Contact
-          </Link>
-
           <Link
             to="/book"
             className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium transition-all duration-200 hover:bg-sage-dark"
           >
-            Book Consultation
+            Book Now
           </Link>
 
           {/* User Menu */}
@@ -395,52 +351,6 @@ export default function Header() {
                   </AnimatePresence>
                 </div>
 
-                {/* Mobile Locations */}
-                <div>
-                  <button
-                    onClick={() => setMobileLocationsOpen(!mobileLocationsOpen)}
-                    className="w-full flex items-center justify-between py-3 px-4 text-base font-medium text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
-                  >
-                    Locations
-                    <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${mobileLocationsOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  <AnimatePresence>
-                    {mobileLocationsOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-4 pb-1 flex flex-col gap-1">
-                          {locations.map((loc) => (
-                            <Link
-                              key={loc.label}
-                              to={loc.href}
-                              className="flex items-center gap-3 py-2.5 px-4 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/30 rounded-lg transition-colors"
-                              onClick={() => {
-                                setMobileOpen(false);
-                                setMobileLocationsOpen(false);
-                              }}
-                            >
-                              <MapPin className="w-4 h-4 text-primary" />
-                              {loc.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <Link
-                  to="/contact"
-                  className="py-3 px-4 text-base font-medium text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Contact
-                </Link>
               </div>
             </nav>
 
@@ -462,7 +372,7 @@ export default function Header() {
                 className="flex items-center justify-center w-full bg-primary text-primary-foreground px-6 py-3.5 rounded-full font-semibold text-sm"
                 onClick={() => setMobileOpen(false)}
               >
-                Book Consultation
+                Book Now
               </Link>
               <a
                 href="tel:+12363266830"

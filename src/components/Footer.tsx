@@ -8,7 +8,7 @@ const navLinks = [
   { label: "About Us", to: "/about-us" },
   { label: "Our Team", to: "/our-team" },
   { label: "Blog", to: "/blog" },
-  { label: "Contact", to: "/contact" },
+  { label: "Book Now", to: "/book" },
 ];
 
 const serviceLinks = [
@@ -124,7 +124,7 @@ export default function Footer() {
           <div className="flex items-center gap-4 text-xs text-card/40">
             <Link to="/faqs" className="hover:text-card transition-colors">FAQs</Link>
             <span>·</span>
-            <Link to="/contact" className="hover:text-card transition-colors">Contact</Link>
+            <Link to="/book" className="hover:text-card transition-colors">Book Now</Link>
           </div>
         </div>
       </div>

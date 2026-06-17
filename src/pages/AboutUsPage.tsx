@@ -18,7 +18,6 @@ const locations = [
     city: "Victoria, BC V8T 1Z4",
     phone: "(250) 590-5321",
     hours: "Mon-Fri: 9am-5pm",
-    href: "/locations/victoria",
     img: victoriaImg
   },
   { 
@@ -27,7 +26,6 @@ const locations = [
     city: "Langley, BC V1M 0B2",
     phone: "(604) 427-0509",
     hours: "Mon-Fri: 9am-5pm",
-    href: "/locations/langley",
     img: langleyImg
   },
   { 
@@ -36,7 +34,6 @@ const locations = [
     city: "Kelowna, BC V1Y 9S4",
     phone: "(250) 860-4116",
     hours: "Mon-Fri: 9am-5pm",
-    href: "/locations/kelowna",
     img: kelownaImg
   },
 ];
@@ -271,7 +268,7 @@ export default function AboutUsPage() {
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
               >
                 <Link
-                  to={location.href}
+                  to="/book"
                   className="group block bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300"
                 >
                   <div className="aspect-[16/10] overflow-hidden">
@@ -331,12 +328,6 @@ export default function AboutUsPage() {
               >
                 Book Your Free Consultation
                 <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-semibold text-sm hover:bg-primary-foreground/10 transition-all"
-              >
-                Contact Us
               </Link>
             </div>
           </motion.div>
