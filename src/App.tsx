@@ -33,7 +33,6 @@ const FAQPage = lazy(() => import("@/pages/FAQPage"));
 const CareersPage = lazy(() => import("@/pages/CareersPage"));
 const BlogPage = lazy(() => import("@/pages/BlogPage"));
 const GLP1BlogPost = lazy(() => import("@/pages/GLP1BlogPost"));
-const WellnessRevolutionBlogPost = lazy(() => import("@/pages/WellnessRevolutionBlogPost"));
 const PreventionAndLongevityBlogPost = lazy(() => import("@/pages/PreventionAndLongevityBlogPost"));
 const PreventativeHealthBlogPost = lazy(() => import("@/pages/PreventativeHealthBlogPost"));
 const LongevityMasterclassBlogPost = lazy(() => import("@/pages/LongevityMasterclassBlogPost"));
@@ -80,7 +79,6 @@ const App = () => (
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/glp1-agonists" element={<GLP1BlogPost />} />
-              <Route path="/blog/wellness-revolution" element={<WellnessRevolutionBlogPost />} />
               <Route path="/blog/prevention-and-longevity" element={<PreventionAndLongevityBlogPost />} />
               <Route path="/blog/preventative-health" element={<PreventativeHealthBlogPost />} />
               <Route path="/blog/longevity-masterclass" element={<LongevityMasterclassBlogPost />} />

@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import blog1Img from "@/assets/blog1.png";
-import blog2Img from "@/assets/blog2.png";
 import blog3Img from "@/assets/blog3.png";
 import blog4Img from "@/assets/blog4.jpg";
 import blog5Img from "@/assets/blog5.jpg";
@@ -20,14 +19,6 @@ const posts = [
     excerpt: "For decades, the prevailing advice for weight loss has been simple: 'Eat less, move more.' Yet, for millions of people, this equation simply does not work. Discover the science behind GLP-1 agonists and how they're changing the landscape of longevity medicine.",
     img: blog1Img,
     link: "/blog/glp1-agonists",
-  },
-  {
-    title: "A wellness revolution",
-    category: "Longevity Medicine",
-    date: "December 9, 2024",
-    excerpt: "In a world where the quest for eternal vitality is often viewed as a lofty ideal, two dedicated doctors in Kelowna are rewriting the script on aging and wellness. Story by Boulevard Magazine, November 2024.",
-    img: blog2Img,
-    link: "/blog/wellness-revolution",
   },
   {
     title: "How Ageless Living wellness centres can help you live a healthier, longer life",

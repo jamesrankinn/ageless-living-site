@@ -1,40 +1,53 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Clock, ArrowRight, Heart, Shield, Users } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Clock,
+  ArrowRight,
+  ArrowUpRight,
+  Heart,
+  Shield,
+  Users,
+  Microscope,
+  Activity,
+  ShieldCheck,
+  FlaskConical,
+} from "lucide-react";
 import aboutUs1Img from "@/assets/about-us-1.jpg";
 import aboutUs3Img from "@/assets/about-us-3.jpg";
 import teamImg from "@/assets/our-team-1.jpg";
-import victoriaImg from "@/assets/victoria.png";
-import langleyImg from "@/assets/langley.jpg";
-import kelownaImg from "@/assets/kelowna.jpg";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const locations = [
-  { 
-    name: "Victoria", 
-    address: "740 Hillside Ave #120", 
+  {
+    name: "Victoria",
+    address: "740 Hillside Ave #120",
     city: "Victoria, BC V8T 1Z4",
     phone: "(250) 590-5321",
-    hours: "Mon-Fri: 9am-5pm",
-    img: victoriaImg
+    hours: "Mon–Fri: 9am–5pm",
+    directions:
+      "https://www.google.com/maps/search/?api=1&query=Ageless+Living+740+Hillside+Ave+Victoria+BC",
   },
-  { 
-    name: "Langley", 
-    address: "415-20178 96th Ave", 
+  {
+    name: "Langley",
+    address: "415-20178 96th Ave",
     city: "Langley, BC V1M 0B2",
     phone: "(604) 427-0509",
-    hours: "Mon-Fri: 9am-5pm",
-    img: langleyImg
+    hours: "Mon–Fri: 9am–5pm",
+    directions:
+      "https://www.google.com/maps/search/?api=1&query=Ageless+Living+415-20178+96+Ave+Langley+BC",
   },
-  { 
-    name: "Kelowna", 
-    address: "1708 Dolphin Ave #101", 
+  {
+    name: "Kelowna",
+    address: "1708 Dolphin Ave #101",
     city: "Kelowna, BC V1Y 9S4",
     phone: "(250) 860-4116",
-    hours: "Mon-Fri: 9am-5pm",
-    img: kelownaImg
+    hours: "Mon–Fri: 9am–5pm",
+    directions:
+      "https://www.google.com/maps/search/?api=1&query=Ageless+Living+1708+Dolphin+Ave+Kelowna+BC",
   },
 ];
 
@@ -42,17 +55,47 @@ const values = [
   {
     icon: Heart,
     title: "Genuine care",
-    description: "We treat every patient like family. Your wellbeing is our priority, not upselling treatments you do not need."
+    description:
+      "We treat every patient like family. Your wellbeing is our priority, not upselling treatments you do not need.",
   },
   {
     icon: Shield,
     title: "Medical expertise",
-    description: "Every treatment is overseen by licensed physicians. We combine proven medical science with modern wellness approaches."
+    description:
+      "Every treatment is overseen by licensed physicians. We combine proven medical science with modern wellness approaches.",
   },
   {
     icon: Users,
     title: "Personalized approach",
-    description: "No cookie-cutter solutions. We take time to understand your goals and create a plan tailored specifically to you."
+    description:
+      "No cookie-cutter solutions. We take time to understand your goals and create a plan tailored specifically to you.",
+  },
+];
+
+const principles = [
+  {
+    icon: Microscope,
+    title: "We test before we treat",
+    description:
+      "Every program starts with diagnostics — hormone panels, metabolic markers, and a proper history. Your plan comes from your numbers, not a template handed to everyone.",
+  },
+  {
+    icon: Activity,
+    title: "Bio-identical hormones",
+    description:
+      "Our hormone therapy uses molecules identical to the ones your body already makes. We compound them to the dose your labs call for, then re-check as your body settles in.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "A doctor reviews everything",
+    description:
+      "Injectables, IV therapy, weight programs — a licensed physician signs off before anything begins. That oversight is what separates a medical clinic from a med spa.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Equipment with evidence",
+    description:
+      "We only bring in tools that hold up to scrutiny: Sciton BBL and ICON IPL for skin, hyperbaric oxygen and red-light therapy for recovery, medical-grade testing throughout.",
   },
 ];
 
@@ -84,7 +127,7 @@ export default function AboutUsPage() {
                 For over a decade, we have been helping everyday people across British Columbia restore their energy, confidence, and natural vitality. We are not a trendy med spa — we are a medical clinic with doctors who genuinely care about your wellbeing.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Founded by a pharmacist and physician team, Ageless Living combines the best of traditional medicine with evidence-based wellness treatments. Our approach is simple: listen to our patients, provide honest advice, and deliver results that look natural.
+                Founded by a pharmacist and physician team, Ageless Living combines the best of traditional medicine with evidence-based wellness treatments. Our approach is simple: listen to our patients, give honest advice, and deliver results that look natural.
               </p>
             </motion.div>
 
@@ -97,6 +140,7 @@ export default function AboutUsPage() {
                 src={aboutUs1Img}
                 alt="Doctor consulting with patient at Ageless Living"
                 className="w-full aspect-[4/3] object-cover rounded-2xl"
+                loading="lazy"
               />
             </motion.div>
           </div>
@@ -155,6 +199,7 @@ export default function AboutUsPage() {
                 src={aboutUs3Img}
                 alt="The Ageless Living team"
                 className="w-full aspect-[4/3] object-cover rounded-2xl"
+                loading="lazy"
               />
             </motion.div>
 
@@ -177,7 +222,7 @@ export default function AboutUsPage() {
                   Our founders, a pharmacist and physician team, believed there had to be a better way. They combined their medical expertise with a genuine desire to help, creating a clinic where patients are treated as individuals, not numbers.
                 </p>
                 <p>
-                  Today, we have grown to three locations across British Columbia, but our mission remains the same: help everyday people look and feel their best through honest, personalized care.
+                  Today we have grown to three locations across British Columbia, but the mission has not changed: help everyday people look and feel their best through honest, personalized care.
                 </p>
               </div>
               <div className="mt-8">
@@ -191,6 +236,61 @@ export default function AboutUsPage() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ══════════════ THE SCIENCE ══════════════ */}
+      <section className="py-16 md:py-24 bg-cream-dark">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease }}
+              className="lg:col-span-5"
+            >
+              <p className="eyebrow mb-3">The Science</p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-6 leading-tight">
+                Good medicine starts with <span className="italic text-primary">information</span>
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                Before we recommend a single treatment, we run the bloodwork, read your history, and talk through what you are actually feeling.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                A plan built on real lab results looks nothing like a guess, and patients notice the difference. Here is what that looks like in practice.
+              </p>
+            </motion.div>
+
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+              {principles.map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                  className="bg-card rounded-2xl p-6 md:p-7 border border-border"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <p.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="text-base font-semibold text-foreground mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1, ease }}
+            className="mt-12 md:mt-16 max-w-3xl text-base md:text-lg text-foreground/80 leading-relaxed border-l-2 border-primary/40 pl-6"
+          >
+            And the work does not stop after your first appointment. We re-test, compare the results, and adjust the plan, because your body keeps changing and your treatment should keep up with it.
+          </motion.p>
         </div>
       </section>
 
@@ -209,10 +309,10 @@ export default function AboutUsPage() {
                 People who <span className="italic text-primary">genuinely care</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Our doctors and practitioners are not just highly qualified — they are kind, patient, and truly invested in helping you achieve your goals.
+                Our doctors and practitioners are not just highly qualified — they are kind, patient, and truly invested in helping you reach your goals.
               </p>
               <p className="text-muted-foreground mb-8">
-                Every member of our team takes time to listen, explain your options clearly, and answer your questions. We believe that good care starts with understanding.
+                Every member of our team takes time to listen, explain your options clearly, and answer your questions. We believe good care starts with understanding.
               </p>
               <Link
                 to="/our-team"
@@ -233,6 +333,7 @@ export default function AboutUsPage() {
                 src={teamImg}
                 alt="The Ageless Living medical team"
                 className="w-full aspect-[4/3] object-cover rounded-2xl"
+                loading="lazy"
               />
             </motion.div>
           </div>
@@ -247,14 +348,14 @@ export default function AboutUsPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
-            className="text-center mb-12 md:mb-16"
+            className="max-w-2xl mb-12 md:mb-16"
           >
             <p className="eyebrow mb-3">Visit Us</p>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-foreground mb-4">
-              Three convenient <span className="italic text-primary">BC locations</span>
+              Three clinics across <span className="italic text-primary">British Columbia</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Find a clinic near you. All locations offer the same high-quality care and full range of services.
+            <p className="text-lg text-muted-foreground">
+              Find the location nearest you. Every clinic offers the same standard of care and the full range of services.
             </p>
           </motion.div>
 
@@ -266,39 +367,54 @@ export default function AboutUsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
+                className="group relative flex flex-col bg-card rounded-2xl border border-border p-7 md:p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                <Link
-                  to="/book"
-                  className="group block bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={location.img}
-                      alt={`Ageless Living ${location.name} clinic`}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                <span className="absolute top-0 left-7 right-7 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+                <h3 className="font-display text-2xl font-normal text-foreground mb-6">
+                  {location.name}
+                </h3>
+                <div className="space-y-4 text-sm text-muted-foreground flex-1">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
+                    <span>
+                      {location.address}
+                      <br />
+                      {location.city}
+                    </span>
                   </div>
-                  <div className="p-5 md:p-6">
-                    <h3 className="text-xl font-display font-normal text-foreground mb-4 group-hover:text-primary transition-colors">
-                      {location.name}
-                    </h3>
-                    <div className="space-y-3 text-sm text-muted-foreground">
-                      <div className="flex items-start gap-3">
-                        <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
-                        <span>{location.address}<br />{location.city}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Phone className="w-4 h-4 flex-shrink-0 text-primary" />
-                        <span>{location.phone}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Clock className="w-4 h-4 flex-shrink-0 text-primary" />
-                        <span>{location.hours}</span>
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-4 h-4 flex-shrink-0 text-primary" />
+                    <a
+                      href={`tel:${location.phone.replace(/[^0-9]/g, "")}`}
+                      className="hover:text-foreground transition-colors"
+                    >
+                      {location.phone}
+                    </a>
                   </div>
-                </Link>
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-4 h-4 flex-shrink-0 text-primary" />
+                    <span>{location.hours}</span>
+                  </div>
+                </div>
+
+                <div className="mt-7 pt-6 border-t border-border flex items-center justify-between">
+                  <Link
+                    to="/book"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
+                  >
+                    Book a visit
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <a
+                    href={location.directions}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Directions
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>

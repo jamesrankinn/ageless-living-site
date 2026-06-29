@@ -1283,48 +1283,38 @@ Dedicated About Us page showcasing company mission and values:
 ```
 AboutUsPage
 ├── Helmet (SEO meta tags)
-├── Hero Section (Two-column gradient layout)
-│   ├── Left: Practitioner/patient image (rounded, shadow)
-│   ├── Right: Content block
-│   │   ├── Label: "About Us" (10px, uppercase tracking)
-│   │   ├── Headline: "Helping you discover your best self, at any age."
-│   │   └── Description: Guidance, tools, and technologies message
-│   └── Background: Soft gradient (clinic-teal/5 to white)
-├── Mission & Branding Section (Two-column with divider)
-│   ├── Left Column:
-│   │   ├── Label: "Our Mission" (10px, uppercase tracking)
-│   │   ├── Heading: "Live better, longer."
-│   │   ├── Body text about health and wellbeing (80% influenced)
-│   │   └── Values Grid (2 columns):
-│   │       ├── "Picture your possible." + description
-│   │       └── "Collaborative care." + description
-│   └── Right Column: Brand Mark (Teal "A" SVG, 320px)
-├── Locations Section (Two-column, secondary background)
-│   ├── Left Column:
-│   │   ├── Label: "Across Multiple Locations"
-│   │   ├── Heading: "Serving British Columbia for over a decade."
-│   │   ├── Description paragraph
-│   │   └── Location Links (3 inline with MapPin icons):
-│   │       ├── Kelowna → /locations/kelowna
-│   │       ├── Victoria → /locations/victoria
-│   │       └── Langley → /locations/langley
-│   └── Right Column: Clinical team image with overlay branding
-└── Final CTA Section (Centered, white background)
-    ├── Heading: "Ready to begin your journey?"
-    ├── Description: "Your best self is waiting..."
-    └── Two CTAs: "Book Appointment" (dark pill) + "Contact Our Team" (text link)
+├── Hero Section (Two-column)
+│   ├── Left: "About Us" eyebrow + "Helping you feel like yourself again." headline + intro copy
+│   └── Right: Practitioner/patient image (rounded-2xl)
+├── Our Values Section (bg-cream-dark)
+│   └── 3 cards: Genuine care, Medical expertise, Personalized approach
+├── Our Story Section (Two-column, bg-background)
+│   ├── Left: Team image (rounded-2xl)
+│   └── Right: Origin story + "Meet our team" link
+├── The Science Section (bg-cream-dark) — NEW
+│   ├── Left: "The Science" eyebrow + "Good medicine starts with information" + intro
+│   ├── Right: 4 principle cards (test before we treat, bio-identical hormones,
+│   │         physician review, equipment with evidence — Sciton BBL, ICON IPL, HBOT)
+│   └── Closing pull-quote: ongoing re-testing and plan adjustment
+├── Team Preview Section (Two-column, bg-sage-light)
+│   └── Copy + "Meet the full team" CTA + team image
+├── Locations Section (bg-background) — REDESIGNED, photo-free
+│   └── 3 typographic clinic cards (Victoria, Langley, Kelowna):
+│       address, click-to-call phone, hours, "Book a visit" + "Directions" links
+│       (no location photos — replaced the previous image-based cards)
+└── Final CTA Section (bg-primary)
+    ├── Heading: "Ready to get started?"
+    └── CTA: "Book Your Free Consultation"
 ```
 
 **Design Features:**
-- Two-column hero with gradient background (clinic-teal/5 to white)
-- Large brand mark SVG (stylized "A" in teal)
-- Minimal, editorial typography (light font weights, tight tracking)
-- 10px uppercase labels with wide letter-spacing
-- MapPin icons for location links
-- Image with floating branding overlay
-- Framer Motion scroll-triggered animations
-- Responsive design with mobile-first approach
-- Premium typography with tracking and weight variations
+- Authentic, plain-spoken copy for the new Science section (real equipment and
+  diagnostics named; avoids generic marketing language)
+- Photo-free location cards with a subtle teal top-accent gradient, click-to-call
+  phone links, and external Google Maps "Directions" links
+- Alternating cream/sage/background section bands for clear separation
+- Editorial serif display headings (Playfair) with italic teal emphasis
+- Framer Motion scroll-triggered animations; mobile-first responsive layout
 
 ### VictoriaPage Component Structure
 
@@ -1373,9 +1363,7 @@ LangleyPage
 │   ├── Google Maps embed (left)
 │   └── Clinic hours card (teal, right)
 ├── Meet the Langley Team Section
-│   └── 5 team member cards:
-│       ├── Shelley McBride (MOA, Clinic Manager)
-│       ├── Yvonne Ng (Certified Medical Aesthetician)
+│   └── 3 team member cards:
 │       ├── Avnit Bhullar (Medical Aesthetician)
 │       ├── Michael Forbes, BSc Pharm (Owner, Pharmacist)
 │       └── Dr. Jean Paul Lim, MD, FRCPC (Owner, Internal Medicine)
@@ -1406,12 +1394,9 @@ KelownaPage
 │   ├── Google Maps embed (left)
 │   └── Clinic hours card (teal, right)
 ├── Meet the Team Section
-│   └── 7 team member cards:
-│       ├── Constanza Moraga Herrera (Nutritional Practitioner)
-│       ├── Rachel Bowman Fassio (Clinical Nutritionist)
-│       ├── Melissa Zitterer (Clinic Manager, MOA)
-│       ├── Dr. Jason Boxtart, ND (Men's Health Specialist)
-│       ├── Dr. Tracey Lotze, MD (Hormone and Sexual Health)
+│   └── 4 team member cards:
+│       ├── Rachel Bowman-Fassio (Clinic Manager)
+│       ├── Ali Latendre (Medical Office Assistant & Medical Esthetician)
 │       ├── Michael Forbes, BSc Pharm (Owner, Pharmacist)
 │       └── Dr. Jean Paul Lim, MD, FRCPC (Owner, Internal Medicine)
 └── CTA Section (dark theme)
@@ -1446,25 +1431,22 @@ Single source of truth for all staff data. Used by TeamPage, LocationsPage, Staf
 }
 ```
 
-**Complete Staff Roster (16 members):**
+**Complete Staff Roster (11 members):**
 
 | Name | Slug | Role | Locations |
 |------|------|------|-----------|
-| Michael Forbes, BSc Pharm | michael-forbes | Owner, Pharmacist, Certified in Hormone Restoration | Langley, Kelowna |
-| Dr. Jean Paul Lim, MD, FRCPC | dr-jean-paul-lim | Owner, Internal Medicine, Complex Care, and Longevity Specialist | Langley, Kelowna |
+| Michael Forbes, BSc Pharm | michael-forbes | Owner, Pharmacist, Certified in Hormone Restoration | Langley, Kelowna, Victoria |
+| Dr. Jean Paul Lim, MD, FRCPC | dr-jean-paul-lim | Owner, Internal Medicine, Complex Care, and Longevity Specialist | Langley, Kelowna, Victoria |
 | Sarita Hutton | sarita-hutton | Owner, Aesthetic Nurse Specialist, Director of Aesthetic Medicine | Victoria |
-| Dr. Tracey Lotze, MD | dr-tracey-lotze | Hormone and Sexual Health Specialist | Kelowna, Victoria |
-| Dr. Jason Boxtart, ND | dr-jason-boxtart | Men's Health Specialist | Kelowna, Victoria |
-| Constanza Moraga Herrera | constanza-moraga-herrera | Certified Nutritional Practitioner, Lifestyle Medicine & Microbiota Specialist | Kelowna |
-| Rachel Bowman Fassio, BSc, CN, RHN | rachel-bowman-fassio | Clinical and Holistic Nutritionist | Kelowna |
-| Yvonne Ng | yvonne-ng | Certified Medical Aesthetician | Langley |
+| Rachel Bowman-Fassio, BSc, CN, RHN | rachel-bowman-fassio | Clinic Manager | Kelowna |
+| Ali Latendre | ali-latendre | Medical Office Assistant & Medical Esthetician | Kelowna |
 | Avnit Bhullar | avnit-bhullar | Medical Aesthetician | Langley |
 | Jenny Hwang, RN | jenny-hwang | Aesthetic Nurse Mentee | Victoria |
 | Madison Allen | madison-allen | Medical Aesthetician | Victoria |
-| Shelley McBride | shelley-mcbride | MOA, Clinic Manager | Langley |
-| Melissa Zitterer | melissa-zitterer | Clinic Manager, MOA | Kelowna |
 | Lucy Watson | lucy-watson | Clinic Manager | Victoria |
 | Natalie King | natalie-king | Medical Office Assistant | Victoria |
+
+> **Pending additions (awaiting bios/photos):** Dr. Vicky Gairns (Naturopathic Doctor), Michelle Shewchuk, NP (Nurse Practitioner), and Cori Jeffery (Esthetician) for Kelowna; and Daman for Langley. To be added once their bios, credentials, and photos are received from the clinics.
 
 **Image Convention:**
 - Path: `/images/team/[firstname-lastname]-headshot.webp`
