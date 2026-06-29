@@ -1283,48 +1283,38 @@ Dedicated About Us page showcasing company mission and values:
 ```
 AboutUsPage
 ├── Helmet (SEO meta tags)
-├── Hero Section (Two-column gradient layout)
-│   ├── Left: Practitioner/patient image (rounded, shadow)
-│   ├── Right: Content block
-│   │   ├── Label: "About Us" (10px, uppercase tracking)
-│   │   ├── Headline: "Helping you discover your best self, at any age."
-│   │   └── Description: Guidance, tools, and technologies message
-│   └── Background: Soft gradient (clinic-teal/5 to white)
-├── Mission & Branding Section (Two-column with divider)
-│   ├── Left Column:
-│   │   ├── Label: "Our Mission" (10px, uppercase tracking)
-│   │   ├── Heading: "Live better, longer."
-│   │   ├── Body text about health and wellbeing (80% influenced)
-│   │   └── Values Grid (2 columns):
-│   │       ├── "Picture your possible." + description
-│   │       └── "Collaborative care." + description
-│   └── Right Column: Brand Mark (Teal "A" SVG, 320px)
-├── Locations Section (Two-column, secondary background)
-│   ├── Left Column:
-│   │   ├── Label: "Across Multiple Locations"
-│   │   ├── Heading: "Serving British Columbia for over a decade."
-│   │   ├── Description paragraph
-│   │   └── Location Links (3 inline with MapPin icons):
-│   │       ├── Kelowna → /locations/kelowna
-│   │       ├── Victoria → /locations/victoria
-│   │       └── Langley → /locations/langley
-│   └── Right Column: Clinical team image with overlay branding
-└── Final CTA Section (Centered, white background)
-    ├── Heading: "Ready to begin your journey?"
-    ├── Description: "Your best self is waiting..."
-    └── Two CTAs: "Book Appointment" (dark pill) + "Contact Our Team" (text link)
+├── Hero Section (Two-column)
+│   ├── Left: "About Us" eyebrow + "Helping you feel like yourself again." headline + intro copy
+│   └── Right: Practitioner/patient image (rounded-2xl)
+├── Our Values Section (bg-cream-dark)
+│   └── 3 cards: Genuine care, Medical expertise, Personalized approach
+├── Our Story Section (Two-column, bg-background)
+│   ├── Left: Team image (rounded-2xl)
+│   └── Right: Origin story + "Meet our team" link
+├── The Science Section (bg-cream-dark) — NEW
+│   ├── Left: "The Science" eyebrow + "Good medicine starts with information" + intro
+│   ├── Right: 4 principle cards (test before we treat, bio-identical hormones,
+│   │         physician review, equipment with evidence — Sciton BBL, ICON IPL, HBOT)
+│   └── Closing pull-quote: ongoing re-testing and plan adjustment
+├── Team Preview Section (Two-column, bg-sage-light)
+│   └── Copy + "Meet the full team" CTA + team image
+├── Locations Section (bg-background) — REDESIGNED, photo-free
+│   └── 3 typographic clinic cards (Victoria, Langley, Kelowna):
+│       address, click-to-call phone, hours, "Book a visit" + "Directions" links
+│       (no location photos — replaced the previous image-based cards)
+└── Final CTA Section (bg-primary)
+    ├── Heading: "Ready to get started?"
+    └── CTA: "Book Your Free Consultation"
 ```
 
 **Design Features:**
-- Two-column hero with gradient background (clinic-teal/5 to white)
-- Large brand mark SVG (stylized "A" in teal)
-- Minimal, editorial typography (light font weights, tight tracking)
-- 10px uppercase labels with wide letter-spacing
-- MapPin icons for location links
-- Image with floating branding overlay
-- Framer Motion scroll-triggered animations
-- Responsive design with mobile-first approach
-- Premium typography with tracking and weight variations
+- Authentic, plain-spoken copy for the new Science section (real equipment and
+  diagnostics named; avoids generic marketing language)
+- Photo-free location cards with a subtle teal top-accent gradient, click-to-call
+  phone links, and external Google Maps "Directions" links
+- Alternating cream/sage/background section bands for clear separation
+- Editorial serif display headings (Playfair) with italic teal emphasis
+- Framer Motion scroll-triggered animations; mobile-first responsive layout
 
 ### VictoriaPage Component Structure
 
