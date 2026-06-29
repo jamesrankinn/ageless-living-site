@@ -1373,9 +1373,7 @@ LangleyPage
 │   ├── Google Maps embed (left)
 │   └── Clinic hours card (teal, right)
 ├── Meet the Langley Team Section
-│   └── 5 team member cards:
-│       ├── Shelley McBride (MOA, Clinic Manager)
-│       ├── Yvonne Ng (Certified Medical Aesthetician)
+│   └── 3 team member cards:
 │       ├── Avnit Bhullar (Medical Aesthetician)
 │       ├── Michael Forbes, BSc Pharm (Owner, Pharmacist)
 │       └── Dr. Jean Paul Lim, MD, FRCPC (Owner, Internal Medicine)
@@ -1406,12 +1404,9 @@ KelownaPage
 │   ├── Google Maps embed (left)
 │   └── Clinic hours card (teal, right)
 ├── Meet the Team Section
-│   └── 7 team member cards:
-│       ├── Constanza Moraga Herrera (Nutritional Practitioner)
-│       ├── Rachel Bowman Fassio (Clinical Nutritionist)
-│       ├── Melissa Zitterer (Clinic Manager, MOA)
-│       ├── Dr. Jason Boxtart, ND (Men's Health Specialist)
-│       ├── Dr. Tracey Lotze, MD (Hormone and Sexual Health)
+│   └── 4 team member cards:
+│       ├── Rachel Bowman-Fassio (Clinic Manager)
+│       ├── Ali Latendre (Medical Office Assistant & Medical Esthetician)
 │       ├── Michael Forbes, BSc Pharm (Owner, Pharmacist)
 │       └── Dr. Jean Paul Lim, MD, FRCPC (Owner, Internal Medicine)
 └── CTA Section (dark theme)
@@ -1446,25 +1441,22 @@ Single source of truth for all staff data. Used by TeamPage, LocationsPage, Staf
 }
 ```
 
-**Complete Staff Roster (16 members):**
+**Complete Staff Roster (11 members):**
 
 | Name | Slug | Role | Locations |
 |------|------|------|-----------|
-| Michael Forbes, BSc Pharm | michael-forbes | Owner, Pharmacist, Certified in Hormone Restoration | Langley, Kelowna |
-| Dr. Jean Paul Lim, MD, FRCPC | dr-jean-paul-lim | Owner, Internal Medicine, Complex Care, and Longevity Specialist | Langley, Kelowna |
+| Michael Forbes, BSc Pharm | michael-forbes | Owner, Pharmacist, Certified in Hormone Restoration | Langley, Kelowna, Victoria |
+| Dr. Jean Paul Lim, MD, FRCPC | dr-jean-paul-lim | Owner, Internal Medicine, Complex Care, and Longevity Specialist | Langley, Kelowna, Victoria |
 | Sarita Hutton | sarita-hutton | Owner, Aesthetic Nurse Specialist, Director of Aesthetic Medicine | Victoria |
-| Dr. Tracey Lotze, MD | dr-tracey-lotze | Hormone and Sexual Health Specialist | Kelowna, Victoria |
-| Dr. Jason Boxtart, ND | dr-jason-boxtart | Men's Health Specialist | Kelowna, Victoria |
-| Constanza Moraga Herrera | constanza-moraga-herrera | Certified Nutritional Practitioner, Lifestyle Medicine & Microbiota Specialist | Kelowna |
-| Rachel Bowman Fassio, BSc, CN, RHN | rachel-bowman-fassio | Clinical and Holistic Nutritionist | Kelowna |
-| Yvonne Ng | yvonne-ng | Certified Medical Aesthetician | Langley |
+| Rachel Bowman-Fassio, BSc, CN, RHN | rachel-bowman-fassio | Clinic Manager | Kelowna |
+| Ali Latendre | ali-latendre | Medical Office Assistant & Medical Esthetician | Kelowna |
 | Avnit Bhullar | avnit-bhullar | Medical Aesthetician | Langley |
 | Jenny Hwang, RN | jenny-hwang | Aesthetic Nurse Mentee | Victoria |
 | Madison Allen | madison-allen | Medical Aesthetician | Victoria |
-| Shelley McBride | shelley-mcbride | MOA, Clinic Manager | Langley |
-| Melissa Zitterer | melissa-zitterer | Clinic Manager, MOA | Kelowna |
 | Lucy Watson | lucy-watson | Clinic Manager | Victoria |
 | Natalie King | natalie-king | Medical Office Assistant | Victoria |
+
+> **Pending additions (awaiting bios/photos):** Dr. Vicky Gairns (Naturopathic Doctor), Michelle Shewchuk, NP (Nurse Practitioner), and Cori Jeffery (Esthetician) for Kelowna; and Daman for Langley. To be added once their bios, credentials, and photos are received from the clinics.
 
 **Image Convention:**
 - Path: `/images/team/[firstname-lastname]-headshot.webp`

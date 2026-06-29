@@ -98,12 +98,12 @@ Physician-supervised, sustainable weight loss and metabolic health. Root-cause a
 
 ### Founders/Owners
 
-1. **Michael Forbes, BSc Pharm** (Langley, Kelowna)
+1. **Michael Forbes, BSc Pharm** (Langley, Kelowna, Victoria)
    - Owner, Pharmacist, Certified in Hormone Restoration
    - Specializations: BHRT, Compounding Pharmacy, Longevity Medicine, Peptide Therapy
    - Email: michael@agelessliving.ca | Phone: +1 (236) 326-6830
 
-2. **Dr. Jean Paul Lim, MD, FRCPC** (Langley, Kelowna)
+2. **Dr. Jean Paul Lim, MD, FRCPC** (Langley, Kelowna, Victoria)
    - Owner, Internal Medicine, Complex Care, and Longevity Specialist
    - Specializations: FRCPC Internal Medicine, Longevity & Anti-Aging Medicine, Metabolic Health
    - Email: info@agelessliving.ca | Phone: +1 (236) 326-6830
@@ -114,29 +114,27 @@ Physician-supervised, sustainable weight loss and metabolic health. Root-cause a
    - Email: wellness@agelessliving.ca | Phone: +1 (250) 590-5787
    - Instagram: @agelessliving_bc
 
-### Physicians/Specialists
-
-- **Dr. Tracey Lotze, MD** (Kelowna, Victoria) — Hormone and Sexual Health Specialist
-- **Dr. Jason Boxtart, ND** (Kelowna, Victoria) — Men's Health Specialist & Naturopathic Doctor
-
-### Nutritionists (Kelowna)
-
-- **Constanza Moraga Herrera** (CNP) — Lifestyle Medicine & Microbiota Specialist
-- **Rachel Bowman Fassio, BSc, CN, RHN** — Clinical and Holistic Nutritionist
-
 ### Aesthetic Practitioners
 
-- **Yvonne Ng** (Langley) — Certified Medical Aesthetician
 - **Avnit Bhullar** (Langley) — Medical Aesthetician
 - **Jenny Hwang, RN** (Victoria) — Aesthetic Nurse Mentee
 - **Madison Allen** (Victoria) — Medical Aesthetician
 
 ### Clinic Managers & Admin
 
-- **Shelley McBride** (Langley) — MOA, Clinic Manager
-- **Melissa Zitterer** (Kelowna) — Clinic Manager, MOA
+- **Rachel Bowman-Fassio, BSc, CN, RHN** (Kelowna) — Clinic Manager
+- **Ali Latendre** (Kelowna) — Medical Office Assistant & Medical Esthetician
 - **Lucy Watson** (Victoria) — Clinic Manager
 - **Natalie King** (Victoria) — Medical Office Assistant
+
+### Pending Additions (awaiting bios/photos)
+
+- **Dr. Vicky Gairns** (Kelowna) — Naturopathic Doctor
+- **Michelle Shewchuk, NP** (Kelowna) — Nurse Practitioner
+- **Cori Jeffery** (Kelowna) — Esthetician
+- **Daman** (Langley) — details to be provided by the Langley clinic
+
+> Removed (no longer with the clinic): Dr. Tracey Lotze, Dr. Jason Boxtart, Constanza Moraga Herrera, Yvonne Ng, Shelley McBride, Melissa Zitterer.
 
 ---
 
