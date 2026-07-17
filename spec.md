@@ -1,5 +1,56 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Victoria Clinic Feedback: Lead Delivery, Accuracy & Branding (2026-07-17)
+
+Addresses the operational + content concerns raised by the Victoria clinic
+review. Highest priority: form inquiries now actually reach the clinics.
+
+### A. Website inquiries now get delivered (was: silently lost)
+- **Root cause:** there was no `/api/contact` handler, so every inquiry 404'd
+  and fell back to the visitor's own `localStorage` — nobody ever received it.
+- **`src/lib/contactLeads.ts`** rewritten to deliver via **Web3Forms** (a
+  zero-backend form-to-email service, matches the static-hosting setup) with
+  **per-clinic routing**: the selected location maps to that clinic's inbox
+  (Langley → langley@, Victoria → wellness@, Kelowna → kelowna@; "Not sure" →
+  shared triage). Keeps a local backup and now returns an **honest error** if
+  delivery isn't configured/succeeds, instead of a false success.
+- **Setup required to go live:** add per-clinic Web3Forms access keys as Vite
+  env vars — see `.env.example`. `.gitignore` now excludes `.env*`.
+
+### B. Inquiries no longer funnel to Langley
+- Per-clinic routing (above) replaces the previous single destination.
+- **`ServicesPage.tsx`**: the two Langley-only `tel:` links (sidebar + closing
+  CTA) are replaced with links to `/contact` ("Contact your clinic" / "Contact
+  a Clinic"), which lists all three clinics' own numbers.
+
+### C. Treatment accuracy (Victoria feedback)
+- **`CosmeticDermalFillerPage.tsx`**: removed brand names (Restylane®,
+  Revanesse®), **removed PRP** (not offered), and **re-categorized Sculptra**
+  — the page now presents two accurate categories, **Hyaluronic Acid Fillers**
+  and **Collagen Biostimulators** (explicitly noted as distinct from fillers).
+  Meta description + section copy updated to match; added note that offerings
+  vary by clinic and are confirmed at consultation.
+- **`ServicesPage.tsx`**: "HydraFacial" → "Customized UltraFacial" (device
+  brand varies by clinic); "medications like semaglutide" → "GLP-1
+  medications"; added a site-level note that treatments/products vary by clinic.
+
+### D. Copy + branding
+- **Removed "free consultation"** everywhere (inaccurate for Victoria) —
+  `ServicesPage` (×3) and `AboutUsPage` (×2) now say "Book a Consultation".
+- **"Practice" → "Clinic"**: `TeamPage` "Victoria Practice" → "Victoria
+  Clinic" (and "Kelowna Sanctuary" → "Kelowna Clinic" for consistency);
+  HomePage "longevity medicine practice" → "clinic".
+- **Rebalanced aesthetic-medicine framing** on the HomePage: removed the
+  dismissive "only treats the surface" / "a quick syringe and out the door"
+  lines and the "aesthetics is merely the result" phrasing; aesthetics is now
+  presented as an expert pillar delivered with equal clinical rigor.
+
+### E. Not code changes (need input / assets from the client)
+- **Real photography** to replace AI/stock imagery (client to supply).
+- **Web3Forms access keys** (client to create) to switch delivery on.
+- **Staff-change / CMS login** for the social-media manager — open question.
+
+
 ## Changelog — Contact Page, Shop Link, Mobile Nav Fix + Team Redesign (2026-07-17)
 
 Restores a dedicated Contact page and a Shop entry-point, fixes the mobile

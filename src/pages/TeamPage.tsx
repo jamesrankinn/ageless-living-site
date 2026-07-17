@@ -84,14 +84,14 @@ const locationSections = [
   {
     id: "kelowna",
     label: "Kelowna",
-    title: "Kelowna Sanctuary",
+    title: "Kelowna Clinic",
     blurb: "Integrative therapies in a peaceful clinical setting.",
     team: kelownaTeam,
   },
   {
     id: "victoria",
     label: "Victoria",
-    title: "Victoria Practice",
+    title: "Victoria Clinic",
     blurb: "Advanced aesthetic medicine and personalized care.",
     team: victoriaTeam,
   },
