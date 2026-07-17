@@ -33,29 +33,17 @@ export default function BrandMark({
         <polygon points="345.78 389.33 313.33 389.33 301.33 365.33 119.56 365.33 108 389.33 74.67 389.33 100 342.22 320.44 342.22 345.78 389.33" />
         <polygon points="304 307.56 115.56 307.56 212.89 128 227.11 155.11 159.44 282.22 291.11 282.22 304 307.56" />
       </g>
-      {/* Wordmark */}
+      {/* Wordmark — single-line, one-word lockup */}
       <text
         x="52"
-        y="22"
+        y="26"
         fill={wordmark}
         fontFamily="Inter, system-ui, sans-serif"
         fontSize="17"
-        fontWeight="600"
-        letterSpacing="1"
+        letterSpacing="0.2"
       >
-        AGELESS
-      </text>
-      <text
-        x="52"
-        y="34"
-        fill={wordmark}
-        fontFamily="Inter, system-ui, sans-serif"
-        fontSize="8.5"
-        fontWeight="500"
-        letterSpacing="4.6"
-        opacity="0.7"
-      >
-        LIVING
+        <tspan fontWeight="700">Ageless</tspan>
+        <tspan fontWeight="400" opacity="0.85">Living</tspan>
       </text>
     </svg>
   );

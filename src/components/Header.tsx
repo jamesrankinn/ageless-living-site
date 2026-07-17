@@ -408,13 +408,14 @@ export default function Header() {
               >
                 Book Now
               </Link>
-              <a
-                href="tel:+12363266830"
+              <Link
+                to="/contact"
+                onClick={closeMobile}
                 className="flex items-center justify-center gap-2 w-full border border-border text-foreground px-6 py-3 rounded-full font-medium text-sm"
               >
                 <Phone className="w-4 h-4" />
-                (236) 326-6830
-              </a>
+                Contact a Clinic
+              </Link>
             </div>
           </motion.div>
         )}

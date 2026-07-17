@@ -1,5 +1,60 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Live Lead Delivery, Clinic Info, Team & Logo Updates (2026-07-17)
+
+Wires up real form delivery, corrects clinic contact info, labels every phone
+by location, and applies the latest team/branding feedback.
+
+### A. Web3Forms delivery is now live
+- **`src/lib/contactLeads.ts`** now ships a real Web3Forms access key as the
+  client-side default, so the contact + booking forms deliver on deploy with no
+  env setup. The selected clinic is included in the email subject/body. Per-clinic
+  keys can still override via `VITE_WEB3FORMS_KEY*` env vars.
+
+### B. Every phone number is labeled by clinic
+- **`Footer.tsx`** now renders each clinic's address **and its own tel: link**
+  ("Langley: (236) 326-6830", etc.) from `clinics.ts`; removed the lone
+  unlabeled number.
+- **`Header.tsx`** mobile menu's bottom call button → "Contact a Clinic" link
+  to `/contact` (no unlabeled number).
+
+### C. Corrected clinic data (`src/data/clinics.ts`)
+- **Victoria:** 101 Burnside Rd W #1, Victoria, BC V9A 1B7 · (250) 590-5787 ·
+  Mon–Thu 9–5, Fri 9–4, by appointment, closed weekends.
+- **Kelowna:** 3320 Richter St #102, Kelowna, BC V1W 4V5 · (778) 760-9827 ·
+  Mon–Fri 9–5, by appointment, closed weekends.
+- **Langley:** (236) 326-6830 · Mon–Fri 9–5, by appointment, closed weekends.
+- Google Maps links + Contact/Book/Footer hours updated to match (no more
+  "Saturday by appointment").
+
+### D. Team + profiles
+- **Removed the "Availability" block** from the staff profile "About" section
+  (`StaffProfilePage.tsx`).
+- **Team hero (`TeamPage.tsx`)**: replaced the AI group photo with the three
+  founders' real headshots — Michael Forbes, Dr. Jean Paul Lim, Sarita Hutton.
+- **Avnit Bhullar** updated: title "Clinic Manager and Medical Aesthetician",
+  new credentials, specializations, services list, and bio.
+- **Added Dr. Daman Johal** (Medical Aesthetician). Placed in **Langley**
+  (clinic not specified — flagged for confirmation). Headshot pending: profile
+  shows a placeholder avatar until `/public/team/daman-johal.webp` is added.
+
+### E. Branding fixes
+- **Logo (`BrandMark.tsx`)**: single-line, one-word "AgelessLiving" lockup
+  (same Inter font) instead of stacked AGELESS / LIVING.
+- **Skin Rejuvenation image**: swapped the AI `services-1.jpg` (garbled
+  "Longevity & Aestmetics" sign) for the real clinical photo.
+- **Avatar cards (HomePage)**: border → ring to remove the rounded-corner
+  hairline ("borders off").
+- Rebalanced another HomePage line that framed aesthetics as lower priority.
+
+### F. Still needs client input / assets
+- **Web3Forms:** confirm the destination inbox + (optionally) create separate
+  per-clinic keys; enable spam protection in the dashboard.
+- **Daman:** confirm clinic + provide headshot file.
+- **Real photos** to replace remaining AI imagery.
+- **Logo:** fine-tune against the attached "agelessliving" reference if needed.
+
+
 ## Changelog — Victoria Clinic Feedback: Lead Delivery, Accuracy & Branding (2026-07-17)
 
 Addresses the operational + content concerns raised by the Victoria clinic

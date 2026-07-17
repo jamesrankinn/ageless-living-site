@@ -182,8 +182,8 @@ export default function ContactPage() {
                       <Mail className="h-4 w-4 text-primary shrink-0" />
                       {clinic.email}
                     </a>
-                    <p className="flex items-center gap-3 text-muted-foreground">
-                      <Clock className="h-4 w-4 text-primary shrink-0" />
+                    <p className="flex items-start gap-3 text-muted-foreground">
+                      <Clock className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                       {clinic.hours}
                     </p>
                   </div>
@@ -260,7 +260,7 @@ export default function ContactPage() {
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary shrink-0">
                     <Clock className="h-4 w-4" />
                   </span>
-                  Mon–Fri: 9am–5pm · Sat by appointment
+                  By appointment only · Closed weekends
                 </p>
               </div>
 

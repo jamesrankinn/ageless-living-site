@@ -160,9 +160,9 @@ export default function BookNowPage() {
               <div className="flex items-start gap-3 px-1 text-sm text-muted-foreground">
                 <Clock className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                 <span>
-                  Monday – Friday: 9am – 5pm
+                  By appointment only
                   <br />
-                  Saturday: By appointment
+                  Closed weekends · Hours vary by clinic
                 </span>
               </div>
             </motion.aside>

@@ -5,7 +5,6 @@ import {
   ArrowLeft,
   ArrowRight,
   MapPin,
-  Clock,
   GraduationCap,
   Sparkles,
   Syringe,
@@ -182,17 +181,6 @@ function ProfileContent({ member }: { member: StaffMember }) {
                 <p className="text-muted-foreground leading-[1.85] text-[0.938rem]">
                   {member.bio}
                 </p>
-              </div>
-
-              {/* Availability */}
-              <div className="flex items-start gap-3 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                <div>
-                  <span className="font-semibold text-foreground text-xs uppercase tracking-wider block mb-0.5">
-                    Availability
-                  </span>
-                  {member.availability}
-                </div>
               </div>
             </motion.div>
           </div>
