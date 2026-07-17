@@ -28,12 +28,12 @@ const whatWeDo = [
 ];
 
 const weAre = [
-  <>A longevity medicine practice — physicians, diagnostics, and a plan built around <em className="italic">your</em> biology</>,
+  <>A longevity medicine clinic — physicians, diagnostics, and a plan built around <em className="italic">your</em> biology</>,
   <>Whole-system optimization: hormones, metabolism, cellular repair, nutrition</>,
-  <>A place where aesthetics is the <em className="italic">result</em> of real health</>,
+  <>Expert aesthetic medicine, delivered with the same clinical rigor as everything we do</>,
 ];
 
-const weAreNot = ["A med spa", "A place that only treats the surface", "A quick syringe and out the door"];
+const weAreNot = ["A quick fix without a plan", "One-size-fits-all treatment", "Guesswork instead of real data"];
 
 type Avatar = {
   id: string;
@@ -68,7 +68,7 @@ const womenAvatars: Avatar[] = [
     startLabel: "Skin, from the inside out",
     panelTitle: "Skin, from the inside out",
     panelCopy:
-      "Your skin is your largest organ — a readout of what's happening inside. We can do the injectables, but lasting, natural results come from calming inflammation, restoring nutrients (IV + nutrition), optimizing hormones, and red light therapy, with aesthetics layered on top.",
+      "Your skin is your largest organ — a readout of what's happening inside. Our injectors deliver refined, natural-looking results, and we make them last by also calming inflammation, restoring nutrients (IV + nutrition), optimizing hormones, and red light therapy.",
     ctaLabel: "Explore Medical Aesthetics",
     ctaHref: "/services#skin-rejuvenation",
   },

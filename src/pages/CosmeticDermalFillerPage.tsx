@@ -32,26 +32,16 @@ const focusAreas = [
   },
 ];
 
-const products = [
+const fillerTypes = [
   {
     number: "01",
-    name: "Restylane®",
-    desc: "Versatile range for smoothing wrinkles and enhancing lips with XpresHAn Technology™.",
+    name: "Hyaluronic Acid Fillers",
+    desc: "Smooth lines and restore volume instantly with gel fillers based on a substance your body produces naturally — ideal for lips, cheeks, and fine lines.",
   },
   {
     number: "02",
-    name: "Revanesse®",
-    desc: "Advanced hyaluronic acid formula optimized for volume and smoothness.",
-  },
-  {
-    number: "03",
-    name: "PRP (Platelet-Rich Plasma)",
-    desc: "Harnessing your body's own growth factors to stimulate collagen and tissue repair.",
-  },
-  {
-    number: "04",
-    name: "Sculptra®",
-    desc: "A poly-L-lactic acid (PLLA) collagen stimulator for gradual, long-lasting restoration.",
+    name: "Collagen Biostimulators",
+    desc: "A distinct category from fillers: instead of adding volume directly, biostimulators prompt your skin to rebuild its own collagen for gradual, natural restoration over several months.",
   },
 ];
 
@@ -80,7 +70,7 @@ export default function CosmeticDermalFillerPage() {
         <title>Cosmetic Dermal Filler | Ageless Living™ — Restore Volume & Contour</title>
         <meta
           name="description"
-          content="Smooth away lines and restore volume with premium cosmetic dermal fillers including Restylane®, Revanesse®, PRP, and Sculptra®. Available in Victoria, Langley, and Kelowna."
+          content="Smooth away lines and restore volume with physician-administered hyaluronic acid dermal fillers and collagen biostimulators. Available in Victoria, Langley, and Kelowna."
         />
       </Helmet>
 
@@ -216,9 +206,11 @@ export default function CosmeticDermalFillerPage() {
             transition={{ duration: 0.6, ease }}
             className="text-center max-w-3xl mx-auto mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">World-Class Formulations</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Two Approaches, Natural Results</h2>
             <p className="text-muted-foreground leading-relaxed">
-              We curate only the most rigorous, FDA-approved products to ensure longevity, safety, and natural-looking results.
+              Fillers and biostimulators work in different ways. Your physician
+              recommends the right approach — and the specific product — during
+              your consultation. Offerings vary by clinic and continue to evolve.
             </p>
           </motion.div>
 
@@ -230,7 +222,7 @@ export default function CosmeticDermalFillerPage() {
               transition={{ duration: 0.6, ease }}
               className="space-y-4"
             >
-              {products.map((product, i) => (
+              {fillerTypes.map((product, i) => (
                 <motion.div
                   key={product.name}
                   initial={{ opacity: 0, x: -16 }}

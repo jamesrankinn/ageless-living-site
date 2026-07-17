@@ -435,14 +435,14 @@ export default function AboutUsPage() {
               Ready to get started?
             </h2>
             <p className="text-lg text-primary-foreground/80 mb-8">
-              Book a free consultation to discuss your goals with one of our doctors. We will help you find the right path forward.
+              Book a consultation to discuss your goals with one of our doctors. We will help you find the right path forward.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/book"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-card text-foreground font-semibold text-sm hover:bg-card/90 transition-all"
               >
-                Book Your Free Consultation
+                Book a Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

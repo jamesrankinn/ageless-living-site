@@ -81,11 +81,11 @@ const serviceCategories: ServiceCategory[] = [
         benefits: ["Even skin tone", "Reduced redness", "Smoother texture"],
         href: "/services/laser-ipl-bbl" 
       },
-      { 
-        name: "HydraFacial", 
+      {
+        name: "Customized UltraFacial",
         desc: "Deep cleansing and hydration for instantly glowing skin.",
         benefits: ["Deep pore cleansing", "Intense hydration", "Immediate glow"],
-        href: "/services/customized-ultrafacial" 
+        href: "/services/customized-ultrafacial"
       },
       { 
         name: "Microneedling", 
@@ -109,8 +109,8 @@ const serviceCategories: ServiceCategory[] = [
     image: weightImg,
     treatments: [
       { 
-        name: "GLP-1 Medications", 
-        desc: "Physician-prescribed medications like semaglutide for effective, sustainable weight loss.",
+        name: "GLP-1 Medications",
+        desc: "Physician-prescribed GLP-1 medications for effective, sustainable weight loss.",
         benefits: ["Reduced appetite naturally", "Steady weight loss", "Doctor supervision"],
         href: "/services/health-weight" 
       },
@@ -223,7 +223,7 @@ export default function ServicesPage() {
                 to="/book"
                 className="group inline-flex items-center justify-center gap-3 bg-primary hover:bg-sage-dark text-primary-foreground px-7 py-4 rounded-full font-semibold text-sm transition-all"
               >
-                Book a Free Consultation
+                Book a Consultation
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
@@ -234,6 +234,14 @@ export default function ServicesPage() {
       {/* ══════════════ NAVIGATION + SERVICES ══════════════ */}
       <section className="bg-background pb-20 md:pb-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="mb-10 md:mb-14 rounded-2xl border border-border bg-secondary/30 px-5 py-4 md:px-6 md:py-5">
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <span className="font-semibold text-foreground">Please note:</span>{" "}
+              Available treatments, technologies, and product lines vary by
+              clinic and continue to evolve. The right options for you are always
+              confirmed during an individual consultation based on your goals.
+            </p>
+          </div>
           <div className="grid grid-cols-12 gap-6 lg:gap-12">
             {/* Sticky side navigation - desktop */}
             <aside className="hidden lg:block lg:col-span-3">
@@ -261,15 +269,16 @@ export default function ServicesPage() {
                 <div className="mt-10 p-5 bg-sage-light rounded-2xl">
                   <h4 className="font-semibold text-foreground mb-2">Have questions?</h4>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Our team is happy to help you find the right treatment.
+                    Reach the team at your nearest clinic — Langley, Victoria, or
+                    Kelowna.
                   </p>
-                  <a
-                    href="tel:+12363266830"
+                  <Link
+                    to="/contact"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
                   >
                     <Phone className="w-4 h-4" />
-                    (236) 326-6830
-                  </a>
+                    Contact your clinic
+                  </Link>
                 </div>
               </div>
             </aside>
@@ -391,23 +400,23 @@ export default function ServicesPage() {
               Not sure which treatment is right for you?
             </h2>
             <p className="text-lg text-primary-foreground/80 mb-8">
-              Book a free consultation and our doctors will help you find the best options for your goals.
+              Book a consultation and our doctors will help you find the best options for your goals.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/book"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-card text-foreground font-semibold text-sm hover:bg-card/90 transition-all"
               >
-                Book Your Free Consultation
+                Book a Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <a
-                href="tel:+12363266830"
+              <Link
+                to="/contact"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-primary-foreground/30 text-primary-foreground font-semibold text-sm hover:bg-primary-foreground/10 transition-all"
               >
                 <Phone className="w-4 h-4" />
-                Call Us
-              </a>
+                Contact a Clinic
+              </Link>
             </div>
           </motion.div>
         </div>
