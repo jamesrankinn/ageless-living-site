@@ -1,5 +1,53 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Contact Page, Shop Link, Mobile Nav Fix + Team Redesign (2026-07-17)
+
+Restores a dedicated Contact page and a Shop entry-point, fixes the mobile
+menu so it always dismisses on navigation, lets visitors book at any of the
+three clinics with one tap, and rebuilds the "Meet the Team" page to feel
+premium.
+
+### A. New Contact page (`/contact`)
+- **Added** `src/pages/ContactPage.tsx` and its lazy route in `App.tsx`.
+  Removed the old `/contact → /book` redirect so `/contact` is a real page
+  again.
+- Sections: hero, a three-up **clinic card grid** (Langley, Victoria,
+  Kelowna) each with address, tel/mailto links, hours, a **"Book here"** CTA
+  (deep-links to `/book?location=<id>`) and a **"Directions"** Google Maps
+  link, plus a **"Send a message"** block (contact details + validated React
+  Hook Form + Zod form reusing `saveContactLead`).
+- Fully responsive: cards go 1→2→3 columns, form fields stack on mobile.
+
+### B. Shop link in the nav
+- **Added** `SHOP_URL` (`https://ageless-living.square.site/s/shop`) to
+  `src/lib/links.ts`.
+- Header now shows a **Shop** link (ShoppingBag icon) in the desktop nav and
+  the mobile overlay, opening the Square storefront in a new tab. Footer
+  bottom bar also gains **Contact** and **Shop** links.
+
+### C. Mobile nav fix (menu wouldn't dismiss)
+- The full-screen overlay no longer animates `height` (which could leave it
+  lingering over the destination page). It now uses a clean opacity fade and
+  `z-50`, and **locks body scroll** (`overflow: hidden`) while open.
+- Added a shared `closeMobile()` helper wired to every in-menu link so tapping
+  **Book Now** (or any item) reliably closes the overlay in addition to the
+  existing close-on-navigation effect. Verified end-to-end with Playwright on
+  an iPhone viewport.
+
+### D. Book at any of the three clinics
+- **Added** `src/data/clinics.ts` — single source of truth for all three
+  locations (address, phone, email, hours, Google Maps URL).
+- `BookNowPage` now reads a `?location=langley|victoria|kelowna` query param
+  and pre-selects the matching clinic in the intake form; its location cards
+  are sourced from `clinics.ts`.
+
+### E. Meet the Team redesign (`/our-team`)
+- Rebuilt `TeamPage.tsx`: new hero ("The people behind your care" + trust
+  stats), refined pill-style location filter, premium staff cards
+  (4:5 portraits, hover lift, gradient + arrow affordance), per-section
+  specialist counts, and a closing booking CTA. Staff data/routing unchanged.
+
+
 ## Changelog — Merge Contact into Book Now + Remove Location Pages (2026-06-17)
 
 Further simplification. The intake form now lives on a single **Book Now**
