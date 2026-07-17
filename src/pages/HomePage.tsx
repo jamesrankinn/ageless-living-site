@@ -295,7 +295,8 @@ export default function HomePage() {
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
                 Your body is one connected system. When your hormones, metabolism, and cells are working well, it
                 shows — in your energy, your performance, and your skin, your largest organ. So we work from the
-                inside out. Aesthetics isn't where we start; it's what happens when the rest is working.
+                inside out, pairing expert aesthetic care with the internal health that makes results look
+                natural and last.
               </p>
               <div className="flex items-center gap-3 text-sm font-medium">
                 <span className="inline-flex items-center px-4 py-2 rounded-full border border-clinic-teal/40 text-clinic-teal">
@@ -428,10 +429,10 @@ export default function HomePage() {
                   key={a.id}
                   onClick={() => setActiveIdx(i)}
                   aria-pressed={isActive}
-                  className={`group text-left rounded-2xl overflow-hidden bg-card border transition-all duration-300 ${
+                  className={`group text-left rounded-2xl overflow-hidden bg-card transition-all duration-300 ${
                     isActive
-                      ? "border-clinic-teal ring-2 ring-clinic-teal/30 shadow-lg"
-                      : "border-border hover:border-clinic-teal/40 hover:shadow-md"
+                      ? "ring-2 ring-clinic-teal shadow-lg"
+                      : "ring-1 ring-border hover:ring-clinic-teal/40 hover:shadow-md"
                   }`}
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">

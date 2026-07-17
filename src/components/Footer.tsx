@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Facebook, Phone } from "lucide-react";
 import BrandMark from "@/components/BrandMark";
 import { SHOP_URL } from "@/lib/links";
+import { clinics } from "@/data/clinics";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -91,29 +92,23 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-card mb-4">Visit Us</h4>
             <div className="space-y-4 text-sm text-card/60">
-              <div>
-                <p className="text-card font-medium mb-1">Victoria</p>
-                <p>740 Hillside Ave #120</p>
-                <p>Victoria, BC V8T 1Z4</p>
-              </div>
-              <div>
-                <p className="text-card font-medium mb-1">Langley</p>
-                <p>415-20178 96th Ave</p>
-                <p>Langley, BC V1M 0B2</p>
-              </div>
-              <div>
-                <p className="text-card font-medium mb-1">Kelowna</p>
-                <p>1708 Dolphin Ave #101</p>
-                <p>Kelowna, BC V1Y 9S4</p>
-              </div>
-              <div className="pt-2 border-t border-card/10">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>(236) 326-6830</span>
+              {clinics.map((clinic) => (
+                <div key={clinic.id}>
+                  <p className="text-card font-medium mb-1">{clinic.name}</p>
+                  <p>{clinic.addressLine1}</p>
+                  <p>{clinic.addressLine2}</p>
+                  <a
+                    href={`tel:${clinic.phoneTel}`}
+                    className="mt-1.5 inline-flex items-center gap-2 hover:text-card transition-colors"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    {clinic.name}: {clinic.phoneDisplay}
+                  </a>
                 </div>
-                <p>Mon-Fri: 9am-5pm</p>
-                <p>Saturday: By appointment</p>
-              </div>
+              ))}
+              <p className="pt-2 border-t border-card/10">
+                By appointment only · Closed weekends
+              </p>
             </div>
           </div>
         </div>

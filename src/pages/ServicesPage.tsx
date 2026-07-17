@@ -4,7 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Phone } from "lucide-react";
 
-import skinImg from "@/assets/services-1.jpg";
+import skinImg from "@/assets/real/skin-rejuvenation-ageless-living.webp";
 import hormoneImg from "@/assets/hormone-balancing.jpg";
 import biohackingImg from "@/assets/biohacking.jpg";
 import weightImg from "@/assets/health-weight.jpg";

@@ -43,12 +43,21 @@ const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 const env = import.meta.env;
 
+/**
+ * Live Web3Forms access key. Web3Forms keys are designed to live in
+ * client-side code, so this default lets the form work on deploy without any
+ * env configuration. When separate per-clinic inboxes are set up, override any
+ * of these with the VITE_WEB3FORMS_KEY* env vars (see `.env.example`).
+ */
+const DEFAULT_ACCESS_KEY = "5c145cb5-dd6c-490e-89c6-1ad2705de155";
+const SHARED_KEY = env.VITE_WEB3FORMS_KEY || DEFAULT_ACCESS_KEY;
+
 /** Per-clinic Web3Forms access keys, with a shared fallback for "not sure". */
 const ACCESS_KEYS: Record<ContactLocation, string | undefined> = {
-  langley: env.VITE_WEB3FORMS_KEY_LANGLEY || env.VITE_WEB3FORMS_KEY,
-  victoria: env.VITE_WEB3FORMS_KEY_VICTORIA || env.VITE_WEB3FORMS_KEY,
-  kelowna: env.VITE_WEB3FORMS_KEY_KELOWNA || env.VITE_WEB3FORMS_KEY,
-  unsure: env.VITE_WEB3FORMS_KEY,
+  langley: env.VITE_WEB3FORMS_KEY_LANGLEY || SHARED_KEY,
+  victoria: env.VITE_WEB3FORMS_KEY_VICTORIA || SHARED_KEY,
+  kelowna: env.VITE_WEB3FORMS_KEY_KELOWNA || SHARED_KEY,
+  unsure: SHARED_KEY,
 };
 
 const CLINIC_LABEL: Record<ContactLocation, string> = {

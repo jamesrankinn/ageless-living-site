@@ -1,6 +1,6 @@
 // Single source of truth for the three Ageless Living™ clinic locations.
-// Used by the Contact page, Book page, and any per-clinic booking CTA so the
-// address / phone / booking target never drift between pages.
+// Used by the Contact page, Book page, Footer, and any per-clinic booking CTA so
+// the address / phone / hours / booking target never drift between pages.
 
 export type ClinicId = "langley" | "victoria" | "kelowna";
 
@@ -27,10 +27,10 @@ export const clinics: Clinic[] = [
     tagline: "Longevity, recovery & aesthetic medicine",
     addressLine1: "415-20178 96th Ave",
     addressLine2: "Langley, BC V1M 0B2",
-    phoneDisplay: "+1 (236) 326-6830",
+    phoneDisplay: "(236) 326-6830",
     phoneTel: "+12363266830",
     email: "langley@agelessliving.ca",
-    hours: "Mon–Fri: 9am–5pm",
+    hours: "Mon–Fri: 9am–5pm · By appointment · Closed weekends",
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=415-20178+96th+Ave+Langley+BC+V1M+0B2",
   },
@@ -38,27 +38,27 @@ export const clinics: Clinic[] = [
     id: "victoria",
     name: "Victoria",
     tagline: "Advanced aesthetic & personalized care",
-    addressLine1: "740 Hillside Ave #120",
-    addressLine2: "Victoria, BC V8T 1Z4",
-    phoneDisplay: "+1 (250) 590-5787",
+    addressLine1: "101 Burnside Rd W #1",
+    addressLine2: "Victoria, BC V9A 1B7",
+    phoneDisplay: "(250) 590-5787",
     phoneTel: "+12505905787",
     email: "wellness@agelessliving.ca",
-    hours: "Mon–Fri: 9am–5pm",
+    hours: "Mon–Thu: 9am–5pm · Fri: 9am–4pm · By appointment · Closed weekends",
     mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=740+Hillside+Ave+120+Victoria+BC+V8T+1Z4",
+      "https://www.google.com/maps/search/?api=1&query=101+Burnside+Rd+W+1+Victoria+BC+V9A+1B7",
   },
   {
     id: "kelowna",
     name: "Kelowna",
     tagline: "Integrative therapies & IV wellness",
-    addressLine1: "1708 Dolphin Ave #101",
-    addressLine2: "Kelowna, BC V1Y 9S4",
-    phoneDisplay: "+1 (778) 760-9827",
+    addressLine1: "3320 Richter St #102",
+    addressLine2: "Kelowna, BC V1W 4V5",
+    phoneDisplay: "(778) 760-9827",
     phoneTel: "+17787609827",
     email: "kelowna@agelessliving.ca",
-    hours: "Mon–Fri: 9am–5pm",
+    hours: "Mon–Fri: 9am–5pm · By appointment · Closed weekends",
     mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=1708+Dolphin+Ave+101+Kelowna+BC+V1Y+9S4",
+      "https://www.google.com/maps/search/?api=1&query=3320+Richter+St+102+Kelowna+BC+V1W+4V5",
   },
 ];
 

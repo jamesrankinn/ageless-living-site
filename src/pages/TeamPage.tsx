@@ -9,7 +9,25 @@ import {
 } from "@/data/staffData";
 import AglessPattern from "@/components/AglessPattern";
 
-const ourTeamImg = "/team/team-founders.webp";
+// Displayed in the hero collage. Client requested these three founders shown
+// here (no group photo available) — using their individual headshots.
+const heroFounders = [
+  {
+    name: "Michael Forbes",
+    title: "Owner, Pharmacist",
+    img: "/team/michael-forbes.webp",
+  },
+  {
+    name: "Dr. Jean Paul Lim",
+    title: "Owner, Internal Medicine",
+    img: "/team/dr-jean-paul-lim.webp",
+  },
+  {
+    name: "Sarita Hutton",
+    title: "Director of Aesthetic Medicine",
+    img: "/team/sarita-hutton.webp",
+  },
+];
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -154,19 +172,29 @@ export default function TeamPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease }}
             >
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src={ourTeamImg}
-                  alt="Ageless Living founding pharmacist and physician team"
-                  className="w-full h-full object-cover object-top"
-                />
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
+                {heroFounders.map((f, i) => (
+                  <div key={f.name} className={i === 1 ? "mt-6 md:mt-10" : ""}>
+                    <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-secondary/30">
+                      <img
+                        src={f.img}
+                        alt={`${f.name}, ${f.title} at Ageless Living`}
+                        className="w-full h-full object-cover object-top"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p className="mt-2.5 text-center text-xs font-semibold text-foreground leading-tight">
+                      {f.name}
+                    </p>
+                    <p className="text-center text-[11px] text-muted-foreground leading-tight">
+                      {f.title}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="absolute -bottom-5 -left-4 md:-left-6 bg-card p-5 rounded-2xl shadow-lg max-w-xs border border-border/40">
-                <p className="text-sm italic text-muted-foreground leading-relaxed">
-                  "Integrating traditional precision with future-focused
-                  wellness."
-                </p>
-              </div>
+              <p className="mt-6 text-sm italic text-muted-foreground text-center max-w-md mx-auto">
+                "Integrating traditional precision with future-focused wellness."
+              </p>
             </motion.div>
           </div>
         </div>
