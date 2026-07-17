@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Phone, Mail, MapPin } from "lucide-react";
+import { Instagram, Facebook, Phone } from "lucide-react";
 import BrandMark from "@/components/BrandMark";
+import { SHOP_URL } from "@/lib/links";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -8,6 +9,7 @@ const navLinks = [
   { label: "About Us", to: "/about-us" },
   { label: "Our Team", to: "/our-team" },
   { label: "Blog", to: "/blog" },
+  { label: "Contact", to: "/contact" },
   { label: "Book Now", to: "/book" },
 ];
 
@@ -123,6 +125,17 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4 text-xs text-card/40">
             <Link to="/faqs" className="hover:text-card transition-colors">FAQs</Link>
+            <span>·</span>
+            <Link to="/contact" className="hover:text-card transition-colors">Contact</Link>
+            <span>·</span>
+            <a
+              href={SHOP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-card transition-colors"
+            >
+              Shop
+            </a>
             <span>·</span>
             <Link to="/book" className="hover:text-card transition-colors">Book Now</Link>
           </div>

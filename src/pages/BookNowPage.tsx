@@ -1,34 +1,24 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { MapPin, Phone, Mail, Clock, Check, ArrowRight } from "lucide-react";
 import { saveContactLead } from "@/lib/contactLeads";
+import { clinics } from "@/data/clinics";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const locations = [
-  {
-    name: "Langley",
-    address: "415-20178 96th Ave, Langley, BC V1M 0B2",
-    phone: "+1 (236) 326-6830",
-    email: "langley@agelessliving.ca",
-  },
-  {
-    name: "Victoria",
-    address: "740 Hillside Ave #120, Victoria, BC V8T 1Z4",
-    phone: "+1 (250) 590-5787",
-    email: "wellness@agelessliving.ca",
-  },
-  {
-    name: "Kelowna",
-    address: "1708 Dolphin Ave #101, Kelowna, BC V1Y 9S4",
-    phone: "+1 (778) 760-9827",
-    email: "kelowna@agelessliving.ca",
-  },
-];
+const locations = clinics.map((c) => ({
+  name: c.name,
+  address: `${c.addressLine1}, ${c.addressLine2}`,
+  phone: c.phoneDisplay,
+  email: c.email,
+}));
+
+const locationValues = ["langley", "victoria", "kelowna", "unsure"] as const;
 
 const interests = [
   "Hormone Optimization",
@@ -44,7 +34,7 @@ const schema = z.object({
   lastName: z.string().min(2, "Please enter your last name."),
   email: z.string().email("Please enter a valid email."),
   phone: z.string().min(7, "Please enter a valid phone number."),
-  location: z.enum(["langley", "victoria", "kelowna", "unsure"]),
+  location: z.enum(locationValues),
   interest: z.string().min(1, "Please select an area of interest."),
   message: z.string().min(10, "Please tell us a little more (10+ characters)."),
 });
@@ -57,6 +47,16 @@ const fieldClass =
 export default function BookNowPage() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  // Allow deep-linking a preferred clinic, e.g. /book?location=langley, so the
+  // "Book at this clinic" CTAs across the site land on the form pre-filled.
+  const requestedLocation = searchParams.get("location");
+  const initialLocation = (locationValues as readonly string[]).includes(
+    requestedLocation ?? "",
+  )
+    ? (requestedLocation as FormValues["location"])
+    : "unsure";
 
   const {
     register,
@@ -70,7 +70,7 @@ export default function BookNowPage() {
       lastName: "",
       email: "",
       phone: "",
-      location: "unsure",
+      location: initialLocation,
       interest: "",
       message: "",
     },

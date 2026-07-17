@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { MapPin, User } from "lucide-react";
+import { MapPin, User, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   getStaffByLocation,
@@ -20,23 +20,29 @@ function TeamCard({
   member: StaffMember;
   section: string;
 }) {
+  const hasPhoto =
+    member.image &&
+    !member.image.includes("placeholder") &&
+    !member.image.startsWith("/images/team/");
+
   return (
-    <Link to={`/our-team/${member.slug}`} state={{ from: section }}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, ease }}
-        className="bg-card rounded-xl overflow-hidden border border-border/20 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, ease }}
+    >
+      <Link
+        to={`/our-team/${member.slug}`}
+        state={{ from: section }}
+        className="group block h-full rounded-2xl bg-card border border-border/50 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
       >
-        <div className="aspect-square bg-secondary/20 overflow-hidden">
-          {member.image &&
-          !member.image.includes("placeholder") &&
-          !member.image.startsWith("/images/team/") ? (
+        <div className="relative aspect-[4/5] overflow-hidden bg-secondary/30">
+          {hasPhoto ? (
             <img
               src={member.image}
               alt={getStaffAltText(member)}
-              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.05]"
               loading="lazy"
             />
           ) : (
@@ -44,17 +50,22 @@ function TeamCard({
               <User className="w-16 h-16 text-muted-foreground/30" />
             </div>
           )}
+          {/* Subtle gradient for depth + a hover affordance */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span className="absolute top-3 right-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-card/90 text-primary translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-sm">
+            <ArrowUpRight className="h-4 w-4" />
+          </span>
         </div>
-        <div className="p-4">
-          <h3 className="text-base font-bold text-foreground leading-tight mb-1">
+        <div className="p-5">
+          <h3 className="text-base font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
             {member.name}
           </h3>
-          <p className="text-xs font-bold uppercase tracking-widest text-clinic-teal">
+          <p className="mt-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
             {member.role}
           </p>
         </div>
-      </motion.div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -62,40 +73,79 @@ const langleyTeam = getStaffByLocation("langley");
 const kelownaTeam = getStaffByLocation("kelowna");
 const victoriaTeam = getStaffByLocation("victoria");
 
+const locationSections = [
+  {
+    id: "langley",
+    label: "Langley",
+    title: "Langley Clinic",
+    blurb: "Specialized care and innovative wellness protocols.",
+    team: langleyTeam,
+  },
+  {
+    id: "kelowna",
+    label: "Kelowna",
+    title: "Kelowna Sanctuary",
+    blurb: "Integrative therapies in a peaceful clinical setting.",
+    team: kelownaTeam,
+  },
+  {
+    id: "victoria",
+    label: "Victoria",
+    title: "Victoria Practice",
+    blurb: "Advanced aesthetic medicine and personalized care.",
+    team: victoriaTeam,
+  },
+];
+
 export default function TeamPage() {
   return (
     <>
       <Helmet>
-        <title>Our Team | Ageless Living™ — Expert Clinical Care</title>
+        <title>Meet the Team | Ageless Living™ — Expert Clinical Care</title>
         <meta
           name="description"
           content="Meet the dedicated team of physicians, specialists, and clinical professionals behind Ageless Living™ across Victoria, Langley, and Kelowna."
         />
       </Helmet>
 
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-10 md:pb-12 bg-secondary/30 overflow-hidden">
+      {/* ══════════════ HERO ══════════════ */}
+      <section className="relative pt-28 pb-14 md:pt-36 md:pb-20 bg-secondary/30 overflow-hidden">
         <AglessPattern opacity={0.05} size={130} />
         <div className="relative container mx-auto section-padding">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
-              className="space-y-4"
+              className="space-y-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease }}
             >
-              <span className="text-clinic-teal font-bold tracking-widest uppercase text-xs">
-                Collaborative Care
+              <span className="text-primary font-semibold tracking-widest uppercase text-xs">
+                Meet the Team
               </span>
-              <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-foreground leading-tight">
-                Our Team
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-foreground leading-[1.05]">
+                The people behind
+                <br className="hidden sm:block" /> your care
               </h1>
-              <p className="text-base text-muted-foreground leading-relaxed max-w-xl">
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
                 The brainchild of pharmacist and physician (MD) founders,
                 Ageless blends the best of traditional medicine with
-                groundbreaking wellness therapies, taking your health to the
-                next level.
+                groundbreaking wellness therapies — delivered by a team that
+                takes the time to truly know you.
               </p>
+              <div className="flex flex-wrap gap-8 pt-2">
+                <div>
+                  <p className="text-3xl font-bold text-foreground">3</p>
+                  <p className="text-sm text-muted-foreground">BC clinics</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-bold text-foreground">10+</p>
+                  <p className="text-sm text-muted-foreground">Years of care</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-bold text-foreground">MD-led</p>
+                  <p className="text-sm text-muted-foreground">Every protocol</p>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -104,15 +154,15 @@ export default function TeamPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease }}
             >
-              <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-xl">
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src={ourTeamImg}
-                  alt="Professional medical clinic founders"
+                  alt="Ageless Living founding pharmacist and physician team"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-card p-5 rounded-xl shadow-lg max-w-xs border border-border/40">
-                <p className="text-xs italic text-muted-foreground leading-relaxed">
+              <div className="absolute -bottom-5 -left-4 md:-left-6 bg-card p-5 rounded-2xl shadow-lg max-w-xs border border-border/40">
+                <p className="text-sm italic text-muted-foreground leading-relaxed">
                   "Integrating traditional precision with future-focused
                   wellness."
                 </p>
@@ -122,88 +172,76 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Location Filter Navigation */}
-      <section className="sticky top-[73px] z-40 bg-background/80 backdrop-blur-xl py-3 border-b border-border/20">
+      {/* ══════════════ LOCATION FILTER ══════════════ */}
+      <section className="sticky top-[64px] z-30 bg-background/85 backdrop-blur-xl border-b border-border/40">
         <div className="container mx-auto section-padding">
-          <div className="flex justify-center gap-4 md:gap-12 overflow-x-auto">
-            <a
-              href="#langley"
-              className="group flex items-center gap-2 px-6 py-2 rounded-full hover:bg-secondary/20 transition-all"
-            >
-              <MapPin className="w-4 h-4 text-clinic-teal group-hover:scale-110 transition-transform" />
-              <span className="font-bold text-sm">Langley</span>
-            </a>
-            <a
-              href="#kelowna"
-              className="group flex items-center gap-2 px-6 py-2 rounded-full hover:bg-secondary/20 transition-all"
-            >
-              <MapPin className="w-4 h-4 text-clinic-teal group-hover:scale-110 transition-transform" />
-              <span className="font-bold text-sm">Kelowna</span>
-            </a>
-            <a
-              href="#victoria"
-              className="group flex items-center gap-2 px-6 py-2 rounded-full hover:bg-secondary/20 transition-all"
-            >
-              <MapPin className="w-4 h-4 text-clinic-teal group-hover:scale-110 transition-transform" />
-              <span className="font-bold text-sm">Victoria</span>
-            </a>
+          <div className="flex justify-start md:justify-center gap-2 md:gap-3 overflow-x-auto scrollbar-none py-3">
+            {locationSections.map((loc) => (
+              <a
+                key={loc.id}
+                href={`#${loc.id}`}
+                className="group flex items-center gap-2 shrink-0 px-5 py-2 rounded-full border border-border/60 text-sm font-semibold text-foreground hover:border-primary/50 hover:bg-primary/5 transition-all"
+              >
+                <MapPin className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+                {loc.label}
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Team Sections */}
-      <main className="container mx-auto section-padding py-12 md:py-16 space-y-16">
-        {/* Langley Section */}
-        <section id="langley" className="scroll-mt-40">
-          <div className="mb-6 border-l-4 border-clinic-teal pl-4">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Langley Clinic
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              Specialized care and innovative wellness protocols.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {langleyTeam.map((member) => (
-              <TeamCard key={member.slug} member={member} section="langley" />
-            ))}
-          </div>
-        </section>
-
-        {/* Kelowna Section */}
-        <section id="kelowna" className="scroll-mt-40">
-          <div className="mb-6 border-l-4 border-clinic-teal pl-4">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Kelowna Sanctuary
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              Integrative therapies in a peaceful clinical setting.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {kelownaTeam.map((member) => (
-              <TeamCard key={member.slug} member={member} section="kelowna" />
-            ))}
-          </div>
-        </section>
-
-        {/* Victoria Section */}
-        <section id="victoria" className="scroll-mt-40">
-          <div className="mb-6 border-l-4 border-clinic-teal pl-4">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Victoria Practice
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              Advanced aesthetic medicine and personalized care.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {victoriaTeam.map((member) => (
-              <TeamCard key={member.slug} member={member} section="victoria" />
-            ))}
-          </div>
-        </section>
+      {/* ══════════════ TEAM SECTIONS ══════════════ */}
+      <main className="container mx-auto section-padding py-14 md:py-20 space-y-16 md:space-y-24">
+        {locationSections.map((loc) => (
+          <section key={loc.id} id={loc.id} className="scroll-mt-32">
+            <div className="mb-8 flex items-end justify-between gap-4">
+              <div className="border-l-4 border-primary pl-4">
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+                  {loc.title}
+                </h2>
+                <p className="text-sm text-muted-foreground mt-1">{loc.blurb}</p>
+              </div>
+              <span className="hidden sm:inline-flex shrink-0 items-center rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-muted-foreground">
+                {loc.team.length} {loc.team.length === 1 ? "specialist" : "specialists"}
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+              {loc.team.map((member) => (
+                <TeamCard key={member.slug} member={member} section={loc.id} />
+              ))}
+            </div>
+          </section>
+        ))}
       </main>
+
+      {/* ══════════════ CTA ══════════════ */}
+      <section className="pb-16 md:pb-24">
+        <div className="container mx-auto section-padding">
+          <div className="rounded-3xl bg-primary/5 border border-primary/15 px-6 py-12 md:px-12 md:py-16 text-center">
+            <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
+              Ready to meet your care team?
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto mb-8">
+              Book a consultation at the clinic nearest you — Langley, Victoria,
+              or Kelowna — and start a plan built around your goals.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                to="/book"
+                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm transition-colors hover:bg-sage-dark w-full sm:w-auto"
+              >
+                Book a Consultation
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-border text-foreground font-medium text-sm transition-colors hover:bg-secondary/60 w-full sm:w-auto"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

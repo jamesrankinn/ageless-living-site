@@ -40,6 +40,7 @@ const GutMicrobesBlogPost = lazy(() => import("@/pages/GutMicrobesBlogPost"));
 const LiveBetterLongerBlogPost = lazy(() => import("@/pages/LiveBetterLongerBlogPost"));
 const LongevityIndustryBlogPost = lazy(() => import("@/pages/LongevityIndustryBlogPost"));
 const BookNowPage = lazy(() => import("@/pages/BookNowPage"));
+const ContactPage = lazy(() => import("@/pages/ContactPage"));
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const SignupPage = lazy(() => import("@/pages/SignupPage"));
 const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
@@ -86,13 +87,13 @@ const App = () => (
               <Route path="/blog/live-better-longer" element={<LiveBetterLongerBlogPost />} />
               <Route path="/blog/longevity-industry" element={<LongevityIndustryBlogPost />} />
               <Route path="/book" element={<BookNowPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               {/* Redirects for old routes */}
               <Route path="/treatments" element={<Navigate to="/services" replace />} />
               <Route path="/journey" element={<Navigate to="/about-us" replace />} />
-              <Route path="/contact" element={<Navigate to="/book" replace />} />
               <Route path="/locations" element={<Navigate to="/about-us" replace />} />
               <Route path="/locations/victoria" element={<Navigate to="/book" replace />} />
               <Route path="/locations/langley" element={<Navigate to="/book" replace />} />

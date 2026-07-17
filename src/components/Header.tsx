@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, User, LogOut, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, User, LogOut, Phone, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/lib/auth";
+import { SHOP_URL } from "@/lib/links";
 import BrandMark from "@/components/BrandMark";
 
 const services = [
@@ -18,6 +19,7 @@ const aboutItems = [
   { label: "FAQs", href: "/faqs" },
   { label: "Blog", href: "/blog" },
   { label: "Careers", href: "/careers" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
@@ -49,6 +51,23 @@ export default function Header() {
     setAboutOpen(false);
     setUserMenuOpen(false);
   }, [location.pathname, location.hash, location.key]);
+
+  // Lock background scroll while the full-screen mobile overlay is open so the
+  // page behind it can't scroll and the overlay always covers the viewport.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [mobileOpen]);
+
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setMobileServicesOpen(false);
+    setMobileAboutOpen(false);
+  };
 
   // On the homepage the hero is dark, so when the header is transparent
   // (not scrolled) it needs light text to stay legible.
@@ -168,6 +187,17 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
+          {/* Shop — external Square storefront */}
+          <a
+            href={SHOP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+          >
+            <ShoppingBag className="w-4 h-4" />
+            Shop
+          </a>
+
           <Link
             to="/book"
             className="inline-flex items-center px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium transition-all duration-200 hover:bg-sage-dark"
@@ -226,6 +256,7 @@ export default function Header() {
           onClick={() => setMobileOpen(!mobileOpen)}
           className="lg:hidden p-2.5 text-foreground rounded-full hover:bg-secondary/50 active:bg-secondary transition-colors"
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -234,18 +265,19 @@ export default function Header() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "100dvh" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden fixed inset-0 top-0 bg-card z-40 flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden fixed inset-0 bg-card z-50 flex flex-col text-foreground"
           >
             {/* Mobile Header */}
             <div className="flex items-center justify-between py-4 px-4 border-b border-border shrink-0">
-              <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center text-foreground">
+              <Link to="/" onClick={closeMobile} className="flex items-center text-foreground">
                 <BrandMark className="h-8 w-auto" />
               </Link>
               <button
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMobile}
                 className="p-2.5 text-foreground rounded-full hover:bg-secondary/50 active:bg-secondary transition-colors"
                 aria-label="Close menu"
               >
@@ -260,7 +292,7 @@ export default function Header() {
                 <Link
                   to="/"
                   className="flex items-center py-3 px-4 text-base font-medium text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={closeMobile}
                 >
                   Home
                 </Link>
@@ -289,10 +321,7 @@ export default function Header() {
                               key={svc.href}
                               to={svc.href}
                               className="py-2.5 px-4 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/30 rounded-lg transition-colors"
-                              onClick={() => {
-                                setMobileOpen(false);
-                                setMobileServicesOpen(false);
-                              }}
+                              onClick={closeMobile}
                             >
                               {svc.label}
                             </Link>
@@ -300,10 +329,7 @@ export default function Header() {
                           <Link
                             to="/services"
                             className="py-2.5 px-4 text-sm font-medium text-primary hover:bg-secondary/30 rounded-lg transition-colors"
-                            onClick={() => {
-                              setMobileOpen(false);
-                              setMobileServicesOpen(false);
-                            }}
+                            onClick={closeMobile}
                           >
                             View All Services
                           </Link>
@@ -337,10 +363,7 @@ export default function Header() {
                               key={item.href}
                               to={item.href}
                               className="py-2.5 px-4 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/30 rounded-lg transition-colors"
-                              onClick={() => {
-                                setMobileOpen(false);
-                                setMobileAboutOpen(false);
-                              }}
+                              onClick={closeMobile}
                             >
                               {item.label}
                             </Link>
@@ -351,6 +374,17 @@ export default function Header() {
                   </AnimatePresence>
                 </div>
 
+                {/* Mobile Shop — external Square storefront */}
+                <a
+                  href={SHOP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 py-3 px-4 text-base font-medium text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+                  onClick={closeMobile}
+                >
+                  <ShoppingBag className="w-5 h-5 text-muted-foreground" />
+                  Shop
+                </a>
               </div>
             </nav>
 
@@ -370,7 +404,7 @@ export default function Header() {
               <Link
                 to="/book"
                 className="flex items-center justify-center w-full bg-primary text-primary-foreground px-6 py-3.5 rounded-full font-semibold text-sm"
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMobile}
               >
                 Book Now
               </Link>
