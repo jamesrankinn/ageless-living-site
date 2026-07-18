@@ -120,11 +120,11 @@ export default function MicroneedlingPage() {
       <section className="py-16 bg-foreground text-white rounded-[2rem] mx-4 md:mx-8">
         <div className="container mx-auto section-padding grid lg:grid-cols-2 gap-20 items-center">
 
-          <div className="rounded-full overflow-hidden aspect-square">
+          <div className="rounded-3xl overflow-hidden aspect-square">
             <img
               src={microneedlingImg}
               alt="Microneedling treatment at Ageless Living clinic"
-              className="w-full h-full object-cover grayscale"
+              className="w-full h-full object-cover"
             />
           </div>
 
