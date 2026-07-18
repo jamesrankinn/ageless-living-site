@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, Phone } from "lucide-react";
 
 import skinImg from "@/assets/real/skin-rejuvenation-ageless-living.webp";
-import hormoneImg from "@/assets/hormone-balancing.jpg";
-import biohackingImg from "@/assets/biohacking.jpg";
-import weightImg from "@/assets/health-weight.jpg";
+import hormoneImg from "@/assets/real/hormone-balancing-ageless-living.webp";
+import biohackingImg from "@/assets/real/biohacking-ageless-living.webp";
+import weightImg from "@/assets/real/medical-weight-loss-ageless-living.webp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 

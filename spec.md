@@ -1,5 +1,46 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Replace AI Imagery with Real Clinic Photos (2026-07-18)
+
+Site-wide swap of AI-generated imagery for the clinic's real professional
+photography (sourced from the shared Drive "Photos" set), lightly enhanced
+(brightness/saturation/sharpen), optimized to webp/JPEG, and framed big and
+square — no circle crops.
+
+### A. Real photos everywhere
+- Overwrote the entire `src/assets/real/*` set (used across Home, Services,
+  Contact, About, and every service-detail page) in place with real photos —
+  reception/interior, doctor + staff consultations, treatments, biohacking —
+  so no imports changed. All files re-optimized to <80KB webp.
+- Overwrote the legacy `src/assets/*.jpg` service/clinic/about/home images
+  (botox-*, home-*, about-us-*, our-team-1, services-*, hormone-balancing,
+  biohacking, health-weight, laser, microneedling, dermaplanning, etc.) with
+  matching real photos.
+- **Hero:** replaced the AI "couple" PNG with a real clinic reception photo
+  (`hero-clinic-ageless-living.webp`); updated the HomePage import and removed
+  the 1.6MB AI PNG.
+- Repointed the ServicesPage hormone/biohacking/weight imports to the real
+  webp versions.
+
+### B. Homepage persona selector — AI avatars removed
+- Deleted the 8 AI avatar portraits (`src/assets/avatars/*`) and redesigned the
+  "which describes you" cards to be photo-free (quote-forward, teal quote mark,
+  check badge). Removed the now-unused `img` field/imports.
+
+### C. Framing / branding
+- **De-circled** the Microneedling outcomes image (`rounded-full` → big
+  `rounded-3xl` square) and removed its grayscale so the real photo shows in
+  colour — per "big and square, no circle frames."
+- Removed one more line that framed aesthetics as lower priority ("Notice
+  where aesthetics falls — last, not first").
+
+### D. Notes
+- Blog thumbnails (`blog1–8`) are conceptual topic illustrations and were left
+  as-is (no matching real photos); can be swapped when real assets are chosen.
+- The Drive `ageless_photos01–14.webp` set turned out to be **yacht photos**
+  (unrelated) and was not used; the real clinic shoot files were used instead.
+
+
 ## Changelog — Live Lead Delivery, Clinic Info, Team & Logo Updates (2026-07-17)
 
 Wires up real form delivery, corrects clinic contact info, labels every phone

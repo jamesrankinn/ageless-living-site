@@ -4,18 +4,10 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowDown, Check, X as XIcon, Sparkles } from "lucide-react";
 
-import heroCouple from "@/assets/real/hero-couple-ageless-living.png";
+import heroCouple from "@/assets/real/hero-clinic-ageless-living.webp";
 import skinImg from "@/assets/real/skin-rejuvenation-ageless-living.webp";
 import clinicInteriorImg from "@/assets/real/clinic-interior-ageless-living.webp";
 
-import womanTired from "@/assets/avatars/woman-tired.png";
-import womanSkin from "@/assets/avatars/woman-skin.png";
-import womanWeight from "@/assets/avatars/woman-weight.png";
-import womanOptimize from "@/assets/avatars/woman-optimize.png";
-import manEdge from "@/assets/avatars/man-edge.png";
-import manTired from "@/assets/avatars/man-tired.png";
-import manWeight from "@/assets/avatars/man-weight.png";
-import manOptimize from "@/assets/avatars/man-optimize.png";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -37,7 +29,6 @@ const weAreNot = ["A quick fix without a plan", "One-size-fits-all treatment", "
 
 type Avatar = {
   id: string;
-  img: string;
   quote: string;
   blurb: string;
   startLabel: string;
@@ -50,7 +41,6 @@ type Avatar = {
 const womenAvatars: Avatar[] = [
   {
     id: "w1",
-    img: womanTired,
     quote: "“I don't feel like myself.”",
     blurb: "Tired, foggy, weight creeping up, low drive — and your cycle's changing.",
     startLabel: "Hormones & foundation",
@@ -62,7 +52,6 @@ const womenAvatars: Avatar[] = [
   },
   {
     id: "w2",
-    img: womanSkin,
     quote: "“I just want to look better.”",
     blurb: "Tired skin, fine lines — thinking about Botox or filler.",
     startLabel: "Skin, from the inside out",
@@ -74,7 +63,6 @@ const womenAvatars: Avatar[] = [
   },
   {
     id: "w3",
-    img: womanWeight,
     quote: "“I lost the weight — now I look older.”",
     blurb: "Slimmer, but gaunt and aged-looking after GLP-1.",
     startLabel: "Weight & restoration",
@@ -86,7 +74,6 @@ const womenAvatars: Avatar[] = [
   },
   {
     id: "w4",
-    img: womanOptimize,
     quote: "“I feel good — I want to stay ahead.”",
     blurb: "Healthy, and want to optimize and prevent.",
     startLabel: "The Longevity Program",
@@ -101,7 +88,6 @@ const womenAvatars: Avatar[] = [
 const menAvatars: Avatar[] = [
   {
     id: "m1",
-    img: manEdge,
     quote: "“I've lost my edge.”",
     blurb: "Low energy and drive, softer in the middle, sleeping and recovering worse.",
     startLabel: "Hormones & foundation",
@@ -113,7 +99,6 @@ const menAvatars: Avatar[] = [
   },
   {
     id: "m2",
-    img: manTired,
     quote: "“I look tired and older.”",
     blurb: "Tired eyes, a softer jawline — and maybe a thinning hairline.",
     startLabel: "Look as good as you feel",
@@ -125,7 +110,6 @@ const menAvatars: Avatar[] = [
   },
   {
     id: "m3",
-    img: manWeight,
     quote: "“I can't shift the weight.”",
     blurb: "Stubborn belly fat that won't budge with diet and the gym.",
     startLabel: "Weight & metabolic health",
@@ -137,7 +121,6 @@ const menAvatars: Avatar[] = [
   },
   {
     id: "m4",
-    img: manOptimize,
     quote: "“I feel good — I want to stay ahead.”",
     blurb: "Performing well, and want to optimize and prevent.",
     startLabel: "The Longevity Program",
@@ -391,8 +374,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
               You don't need everything — you need the right <em className="italic">starting point</em>. Pick the one
-              that sounds like you. Every path leads to the same place: looking and feeling your best. Notice where
-              aesthetics falls — last, not first.
+              that sounds like you. Every path leads to the same place: looking and feeling your best, inside and out.
             </p>
           </motion.div>
 
@@ -429,32 +411,29 @@ export default function HomePage() {
                   key={a.id}
                   onClick={() => setActiveIdx(i)}
                   aria-pressed={isActive}
-                  className={`group text-left rounded-2xl overflow-hidden bg-card transition-all duration-300 ${
+                  className={`group text-left rounded-2xl bg-card p-6 transition-all duration-300 ${
                     isActive
-                      ? "ring-2 ring-clinic-teal shadow-lg"
+                      ? "ring-2 ring-clinic-teal shadow-lg bg-clinic-teal-light/30"
                       : "ring-1 ring-border hover:ring-clinic-teal/40 hover:shadow-md"
                   }`}
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
-                      src={a.img}
-                      alt={`Avatar: ${a.quote.replace(/[“”]/g, "")}`}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    {isActive && (
-                      <span className="absolute top-3 right-3 w-7 h-7 rounded-full bg-clinic-teal text-white flex items-center justify-center">
-                        <Check className="w-4 h-4" />
-                      </span>
-                    )}
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="font-display text-4xl leading-none text-clinic-teal/40">“</span>
+                    <span
+                      className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
+                        isActive ? "bg-clinic-teal text-white" : "bg-secondary text-transparent"
+                      }`}
+                    >
+                      <Check className="w-4 h-4" />
+                    </span>
                   </div>
-                  <div className="p-5">
-                    <p className="font-semibold text-foreground leading-snug">{a.quote}</p>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{a.blurb}</p>
-                    <p className="mt-3 text-xs text-muted-foreground">
-                      Start here: <span className="font-semibold text-clinic-teal">{a.startLabel}</span>
-                    </p>
-                  </div>
+                  <p className="font-semibold text-foreground leading-snug">
+                    {a.quote.replace(/[“”]/g, "")}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{a.blurb}</p>
+                  <p className="mt-4 pt-4 border-t border-border/60 text-xs text-muted-foreground">
+                    Start here: <span className="font-semibold text-clinic-teal">{a.startLabel}</span>
+                  </p>
                 </button>
               );
             })}
