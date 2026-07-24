@@ -1,5 +1,49 @@
 # Ageless Living™ Website Architecture Specification
 
+## Changelog — Client Feedback: Avatars, Addresses, Kelowna Team, Two Stores (2026-07-24)
+
+Round of changes from the medical director's review of the redesign.
+
+### A. Homepage persona avatars restored
+- Put the 8 persona portraits back on the "Where are you right now?" selector
+  (`src/assets/avatars/*`, restored from history). Re-added the `img` field to
+  the `Avatar` type and to each of the 8 entries, and restored the image-topped
+  card layout (photo with active check badge, text below) in `HomePage.tsx`.
+- Note: these are the AI-generated persona images. Their return was requested
+  by the medical director; the Victoria owner has objected to AI avatars in
+  writing, so this is flagged for a final call before launch. Files are the
+  original ~1.5MB PNGs and could be re-optimized to webp if kept.
+
+### B. About Us addresses corrected
+- **`AboutUsPage.tsx`** no longer hard-codes its own (stale) location list. It
+  now derives the "Visit Us" cards from the single source of truth in
+  `data/clinics.ts`, so the address, phone, and hours match the rest of the
+  site and can't drift again. This fixes the outdated Victoria (740 Hillside),
+  Langley, and Kelowna (1708 Dolphin) entries. Hours row switched to
+  top-aligned so the fuller hours strings wrap cleanly.
+
+### C. Dr. Vicky Gairns added (Kelowna)
+- Added **Dr. Vicky Gairns, ND** (Naturopathic Doctor) to `staffData.ts` under
+  the Kelowna team, so she appears on `/our-team` and gets a profile page. Photo
+  is pending from the clinic — the image path uses the `/images/team/`
+  placeholder convention, so the card shows the graceful avatar until a real
+  headshot is uploaded to `/public/team/vicky-gairns.webp`.
+
+### D. Online store — two choices (Victoria vs. Kelowna & Langley)
+- **`lib/links.ts`**: replaced the single `SHOP_URL` with `SHOP_LOCATIONS` — a
+  Victoria store (`ageless-living.square.site/s/shop`) and a shared Kelowna &
+  Langley store (`ageless.square.site`).
+- **`Header.tsx`**: the desktop "Shop" nav item is now a dropdown (matching the
+  Services/About pattern) offering the two stores; the mobile menu's Shop is a
+  matching collapsible section.
+- **`Footer.tsx`**: the footer bottom bar now links both "Victoria Store" and
+  "Kelowna & Langley Store" (wraps gracefully on small screens).
+
+### E. Notes
+- Outstanding (not code — awaiting the clinics): updated/real staff photography
+  to replace the outdated staff images.
+
+
 ## Changelog — Replace AI Imagery with Real Clinic Photos (2026-07-18)
 
 Site-wide swap of AI-generated imagery for the clinic's real professional

@@ -1,7 +1,8 @@
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Phone } from "lucide-react";
 import BrandMark from "@/components/BrandMark";
-import { SHOP_URL } from "@/lib/links";
+import { SHOP_LOCATIONS } from "@/lib/links";
 import { clinics } from "@/data/clinics";
 
 const navLinks = [
@@ -118,20 +119,24 @@ export default function Footer() {
           <p className="text-xs text-card/40 text-center md:text-left">
             © {new Date().getFullYear()} Ageless Living Wellness Centre. All rights reserved.
           </p>
-          <div className="flex items-center gap-4 text-xs text-card/40">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-card/40">
             <Link to="/faqs" className="hover:text-card transition-colors">FAQs</Link>
-            <span>·</span>
+            <span aria-hidden="true">·</span>
             <Link to="/contact" className="hover:text-card transition-colors">Contact</Link>
-            <span>·</span>
-            <a
-              href={SHOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-card transition-colors"
-            >
-              Shop
-            </a>
-            <span>·</span>
+            {SHOP_LOCATIONS.map((shop) => (
+              <Fragment key={shop.url}>
+                <span aria-hidden="true">·</span>
+                <a
+                  href={shop.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-card transition-colors"
+                >
+                  {shop.label} Store
+                </a>
+              </Fragment>
+            ))}
+            <span aria-hidden="true">·</span>
             <Link to="/book" className="hover:text-card transition-colors">Book Now</Link>
           </div>
         </div>

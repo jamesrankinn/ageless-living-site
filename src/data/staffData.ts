@@ -114,6 +114,31 @@ export const staffMembers: StaffMember[] = [
 
   // ─── Kelowna Team ─────────────────────────────────────────────
   {
+    name: "Dr. Vicky Gairns, ND",
+    slug: "vicky-gairns",
+    role: "Naturopathic Doctor",
+    credentials: "ND",
+    // Headshot pending from the Kelowna clinic — upload to
+    // /public/team/vicky-gairns.webp then change this path to
+    // "/team/vicky-gairns.webp". Until then the profile shows a placeholder
+    // avatar rather than a broken image.
+    image: "/images/team/vicky-gairns.webp",
+    locations: ["kelowna"],
+    bio: "Dr. Vicky Gairns is a licensed Naturopathic Doctor at our Kelowna clinic, where she blends evidence-informed naturopathic medicine with the clinic's integrative and longevity approach. She works closely with patients to uncover the root causes behind fatigue, hormone changes, and stubborn metabolic concerns, then builds personalized plans that combine nutrition, targeted supplementation, IV therapy, and lifestyle medicine. Dr. Gairns believes in treating the whole person rather than just the symptoms, and takes the time to listen so every patient feels understood and supported on their path to feeling their best.",
+    education: [
+      "Doctor of Naturopathic Medicine (ND)",
+      "Registered Naturopathic Doctor — British Columbia",
+    ],
+    specializations: [
+      "Naturopathic Medicine",
+      "Integrative & Functional Medicine",
+      "IV Therapy & Nutrient Support",
+      "Hormone & Metabolic Health",
+    ],
+    treatments: ["IV Therapy & NAD+", "Hormone Balancing (BHRT)"],
+    availability: "Mon–Fri 9:00am–5:00pm",
+  },
+  {
     name: "Rachel Bowman-Fassio, BSc, CN, RHN",
     slug: "rachel-bowman-fassio",
     role: "Clinic Manager",
