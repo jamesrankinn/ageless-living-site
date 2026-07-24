@@ -18,38 +18,20 @@ import {
 import aboutUs1Img from "@/assets/about-us-1.jpg";
 import aboutUs3Img from "@/assets/about-us-3.jpg";
 import teamImg from "@/assets/our-team-1.jpg";
+import { clinics } from "@/data/clinics";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const locations = [
-  {
-    name: "Victoria",
-    address: "740 Hillside Ave #120",
-    city: "Victoria, BC V8T 1Z4",
-    phone: "(250) 590-5321",
-    hours: "Mon–Fri: 9am–5pm",
-    directions:
-      "https://www.google.com/maps/search/?api=1&query=Ageless+Living+740+Hillside+Ave+Victoria+BC",
-  },
-  {
-    name: "Langley",
-    address: "415-20178 96th Ave",
-    city: "Langley, BC V1M 0B2",
-    phone: "(604) 427-0509",
-    hours: "Mon–Fri: 9am–5pm",
-    directions:
-      "https://www.google.com/maps/search/?api=1&query=Ageless+Living+415-20178+96+Ave+Langley+BC",
-  },
-  {
-    name: "Kelowna",
-    address: "1708 Dolphin Ave #101",
-    city: "Kelowna, BC V1Y 9S4",
-    phone: "(250) 860-4116",
-    hours: "Mon–Fri: 9am–5pm",
-    directions:
-      "https://www.google.com/maps/search/?api=1&query=Ageless+Living+1708+Dolphin+Ave+Kelowna+BC",
-  },
-];
+// Derived from the single source of truth in data/clinics.ts so the addresses,
+// phone numbers, and hours here can never drift from the rest of the site.
+const locations = clinics.map((clinic) => ({
+  name: clinic.name,
+  address: clinic.addressLine1,
+  city: clinic.addressLine2,
+  phone: clinic.phoneDisplay,
+  hours: clinic.hours,
+  directions: clinic.mapUrl,
+}));
 
 const values = [
   {
@@ -391,8 +373,8 @@ export default function AboutUsPage() {
                       {location.phone}
                     </a>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Clock className="w-4 h-4 flex-shrink-0 text-primary" />
+                  <div className="flex items-start gap-3">
+                    <Clock className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
                     <span>{location.hours}</span>
                   </div>
                 </div>

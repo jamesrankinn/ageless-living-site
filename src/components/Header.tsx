@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, User, LogOut, Phone, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/lib/auth";
-import { SHOP_URL } from "@/lib/links";
+import { SHOP_LOCATIONS } from "@/lib/links";
 import BrandMark from "@/components/BrandMark";
 
 const services = [
@@ -29,6 +29,8 @@ export default function Header() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [shopOpen, setShopOpen] = useState(false);
+  const [mobileShopOpen, setMobileShopOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,8 +49,10 @@ export default function Header() {
     setMobileOpen(false);
     setMobileServicesOpen(false);
     setMobileAboutOpen(false);
+    setMobileShopOpen(false);
     setServicesOpen(false);
     setAboutOpen(false);
+    setShopOpen(false);
     setUserMenuOpen(false);
   }, [location.pathname, location.hash, location.key]);
 
@@ -67,6 +71,7 @@ export default function Header() {
     setMobileOpen(false);
     setMobileServicesOpen(false);
     setMobileAboutOpen(false);
+    setMobileShopOpen(false);
   };
 
   // On the homepage the hero is dark, so when the header is transparent
@@ -187,16 +192,48 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Shop — external Square storefront */}
-          <a
-            href={SHOP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+          {/* Shop — external Square storefronts (Victoria / Kelowna & Langley) */}
+          <div
+            className="relative"
+            onMouseEnter={() => setShopOpen(true)}
+            onMouseLeave={() => setShopOpen(false)}
           >
-            <ShoppingBag className="w-4 h-4" />
-            Shop
-          </a>
+            <button className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200">
+              <ShoppingBag className="w-4 h-4" />
+              Shop
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            <AnimatePresence>
+              {shopOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+                >
+                  <div className="bg-card border border-border rounded-xl shadow-lg py-2 min-w-[220px]">
+                    <p className="px-4 pt-1 pb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+                      Choose your store
+                    </p>
+                    {SHOP_LOCATIONS.map((shop) => (
+                      <a
+                        key={shop.url}
+                        href={shop.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors"
+                        onClick={() => setShopOpen(false)}
+                      >
+                        {shop.label}
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <Link
             to="/book"
@@ -374,17 +411,45 @@ export default function Header() {
                   </AnimatePresence>
                 </div>
 
-                {/* Mobile Shop — external Square storefront */}
-                <a
-                  href={SHOP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 py-3 px-4 text-base font-medium text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
-                  onClick={closeMobile}
-                >
-                  <ShoppingBag className="w-5 h-5 text-muted-foreground" />
-                  Shop
-                </a>
+                {/* Mobile Shop — external Square storefronts (Victoria / Kelowna & Langley) */}
+                <div>
+                  <button
+                    onClick={() => setMobileShopOpen(!mobileShopOpen)}
+                    className="w-full flex items-center justify-between py-3 px-4 text-base font-medium text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <ShoppingBag className="w-5 h-5 text-muted-foreground" />
+                      Shop
+                    </span>
+                    <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${mobileShopOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {mobileShopOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pl-4 pb-1 flex flex-col gap-1">
+                          {SHOP_LOCATIONS.map((shop) => (
+                            <a
+                              key={shop.url}
+                              href={shop.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="py-2.5 px-4 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/30 rounded-lg transition-colors"
+                              onClick={closeMobile}
+                            >
+                              {shop.label} Store
+                            </a>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </nav>
 
